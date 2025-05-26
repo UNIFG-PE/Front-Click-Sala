@@ -1,7 +1,7 @@
 import React from 'react';
 import './RoomCard.css';
 
-function RoomCard({ room, onReserve }) {
+function RoomCard({ room, onReserve, onEdit, onDelete }) {
   return (
     <div className="room-card">
       <div className="room-image">
@@ -18,13 +18,28 @@ function RoomCard({ room, onReserve }) {
           ))}
         </div>
       </div>
-      <button 
-        className="reserve-button" 
-        onClick={() => onReserve(room.id)}
-        disabled={!room.available}
-      >
-        {room.available ? 'Reservar' : 'Indisponível'}
-      </button>
+      <div className="room-card-actions">
+        {onEdit && (
+          <button className="edit-btn" onClick={() => onEdit(room.id)}>
+            Editar
+          </button>
+        )}
+        {onDelete && (
+          <button className="delete-btn" onClick={() => onDelete(room.id)}>
+            Excluir
+          </button>
+        )}
+        {/* Só mostra o botão Reservar se não estiver em modo admin */}
+        {onReserve && !onEdit && !onDelete && (
+          <button
+            className="reserve-button"
+            onClick={() => onReserve(room.id)}
+            disabled={!room.available}
+          >
+            {room.available ? 'Reservar' : 'Indisponível'}
+          </button>
+        )}
+      </div>
     </div>
   );
 }
