@@ -7,7 +7,7 @@ export default function PaginaProfessor({ navigation }) {
       <View style={styles.header}>
         <TouchableOpacity   onPress={() => navigation.openDrawer()}>
           <Image
-            source={require('../../assets/2849812_menu_multimedia_bars_media_icon.png')}
+            source={require('../home/assets/2849812_menu_multimedia_bars_media_icon.png')}
             style={styles.icone}
            
           />
@@ -20,7 +20,7 @@ export default function PaginaProfessor({ navigation }) {
         <Text style={styles.desc}>Conteúdo do card aqui</Text>
       </View>
 
-      {/* Se quiser adicionar mais cards */}
+     
       <View style={styles.card}>
         <Text style={styles.title}>Outro Card</Text>
         <Text style={styles.desc}>Informação adicional</Text>
@@ -94,8 +94,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 16,
     marginBottom: 12,
-    elevation: 3, // sombra no Android
-    shadowColor: '#000', // sombra no iOS
+    elevation: 3, 
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
