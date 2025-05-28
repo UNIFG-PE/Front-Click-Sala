@@ -4,7 +4,7 @@ import Login from "./screens/LoginScreen";
 import AdminScreen from "./screens/AdminScreen";
 import UserScreen from "./screens/UserScreen"; 
 import ForgotPassword from "./screens/ForgotPasswordScreen";
-import VerificarCodigo from "./screens/VerificarCodigoScreen";
+import VerificarCodigo from "./screens/CheckCodeScreen";
 import RedefinirSenha from "./screens/ResetPasswordScreen";
 
 function ProtectedAdmin() {
