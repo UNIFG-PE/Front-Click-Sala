@@ -1,60 +1,41 @@
-import React, { useState } from 'react';
-import './App.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
-import RoomsPage from './pages/RoomsPage';
-import MyReservationsPage from './pages/MyReservationsPage';
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import { getItem } from "./LocalStorage";
+import Login from "./screens/LoginScreen";
+import AdminScreen from "./screens/AdminScreen";
+import UserScreen from "./screens/UserScreen"; 
+import ForgotPassword from "./screens/ForgotPasswordScreen";
+import VerificarCodigo from "./screens/VerificarCodigoScreen";
+import RedefinirSenha from "./screens/ResetPasswordScreen";
+
+function ProtectedAdmin() {
+  const role = getItem("userRole");
+  if (role !== "ADMIN") {
+    return <Navigate to="/login" replace />;
+  }
+  return <AdminScreen />;
+}
+
+function ProtectedUser() {
+  const role = getItem("userRole");
+  if (role !== "USER") {
+    return <Navigate to="/login" replace />;
+  }
+  return <UserScreen />;
+}
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('home');
-
-  // Simular um sistema de rotas simples
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'home':
-        return <HomePage />;
-      case 'salas':
-        return <RoomsPage />;
-      case 'reservas':
-        return <MyReservationsPage />;
-      default:
-        return <HomePage />;
-    }
-  };
-
-  // Interceptar cliques em links para simular navegação
-  React.useEffect(() => {
-    const handleNavigation = (event) => {
-      // Verificar se o clique foi em um link interno
-      if (event.target.tagName === 'A' && !event.target.getAttribute('href').startsWith('http')) {
-        event.preventDefault();
-        const path = event.target.getAttribute('href');
-
-        // Atualizar a página atual com base no caminho
-        if (path === '/') setCurrentPage('home');
-        else if (path === '/salas') setCurrentPage('salas');
-        else if (path === '/reservas') setCurrentPage('reservas');
-      }
-    };
-
-    // Adicionar listener para capturar cliques
-    document.addEventListener('click', handleNavigation);
-
-    // Limpar listener quando o componente for desmontado
-    return () => {
-      document.removeEventListener('click', handleNavigation);
-    };
-  }, []);
-
   return (
-    <div className="App">
-      <Header />
-      <main className="main-content">
-        {renderPage()}
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/esqueci-senha" element={<ForgotPassword />} />
+        <Route path="/admin" element={<ProtectedAdmin />} />
+        <Route path="/user" element={<ProtectedUser />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
+        <Route path="/verificar-codigo" element={<VerificarCodigo />} />
+        <Route path="/redefinir-senha" element={<RedefinirSenha />} />
+      </Routes>
+    </Router>
   );
 }
 
