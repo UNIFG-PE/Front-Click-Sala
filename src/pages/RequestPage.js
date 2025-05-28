@@ -1,5 +1,6 @@
 import React from "react";
 import ReservationForm from "../components/ReservationForm";
+import "./RequestPage.css";
 
 const RequestPage = () => (
   <div>
