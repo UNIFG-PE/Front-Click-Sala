@@ -7,7 +7,7 @@ export default function PaginaProfessor({ navigation }) {
       <View style={styles.header}>
         <TouchableOpacity   onPress={() => navigation.openDrawer()}>
           <Image
-            source={require('../home/assets/2849812_menu_multimedia_bars_media_icon.png')}
+            source={require('../assets/2849812_menu_multimedia_bars_media_icon.png')}
             style={styles.icone}
            
           />
