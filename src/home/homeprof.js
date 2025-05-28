@@ -1,5 +1,5 @@
 
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native-web';
 
 export default function PaginaProfessor({ navigation }) {
   return (
