@@ -1,5 +1,5 @@
 //Criação de salas no primeiro contato com o App//
-// tela1.js
+// tela01.js
 
 document.body.style.margin = "0";
 document.body.style.fontFamily = "Arial, sans-serif";
