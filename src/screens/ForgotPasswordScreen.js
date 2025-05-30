@@ -4,7 +4,7 @@ import "../style/custom.css";
 import Logo from "../assets/logo.png";
 import backgroundImage from "../assets/backG.jpg";
 import axios from "axios";
-import { FaArrowLeft } from "react-icons/fa";
+import BackButton from "../components/BackButton";  
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -51,13 +51,7 @@ const ForgotPassword = () => {
         >
           <div className="container">
           
-            <button
-              onClick={() => navigate(-1)}
-              className="backButton"
-              aria-label="Voltar"
-            >
-              <FaArrowLeft />
-            </button>
+           <BackButton />
 
             <img src={Logo} alt="ULife Logo" className="logoImage" />
             <h1 className="title">Digite Seu Email</h1>
