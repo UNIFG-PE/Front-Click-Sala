@@ -4,43 +4,45 @@ import "../style/custom.css";
 import Logo from "../assets/logo.png";
 import backgroundImage from "../assets/backG.jpg";
 import axios from "axios";
+import { FaArrowLeft } from "react-icons/fa";
 
 const ForgotPassword = () => {
-    const [email, setEmail] = useState("");
-    const [erro, setErro] = useState("");
-    const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [erro, setErro] = useState("");
+  const navigate = useNavigate();
 
-    const validEmail = (email) => {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email.trim());
-    };
-    const handleSubmit = async () => {
-     if (!email.trim()){
-        alert("Erro: Por favor, insira um email")
-        return;
-     };
-    if (!validEmail(email)){
-        setErro("Insira um email válido");
-        return;
+  const validEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email.trim());
+  };
+
+  const handleSubmit = async () => {
+    if (!email.trim()) {
+      alert("Erro: Por favor, insira um email");
+      return;
     }
-   try {
-  const response = await axios.post("http://localhost:8081/api/auth/forgot-password", {
-    email: email.trim(),
-  });
-
-  if (response.status === 200) {
-    alert("Sucesso, Código enviado para o email: " + email);
-    navigate("/verificar-codigo", { state: { email } });
-  } else {
-    alert("Erro: Não foi possível enviar para o email de recuperação");
-  }
-} catch (erro) {
-  console.error(erro);
-  alert("Erro: Não foi possível enviar para o email de recuperação");
-}
+    if (!validEmail(email)) {
+      setErro("Insira um email válido");
+      return;
     }
+    try {
+      const response = await axios.post("http://localhost:8081/api/auth/forgot-password", {
+        email: email.trim(),
+      });
 
-return (
+      if (response.status === 200) {
+        alert("Sucesso, Código enviado para o email: " + email);
+        navigate("/verificar-codigo", { state: { email } });
+      } else {
+        alert("Erro: Não foi possível enviar para o email de recuperação");
+      }
+    } catch (erro) {
+      console.error(erro);
+      alert("Erro: Não foi possível enviar para o email de recuperação");
+    }
+  };
+
+  return (
     <div className="gradient">
       <div className="backG">
         <div
@@ -48,6 +50,15 @@ return (
           style={{ backgroundImage: `url(${backgroundImage})` }}
         >
           <div className="container">
+          
+            <button
+              onClick={() => navigate(-1)}
+              className="backButton"
+              aria-label="Voltar"
+            >
+              <FaArrowLeft />
+            </button>
+
             <img src={Logo} alt="ULife Logo" className="logoImage" />
             <h1 className="title">Digite Seu Email</h1>
             <p className="text">
@@ -67,7 +78,6 @@ return (
                 }}
                 className="input"
               />
-
               {erro && <div className="erro">{erro}</div>}
             </div>
 

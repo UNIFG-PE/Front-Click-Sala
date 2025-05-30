@@ -4,6 +4,7 @@ import axios from "axios";
 import "../style/custom.css";
 import Logo from "../assets/logo.png";
 import backgroundImage from "../assets/backG.jpg";
+import { FaArrowLeft } from "react-icons/fa"; 
 
 const VerificarCodigo = () => {
   const [codigo, setCodigo] = useState("");
@@ -40,6 +41,13 @@ const VerificarCodigo = () => {
       <div className="backG">
         <div className="backgroundImage" style={{ backgroundImage: `url(${backgroundImage})` }}>
           <div className="container">
+             <button
+                          onClick={() => navigate(-1)}
+                          className="backButton"
+                          aria-label="Voltar"
+                        >
+                          <FaArrowLeft />
+                        </button>
             <img src={Logo} alt="ULife Logo" className="logoImage" />
             <h1 className="title">Verificação de Código</h1>
             <p className="text">
