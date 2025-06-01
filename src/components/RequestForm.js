@@ -6,7 +6,6 @@ function RequestForm({ onSubmit, onCancel }) {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [participants, setParticipants] = useState(1);
-  const [purpose, setPurpose] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,7 +15,6 @@ function RequestForm({ onSubmit, onCancel }) {
       startTime,
       endTime,
       participants,
-      purpose,
     };
 
     onSubmit(criteria);
@@ -70,17 +68,6 @@ function RequestForm({ onSubmit, onCancel }) {
           value={participants}
           onChange={(e) => setParticipants(parseInt(e.target.value))}
           min="1"
-          required
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="purpose">Finalidade da Reunião</label>
-        <textarea
-          id="purpose"
-          value={purpose}
-          onChange={(e) => setPurpose(e.target.value)}
-          placeholder="Descreva brevemente o propósito da reunião"
           required
         />
       </div>
