@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
+import HomePage from './home/HomePage';
 import RoomsPage from './pages/RoomsPage';
 import MyReservationsPage from './pages/MyReservationsPage';
 
