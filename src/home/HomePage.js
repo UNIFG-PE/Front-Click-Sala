@@ -3,12 +3,14 @@ import './HomePage.css';
 
 function HomePage() {
   return (
+    
     <div className="home-page">
       <section className="hero">
         <div className="hero-content">
           <h1>Bem-vindo ao ODA</h1>
           <p>Sistema de reserva de salas online para sua empresa</p>
           <a href="/salas" className="cta-button">Reservar uma Sala</a>
+             <a href="/reservas" className="cta-button">Minhas reservas</a>
         </div>
       </section>
       
