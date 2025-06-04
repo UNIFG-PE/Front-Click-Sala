@@ -1,0 +1,104 @@
+.pagina-recursos {
+  font-family: 'Segoe UI', sans-serif;
+  color: #2c3e50;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  background-color: #1f1f50;
+  padding: 1rem 2rem;
+  color: white;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.search {
+  flex: 1;
+  margin: 0 2rem;
+  padding: 0.5rem;
+  border-radius: 20px;
+  border: none;
+  max-width: 400px;
+}
+
+.icones {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.conteudo {
+  padding: 2rem;
+}
+
+.conteudo h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.descricao {
+  color: #7f8c8d;
+  margin-bottom: 1rem;
+}
+
+.botao-criar {
+  background-color: #1f1f50;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.lista-recursos {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.lista-recursos li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #ddd;
+  align-items: center;
+}
+
+.acoes {
+  display: flex;
+  gap: 1rem;
+}
+
+.icone {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+
+.icone.editar:hover {
+  color: #2980b9;
+}
+
+.icone.excluir:hover {
+  color: #e74c3c;
+}
+
+.botao-voltar {
+  background-color: #d35400;
+  color: white;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
