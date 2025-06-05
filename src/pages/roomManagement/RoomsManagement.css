@@ -1,25 +1,40 @@
-
 .room-management-page {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1rem;
+  position: relative;
 }
 
 .heading-bar {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  margin-bottom: 3rem;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+  
+}
+
+.main-actions-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
 .heading-bar h1 {
-  font-size: 2rem;
+  font-size: 2.9rem;
   color: #222;
-  margin: 0;
+  margin-right: 65%;
+  margin-top: 10%;
+  margin-bottom: 3%;
+  text-align: center;
+  
 }
 
-.create-room-btn {
+.create-room-btn,
+.create-typeroom-btn,
+.create-resource-btn {
   background: #232654;
   color: #fff;
   border: none;
@@ -30,14 +45,28 @@
   cursor: pointer;
   transition: filter 0.15s;
 }
-.create-room-btn:hover {
+
+.create-room-btn:hover,
+.create-typeroom-btn:hover,
+.create-resource-btn:hover {
   filter: brightness(0.93);
+}
+
+.create-typeroom-btn {
+  padding: 0.85rem 1.5rem;
+}
+
+.create-resource-btn {
+  padding: 0.85rem 1.5rem;
 }
 
 .subtitle {
   color: #777;
-  margin-bottom: 2rem;
-  margin-top: 0.5rem;
+  margin-bottom: 1.2rem;
+  margin-top: 0.6rem;
+  margin-left: 1rem;
+  text-align: left;
+
 }
 
 .rooms-list {
@@ -157,7 +186,6 @@
   cursor: pointer;
   color: #fff;
   transition: filter 0.15s;
-  /* width: 170px; */
   min-width: 120px;
   max-width: 180px;
   word-break: break-word;
@@ -166,7 +194,79 @@
   display: inline-block;
 }
 
+.dropdown-wrapper {
+  position: absolute;
+  display: inline-block;
+  margin-top: 9.5%;
+  right: 6%;
+  margin-right:auto ;
+
+}
+
+.dropdown-toggle-btn {
+  background: #232654;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.85rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+
+.dropdown-toggle-btn:hover {
+  filter: brightness(0.93);
+}
+
+.dropdown-menu {
+  position: relative;
+  right: auto;
+  left: auto;
+  top: 100%;
+  min-width: 210px;
+  background: #fff;
+  border: 1px solid #d2d4e2;
+  border-radius: 8px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.13);
+  z-index: 200;
+  padding: 1rem 1.2rem;
+  margin-top: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-content: center;
+}
+
+.dropdown-action-btn {
+  background: #232654;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.8rem 1.3rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 0.3rem;
+  transition: filter 0.15s;
+  text-align: center;
+  width: 100%;
+}
+
+.dropdown-action-btn:last-child {
+  margin-bottom: 0;
+}
+
+.dropdown-action-btn:hover {
+  filter: brightness(0.93);
+}
+
+
+
 @media (max-width: 800px) {
+  .subtitle {
+    margin-top: 1.8rem;
+  }
   .room-admin-card {
     flex-direction: column;
     align-items: flex-start;
@@ -203,5 +303,23 @@
     font-size: 1rem;
     white-space: normal;
     text-align: center;
+  }
+  .main-actions-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  .heading-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .dropdown-menu {
+    position: relative;
+    min-width: 100%;
+    box-shadow: none;
+    border: 1px solid #d2d4e2;
+    padding: 1rem;
   }
 }
