@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "./RoomsManagement.css";
 import CreateRoom from "./CreateRoom";
+import CreateTypeRoom from "./CreateTypeRoom";
 
 const mockRooms = [
   {
     id: 1,
-    name: "Sala.Executiva",
+    //typeName:"Executiva",
+    name: "Sala Executiva",
     location: " Bloco A, 2º andar",
     description:
       "Sala executiva com mesa de reunião para 10 pessoas, projetor e sistema de videoconferência.",
@@ -14,9 +16,11 @@ const mockRooms = [
     features: ["Projetor", "Videoconferência", "Ar-condicionado", "Café"],
     image:
       "https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80",
+    
   },
   {
     id: 2,
+    //typeName:'Criativa',
     name: "Sala Criativa",
     location: "Bloco B, Térreo",
     description:
@@ -29,6 +33,7 @@ const mockRooms = [
   },
   {
     id: 3,
+    //typeName:
     name: "Sala de Treinamento",
     location: "Bloco C, 1º andar",
     description:
@@ -86,6 +91,7 @@ function RoomsManagement() {
   const [rooms, setRooms] = useState(mockRooms);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showRoomTypes, setShowRoomTypes] = useState(false)
 
   const handleEdit = (id) => { alert("Editar sala id: " + id); };
   const handleDelete = (id) => {
@@ -109,7 +115,16 @@ function RoomsManagement() {
     setShowCreateModal(false);
   };
   const handleCreateResource = () => { alert("Criar recurso - teste "); };
-  const handleCreateRoomType = () => { alert("Criar tipo de sala - teste "); };
+const handleCreateRoomType =() =>setShowRoomTypes(true)
+  // const handleCreateRoomType = () => { alert("Criar tipo de sala - teste "); };
+  if (showRoomTypes) {
+    return (
+      <CreateTypeRoom
+        roomTypes={mockRooms}
+        onBack={() => setShowRoomTypes(false)}
+      />
+    );
+  }
   const toggleDropdown = () => setShowDropdown((prev) => !prev);
 
   return (
