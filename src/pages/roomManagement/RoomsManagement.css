@@ -7,11 +7,13 @@
 
 .heading-bar {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
   gap: 1.2rem;
-  margin-bottom: 1.5rem;
-  
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+  margin-left: 3rem;
+   justify-content: flex-start;
+   position: relative;
 }
 
 .main-actions-row {
@@ -21,16 +23,15 @@
   justify-content: center;
   margin-bottom: 1rem;
 }
-
 .heading-bar h1 {
   font-size: 2.9rem;
   color: #222;
-  margin-right: 65%;
-  margin-top: 10%;
-  margin-bottom: 3%;
-  text-align: center;
-  
+  margin: 0;
+  flex: 1 1 0;
+  text-align: left;
+
 }
+
 
 .create-room-btn,
 .create-typeroom-btn,
@@ -52,10 +53,7 @@
   filter: brightness(0.93);
 }
 
-.create-typeroom-btn {
-  padding: 0.85rem 1.5rem;
-}
-
+.create-typeroom-btn,
 .create-resource-btn {
   padding: 0.85rem 1.5rem;
 }
@@ -65,8 +63,8 @@
   margin-bottom: 1.2rem;
   margin-top: 0.6rem;
   margin-left: 1rem;
-  text-align: left;
-
+  text-align: center;
+ 
 }
 
 .rooms-list {
@@ -84,6 +82,7 @@
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
   gap: 1.8rem;
   position: relative;
+  margin-top: 10px;
 }
 
 .room-image-column {
@@ -195,12 +194,10 @@
 }
 
 .dropdown-wrapper {
-  position: absolute;
+  position: relative;
+  margin: 0 0 0 1.5 rem;
   display: inline-block;
-  margin-top: 9.5%;
-  right: 6%;
-  margin-right:auto ;
-
+  
 }
 
 .dropdown-toggle-btn {
@@ -220,22 +217,26 @@
 }
 
 .dropdown-menu {
-  position: relative;
-  right: auto;
-  left: auto;
+  position: absolute;
+  left: 0;
   top: 100%;
-  min-width: 210px;
   background: #fff;
   border: 1px solid #d2d4e2;
   border-radius: 8px;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.13);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.13);
   z-index: 200;
   padding: 1rem 1.2rem;
   margin-top: 0.2rem;
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  align-content: center;
+  min-width: 210px;
+  align-items: stretch;
+}
+.dropdown-menu.open {
+  position: static;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.13);
 }
 
 .dropdown-action-btn {
@@ -252,16 +253,6 @@
   text-align: center;
   width: 100%;
 }
-
-.dropdown-action-btn:last-child {
-  margin-bottom: 0;
-}
-
-.dropdown-action-btn:hover {
-  filter: brightness(0.93);
-}
-
-
 
 @media (max-width: 800px) {
   .subtitle {
@@ -313,13 +304,41 @@
   .heading-bar {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.8rem;
   }
-  
-  .dropdown-menu {
+  .heading-bar h1 {
+    text-align: center;
+    margin: 0 0 0.7rem 0;
+  }
+  .dropdown-wrapper {
+    width: auto;
+    margin: 0;
+    display: flex;
+    justify-content: center;
     position: relative;
-    min-width: 100%;
-    box-shadow: none;
+    flex-direction: column;
+    align-items: center;
+  }
+  .dropdown-menu {
+    position: absolute;
+    left: 31%;
+    top: 100%;
+    min-width: 210px;
+    max-width: 90vw;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.13);
     border: 1px solid #d2d4e2;
-    padding: 1rem;
+    padding: 1rem 1.2rem;
+    margin-top: 0.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: stretch;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .dropdown-menu.open {
+    position: static;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.13);
   }
 }

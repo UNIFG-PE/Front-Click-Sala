@@ -130,17 +130,18 @@ const handleCreateRoomType =() =>setShowRoomTypes(true)
   return (
     <div className="room-management-page">
       <div className="menu-bar">
+      <div className="heading-bar">
+        <h1>Salas</h1>
         <div className="dropdown-wrapper">
           <button
             className="dropdown-toggle-btn"
             onClick={toggleDropdown}
             aria-haspopup="true"
             aria-expanded={showDropdown}
-          >
-            Gerenciar ▼
+          > Gerenciar ▼
           </button>
           {showDropdown && (
-            <div className="dropdown-menu dropdown-menu-right">
+            <div className="dropdown-menu open">
               <button
                 className="dropdown-action-btn"
                 onClick={() => setShowCreateModal(true)}
@@ -163,8 +164,6 @@ const handleCreateRoomType =() =>setShowRoomTypes(true)
           )}
         </div>
       </div>
-      <div className="heading-bar">
-        <h1>Salas</h1>
       </div>
       <p className="subtitle">
         Aqui você pode escolher uma sala para modificar.

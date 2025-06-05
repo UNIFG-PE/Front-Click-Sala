@@ -13,7 +13,11 @@ function CreateTypeRoom({roomTypes,onBack}){
           <button className="back-btn" onClick={onBack} aria-label="Voltar">
           <span style={{fontSize: "1.1em", verticalAlign: "middle"}}>&#8592;</span>
         </button>
+        <div className="titles">
             <h1>Tipos de Sala</h1>
+            <p className="subtitle">
+        Aqui você pode escolher uma sala para modificar. </p>
+        </div>
             <button className="create-type-btn" onClick={handleCreate}>Criar</button>
           </div>
           <div className="roomtype-list">
