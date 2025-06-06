@@ -1,12 +1,23 @@
 import React, { useState } from "react";
 import "./RoomsManagement.css";
 import CreateRoom from "./CreateRoom";
-import CreateTypeRoom from "./CreateTypeRoom";
+import TypeRoom from "./TypeRoom";
+
+const mockRoomTypes =[
+  { id:1 , name:"Executiva"},
+  {id:2 , name:'Criativa'},
+  { id: 3, name: "Treinamento" },
+  { id: 4, name: "Videoconferência" },
+  { id: 5, name: "Pequena" },
+  { id: 6, name: "Auditório" },
+  {id: 7, name: 'Laboratório'},
+  {id: 8, name: 'Sala.com'},
+];
 
 const mockRooms = [
   {
     id: 1,
-    //typeName:"Executiva",
+   typeId: 1,
     name: "Sala Executiva",
     location: " Bloco A, 2º andar",
     description:
@@ -20,7 +31,7 @@ const mockRooms = [
   },
   {
     id: 2,
-    //typeName:'Criativa',
+   typeId:2,
     name: "Sala Criativa",
     location: "Bloco B, Térreo",
     description:
@@ -33,7 +44,7 @@ const mockRooms = [
   },
   {
     id: 3,
-    //typeName:
+   typeId:3,
     name: "Sala de Treinamento",
     location: "Bloco C, 1º andar",
     description:
@@ -46,6 +57,7 @@ const mockRooms = [
   },
   {
     id: 4,
+    typeId:4,
     name: "Sala de Videoconferência",
     location: "Bloco A, 3º andar",
     description:
@@ -63,6 +75,7 @@ const mockRooms = [
   },
   {
     id: 5,
+    typeId:5,
     name: "Sala Pequena",
     location: "Bloco B, 2º andar",
     description:
@@ -75,6 +88,7 @@ const mockRooms = [
   },
   {
     id: 6,
+    typeId:6,
     name: "Auditório Principal",
     location: "Bloco C, Térreo",
     description:
@@ -89,6 +103,7 @@ const mockRooms = [
 
 function RoomsManagement() {
   const [rooms, setRooms] = useState(mockRooms);
+  const [roomTypes,setRoomTypes] = useState(mockRoomTypes);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [showRoomTypes, setShowRoomTypes] = useState(false)
@@ -116,16 +131,18 @@ function RoomsManagement() {
   };
   const handleCreateResource = () => { alert("Criar recurso - teste "); };
 const handleCreateRoomType =() =>setShowRoomTypes(true)
-  // const handleCreateRoomType = () => { alert("Criar tipo de sala - teste "); };
+
   if (showRoomTypes) {
     return (
-      <CreateTypeRoom
-        roomTypes={mockRooms}
+      <TypeRoom
+        roomTypes={roomTypes}
+        setRoomTypes={setRoomTypes}
         onBack={() => setShowRoomTypes(false)}
       />
     );
   }
   const toggleDropdown = () => setShowDropdown((prev) => !prev);
+
 
   return (
     <div className="room-management-page">
