@@ -234,6 +234,8 @@ const handleCreateRoomType =() =>setShowRoomTypes(true)
           <CreateRoom
             onSubmit={handleCreateRoom}
             onCancel={() => setShowCreateModal(false)}
+            existingRooms={rooms}
+            roomTypes={roomTypes}
           />
         </div>
       )}

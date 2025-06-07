@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import './CreateRoom.css';
 
+
 const defaultImage = 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80';
 
-function CreateRoom({ onSubmit, onCancel, existingRooms = [] }) {
+function CreateRoom({ onSubmit, onCancel, existingRooms = [], roomTypes = [] }) {
   const [name, setName] = useState('');
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
@@ -11,11 +12,10 @@ function CreateRoom({ onSubmit, onCancel, existingRooms = [] }) {
   const [features, setFeatures] = useState('');
   const [image, setImage] = useState('');
   const [available, setAvailable] = useState(true);
+  const [roomTypeId, setRoomTypeId] = useState(''); 
 
-  
   const [error, setError] = useState('');
 
- 
   const unavailableLocations = [
     'Bloco Z, 10º andar',
     'Bloco X, Subsolo'
@@ -35,7 +35,11 @@ function CreateRoom({ onSubmit, onCancel, existingRooms = [] }) {
     e.preventDefault();
     setError('');
 
-    
+    if (!roomTypeId) {
+      setError('Selecione o tipo de sala.');
+      return;
+    }
+
     if (existingRooms.some(room => room.name.toLowerCase() === name.trim().toLowerCase())) {
       setError('Já existe uma sala com esse nome.');
       return;
@@ -45,7 +49,6 @@ function CreateRoom({ onSubmit, onCancel, existingRooms = [] }) {
       setError('URL da imagem inválida. Use um endereço iniciado por http:// ou https://');
       return;
     }
-
 
     if (unavailableLocations.some(loc =>
       loc.toLowerCase() === location.trim().toLowerCase())
@@ -66,7 +69,8 @@ function CreateRoom({ onSubmit, onCancel, existingRooms = [] }) {
       capacity: Number(capacity),
       features: featuresArray,
       image: image || defaultImage,
-      available
+      available,
+      roomTypeId 
     });
   };
 
@@ -84,6 +88,17 @@ function CreateRoom({ onSubmit, onCancel, existingRooms = [] }) {
           value={name}
           onChange={e => setName(e.target.value)}
         />
+
+        <label>Tipo de sala*</label>
+        <select className='room-type-select'
+          required
+          value={roomTypeId}
+          onChange={e => setRoomTypeId(e.target.value)} >
+          <option value="">Selecione o tipo de sala</option>
+          {roomTypes.map(type => (
+            <option key={type.id} value={type.id}>{type.name}</option>
+          ))}
+        </select>
 
         <label>Localização*</label>
         <input
@@ -139,6 +154,7 @@ function CreateRoom({ onSubmit, onCancel, existingRooms = [] }) {
           <button type="submit" className="submit-btn">Criar Sala</button>
         </div>
       </form>
+      
     </div>
   );
 }
