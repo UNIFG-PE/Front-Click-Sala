@@ -1,21 +1,22 @@
-import React, { useState } from 'react';  // IMPORTAR useState
+import React, { useState } from 'react';
+import './header.css';
 import { FiLogOut } from 'react-icons/fi';
-import Logout from './logout'; // Importa o componente modal Logout (arquivo Logout.js)
-import './Header.css';
+import Logout from './logout';
 
 function Header() {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+
   const handleLogoutClick = () => setShowLogoutModal(true);
 
   const handleConfirmLogout = () => {
     setShowLogoutModal(false);
-    console.log('usurio confirmou o logout');
-    window.location.href = '/';
+    console.log('usuário confirmou o logout');
+    // Aqui você pode limpar localStorage, cookies, redirecionar, etc.
   };
 
   const handleCancelLogout = () => {
     setShowLogoutModal(false);
-    console.log('usuario cancelou o ogout');
+    console.log('usuário cancelou o logout');
   };
 
   return (
@@ -27,18 +28,17 @@ function Header() {
       <nav className="nav">
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="/reservas">Minhas Reservas</a></li>
-          <li><a href="/salas">Salas</a></li>
+          <li><a href="/reservas">Consultar Reservas</a></li>
+          <li><a href="/salas">Gerenciar Salas</a></li>
           <li><a href="/suporte">Suporte</a></li>
           <li>
             <span className="nav-link" onClick={handleLogoutClick} style={{ cursor: 'pointer' }}>
-              <FiLogOut size={23}/>
+              <FiLogOut size={23} />
             </span>
           </li>
         </ul>
       </nav>
 
-      {}
       {showLogoutModal && (
         <Logout onConfirm={handleConfirmLogout} onCancel={handleCancelLogout} />
       )}

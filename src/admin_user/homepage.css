@@ -32,9 +32,13 @@
   display: inline-block;
   background-color: #3498db;
   color: white;
-  padding: 1rem 2rem;
+  padding: 1rem 3rem;
   border-radius: 30px;
+  width: 140px;
+  height: 22px;
   font-weight: 600;
+  margin-right: 10px;
+  margin-left: 20px;
   text-decoration: none;
   transition: background-color 0.3s, transform 0.3s;
 }
