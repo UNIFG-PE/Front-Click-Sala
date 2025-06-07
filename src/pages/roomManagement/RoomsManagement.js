@@ -6,7 +6,7 @@ const mockRooms = [
     id: 1,
     name: 'Sala.Executiva',
     location: ' Bloco A, 2º andar',
-    description: 'Sala executiva com mesa de reunião para 10 pessoas, projetor e sistema de videoconferência.',
+    description: 'Sala executiva com mesa de reunião para 10 pessoas, projetor esistema de videoconferência.',
     capacity: 10,
     available: true,
     features: ['Projetor', 'Videoconferência', 'Ar-condicionado', 'Café'],
