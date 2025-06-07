@@ -1,66 +1,82 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
-import Footer from './components/Footer';
-import HomePage from './home/HomePage';
+import Footer from './admin_user/footer';
+import HomePage from './home/HomePage'; // user
 import RoomsPage from './pages/RoomsPage';
-import MyReservationsPage from './pages/MyReservationsPage';
+import MyReservationsPage from './pages/MyReservationsPage'; 
 import Suporte from './pages/Suporte';
+import Login from './admin_user/pages/login'; 
+import AdminScreen from './admin_user/homepage'; // admin
+import AdminHeader from './admin_user/header';
+import GerenciarSalas from './admin_user/pages/MyReservationsPage';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('home');
+  const [currentPage, setCurrentPage] = useState('login');
+  const [userRole, setUserRole] = useState(null);
 
-  // Simular um sistema de rotas simples
+  const handleLogin = (role) => {
+    setUserRole(role);
+    if (role === 'ADMIN') {
+      setCurrentPage('admin');
+    } else {
+      setCurrentPage('home');
+    }
+  };
+
   const renderPage = () => {
+    if (!userRole) return <Login onLogin={handleLogin} />;
+
     switch (currentPage) {
+      case 'admin':
+        return <AdminScreen />;
+      case 'gerenciarsalas':
+        return < GerenciarSalas/>;
       case 'home':
         return <HomePage />;
       case 'salas':
         return <RoomsPage />;
       case 'reservas':
         return <MyReservationsPage />;
-        case 'suporte':
-          return <Suporte />;
+      case 'suporte':
+        return <Suporte />;
+   
       default:
         return <HomePage />;
     }
   };
 
-  // Interceptar cliques em links para simular navegação
-  React.useEffect(() => {
+  useEffect(() => {
     const handleNavigation = (event) => {
-      // Verificar se o clique foi em um link interno
-      if (event.target.tagName === 'A' && !event.target.getAttribute('href').startsWith('http')) {
+      if (!userRole) return;
+
+      if (
+        event.target.tagName === 'A' &&
+        !event.target.getAttribute('href').startsWith('http')
+      ) {
         event.preventDefault();
         const path = event.target.getAttribute('href');
 
-        // Atualizar a página atual com base no caminho
         if (path === '/') setCurrentPage('home');
-        else if (path === '/salas') setCurrentPage('salas');
+        else if (path === '/gerenciarsalas') setCurrentPage('gerenciarsalas');
         else if (path === '/reservas') setCurrentPage('reservas');
         else if (path === '/suporte') setCurrentPage('suporte');
-
+        
       }
     };
 
-    // Adicionar listener para capturar cliques
     document.addEventListener('click', handleNavigation);
-
-    // Limpar listener quando o componente for desmontado
-    return () => {
-      document.removeEventListener('click', handleNavigation);
-    };
-  }, []);
+    return () => document.removeEventListener('click', handleNavigation);
+  }, [userRole]);
 
   return (
-    <div className="App">
-      <Header />
-      <main className="main-content">
-        {renderPage()}
-      </main>
-      <Footer />
-    </div>
-  );
+  <div className="App">
+    {userRole === 'USER' && <Header />}
+    {userRole === 'ADMIN' && <AdminHeader/>}
+    <main className="main-content">{renderPage()}</main>
+    {userRole && <Footer />}
+  </div>
+);
 }
 
 export default App;
