@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import RoomCard from '../components/RoomCard';
-import ReservationForm from '../components/ReservationForm';
+import RoomCard from '../../components/RoomCard';
+import ReservationForm from '../../components/ReservationForm';
 import './RoomsPage.css';
 
 // Dados mockados para as salas
