@@ -1,0 +1,344 @@
+.room-management-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  position: relative;
+}
+
+.heading-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 1.2rem;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+  margin-left: 3rem;
+   justify-content: flex-start;
+   position: relative;
+}
+
+.main-actions-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.heading-bar h1 {
+  font-size: 2.9rem;
+  color: #222;
+  margin: 0;
+  flex: 1 1 0;
+  text-align: left;
+
+}
+
+
+.create-room-btn,
+.create-typeroom-btn,
+.create-resource-btn {
+  background: #232654;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.85rem 2.2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+
+.create-room-btn:hover,
+.create-typeroom-btn:hover,
+.create-resource-btn:hover {
+  filter: brightness(0.93);
+}
+
+.create-typeroom-btn,
+.create-resource-btn {
+  padding: 0.85rem 1.5rem;
+}
+
+.subtitle {
+  color: #777;
+  margin-bottom: 1.2rem;
+  margin-top: 0.6rem;
+  margin-left: 1rem;
+  text-align: center;
+ 
+}
+
+.rooms-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+}
+
+.room-admin-card {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 13px;
+  padding: 1.2rem 2rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+  gap: 1.8rem;
+  position: relative;
+  margin-top: 10px;
+}
+
+.room-image-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.7rem;
+  min-width: 170px;
+  position: relative;
+}
+
+.room-image {
+  width: 170px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.room-capacity {
+  color: #666;
+  font-size: 0.98rem;
+  background: #f1f1f1;
+  border-radius: 12px;
+  padding: 0.2rem 0.9rem;
+  margin-top: 0.6rem;
+  margin-left: 0.5rem;
+  text-align: left;
+  width: auto;
+  min-width: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.room-details {
+  flex: 1 1 0%;
+  min-width: 170px;
+}
+
+.room-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #232654;
+  margin-bottom: 0.3rem;
+}
+
+.room-location {
+  color: #444;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.room-status-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-left: auto;
+  align-items: flex-end;
+}
+.center-actions {
+  align-items: center;
+  margin-left: 0;
+}
+
+.action-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 0.7rem 1.7rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+  transition: filter 0.15s;
+  width: 170px;
+  text-align: center;
+}
+.action-btn.orange {
+  background: #e35523;
+}
+.action-btn.edit {
+  background: #232654;
+}
+.action-btn.green {
+  background: #28a745;
+}
+.action-btn.red {
+  background: #dc3545;
+}
+.action-btn:hover {
+  filter: brightness(0.92);
+}
+
+.small-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 0.7rem 1.7rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+  transition: filter 0.15s;
+  min-width: 120px;
+  max-width: 180px;
+  word-break: break-word;
+  white-space: nowrap;
+  text-align: center;
+  display: inline-block;
+}
+
+.dropdown-wrapper {
+  position: relative;
+  margin: 0 0 0 1.5 rem;
+  display: inline-block;
+  
+}
+
+.dropdown-toggle-btn {
+  background: #232654;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.85rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+
+.dropdown-toggle-btn:hover {
+  filter: brightness(0.93);
+}
+
+.dropdown-menu {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background: #fff;
+  border: 1px solid #d2d4e2;
+  border-radius: 8px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.13);
+  z-index: 200;
+  padding: 1rem 1.2rem;
+  margin-top: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-width: 210px;
+  align-items: stretch;
+}
+.dropdown-menu.open {
+  position: static;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.13);
+}
+
+.dropdown-action-btn {
+  background: #232654;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.8rem 1.3rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 0.3rem;
+  transition: filter 0.15s;
+  text-align: center;
+  width: 100%;
+}
+
+@media (max-width: 800px) {
+  .subtitle {
+    margin-top: 1.8rem;
+  }
+  .room-admin-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.2rem;
+  }
+  .room-image-column {
+    width: 100%;
+  }
+  .room-image {
+    width: 100%;
+    height: 160px;
+  }
+  .room-status-actions,
+  .center-actions {
+    flex-direction: row;
+    gap: 1.2rem;
+    margin-left: 0;
+    margin-top: 1rem;
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+  }
+  .action-btn {
+    width: 100%;
+  }
+  .small-btn {
+    width: 80px;
+  }
+  .small-btn {
+    width: 100%;
+    min-width: 0;
+    max-width: 160px;
+    font-size: 1rem;
+    white-space: normal;
+    text-align: center;
+  }
+  .main-actions-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  .heading-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+  }
+  .heading-bar h1 {
+    text-align: center;
+    margin: 0 0 0.7rem 0;
+  }
+  .dropdown-wrapper {
+    width: auto;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+  }
+  .dropdown-menu {
+    position: absolute;
+    left: 31%;
+    top: 100%;
+    min-width: 210px;
+    max-width: 90vw;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.13);
+    border: 1px solid #d2d4e2;
+    padding: 1rem 1.2rem;
+    margin-top: 0.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: stretch;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .dropdown-menu.open {
+    position: static;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.13);
+  }
+}
