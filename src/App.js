@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import "./App.css";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import HomePage from "./pages/HomePage";
-import RoomsPage from "./pages/RoomsPage";
-import MyReservationsPage from "./pages/MyReservationsPage";
-import RoomsManagement from "./pages/roomManagement/RoomsManagement";
+import React, { useState } from 'react';
+import './App.css';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import HomePage from './pages/HomePage';
+import RoomsPage from './pages/RoomsPage';
+import MyReservationsPage from './pages/MyReservationsPage';
+import RoomsManagement from './pages/roomManagement/RoomsManagement';
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
 
-  // Simular um sistema de rotas simples
   const renderPage = () => {
     switch (currentPage) {
       case "home":
@@ -21,13 +20,14 @@ function App() {
         return <MyReservationsPage />;
       case "gerenciar-salas":
         return <RoomsManagement />;
+        case "gerenciar-salas":
+        return <RoomsManagement />;
       default:
         return <HomePage />;
     }
   };
 
-  // Interceptar cliques em links para simular navegação
-  React.useEffect(() => {
+  useEffect(() => {
     const handleNavigation = (event) => {
       // Verificar se o clique foi em um link interno
       if (
@@ -38,15 +38,15 @@ function App() {
         const path = event.target.getAttribute("href");
 
         // Atualizar a página atual com base no caminho
-        if (path === "/") setCurrentPage("home");
-        else if (path === "/salas") setCurrentPage("salas");
-        else if (path === "/reservas") setCurrentPage("reservas");
-      else if (path === '/gerenciar-salas') setCurrentPage('gerenciar-salas');
+        if (path === '/') setCurrentPage('home');
+        else if (path === '/salas') setCurrentPage('salas');
+        else if (path === '/reservas') setCurrentPage('reservas');
+        else if (path === '/gerenciar-salas') setCurrentPage('gerenciar-salas');
       }
     };
 
     // Adicionar listener para capturar cliques
-    document.addEventListener("click", handleNavigation);
+    document.addEventListener('click', handleNavigation);
 
     // Limpar listener quando o componente for desmontado
     return () => {
