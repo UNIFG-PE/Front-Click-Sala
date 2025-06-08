@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ReservationCard from '../components/ReservationCard';
+import ReservationCard from '../componentsAdm/ReservationCard';
 import './MyReservationsPage.css';
 
 // Dados mockados para as reservas

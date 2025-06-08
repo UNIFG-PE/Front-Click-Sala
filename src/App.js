@@ -10,6 +10,7 @@ import Login from './admin_user/pages/login';
 import AdminScreen from './admin_user/homepage'; // admin
 import AdminHeader from './admin_user/header';
 import GerenciarSalas from './admin_user/pages/MyReservationsPage';
+import RoomsPag from './admin_user/pages/RoomsPage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('login');
@@ -32,6 +33,8 @@ function App() {
         return <AdminScreen />;
       case 'gerenciarsalas':
         return < GerenciarSalas/>;
+          case 'consultarreser':
+        return < RoomsPag/>;
       case 'home':
         return <HomePage />;
       case 'salas':
@@ -58,6 +61,7 @@ function App() {
         const path = event.target.getAttribute('href');
 
         if (path === '/') setCurrentPage('home');
+        else if (path === '/admin') setCurrentPage('admin');
         else if (path === '/gerenciarsalas') setCurrentPage('gerenciarsalas');
         else if (path === '/reservas') setCurrentPage('reservas');
         else if (path === '/suporte') setCurrentPage('suporte');
