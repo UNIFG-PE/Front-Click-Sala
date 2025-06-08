@@ -2,15 +2,18 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1rem;
+  margin-bottom: 3rem;
 }
 
 .heading-bar {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  margin-bottom: 3rem;
+ 
 }
+
 
 .heading-bar h1 {
   font-size: 2rem;
