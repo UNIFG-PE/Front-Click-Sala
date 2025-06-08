@@ -10,7 +10,6 @@ function Header() {
   const handleConfirmLogout = () => {
     setShowLogoutModal(false);
     console.log('usurio confirmou o logout');
-    window.location.href = '/';
   };
 
   const handleCancelLogout = () => {

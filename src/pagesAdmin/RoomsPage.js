@@ -164,10 +164,6 @@ function RoomsPage() {
           </div>
         )}
       </div>
-      <button className="floating-button-square" onClick={() => alert('Abrir formulário ou ação desejada')}>
-  +
-</button>
-
       
       {showReservationForm && selectedRoom && (
         <div className="modal-overlay">
@@ -177,10 +173,8 @@ function RoomsPage() {
             onCancel={handleReservationCancel}
           />
         </div>
-        
       )}
     </div>
-    
   );
 }
 
