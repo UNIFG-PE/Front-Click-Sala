@@ -1,7 +1,7 @@
 import React from 'react';
 import './homepage.css';
 
-function HomePage() {
+function HomePageAdm() {
   return (
     
     <div className="home-page">
@@ -57,4 +57,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default HomePageAdm;

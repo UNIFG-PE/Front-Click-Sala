@@ -7,8 +7,9 @@ function Logout({ onConfirm, onCancel }) {
       <div className="logout-modal">
         <p>Deseja sair?</p>
         <div className="logout-buttons">
-          <button onClick={onConfirm}>sim</button>
-          <button onClick={onCancel}>não</button>
+          <button onClick={onConfirm}>Sim</button>
+          <button onClick={onCancel}>Não</button>
+
         </div>
       </div>
     </div>

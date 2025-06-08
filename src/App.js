@@ -9,7 +9,7 @@ import Suporte from './pages/Suporte';
 import Login from './admin_user/pages/login'; 
 import AdminScreen from './admin_user/homepage'; // admin
 import AdminHeader from './admin_user/header';
-import GerenciarSalas from './admin_user/pages/MyReservationsPage';
+import GerenciarSalas from './admin_user/pages/RoomsManagement';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('login');
@@ -33,7 +33,7 @@ function App() {
       case 'gerenciarsalas':
         return < GerenciarSalas/>;
       case 'home':
-        return <HomePage />;
+        return <AdminScreen />;
       case 'salas':
         return <RoomsPage />;
       case 'reservas':
@@ -43,6 +43,19 @@ function App() {
    
       default:
         return <HomePage />;
+
+      case 'user':
+        return <HomePage />;
+      case 'home':
+        return <HomePage />;
+      case 'salas':
+        return <RoomsPage />;
+      case 'reservas':
+        return <MyReservationsPage />;
+      case 'suporte':
+        return <Suporte />;
+   
+
     }
   };
 

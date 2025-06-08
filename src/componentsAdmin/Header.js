@@ -9,12 +9,12 @@ function Header() {
 
   const handleConfirmLogout = () => {
     setShowLogoutModal(false);
-    console.log('usurio confirmou o logout');
+    console.log('usuario confirmou o logout');
   };
 
   const handleCancelLogout = () => {
     setShowLogoutModal(false);
-    console.log('usuario cancelou o ogout');
+    console.log('usuario cancelou o logout');
   };
 
   return (

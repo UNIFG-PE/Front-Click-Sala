@@ -29,7 +29,7 @@ function Header() {
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/reservas">Consultar Reservas</a></li>
-          <li><a href="/salas">Gerenciar Salas</a></li>
+          <li><a href="/gerenciar">Gerenciar Salas</a></li>
           <li><a href="/suporte">Suporte</a></li>
           <li>
             <span className="nav-link" onClick={handleLogoutClick} style={{ cursor: 'pointer' }}>
