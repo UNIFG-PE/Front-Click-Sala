@@ -6,6 +6,8 @@ import HomePage from "./pages/HomePage";
 import RoomsPage from "./pages/RoomsPage";
 import MyReservationsPage from "./pages/MyReservationsPage";
 import RoomsManagement from "./pages/roomManagement/RoomsManagement";
+import ManageResources from './pages/resources/ManageResources';
+
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -20,8 +22,9 @@ function App() {
         return <MyReservationsPage />;
       case "gerenciar-salas":
         return <RoomsManagement />;
-        case "gerenciar-salas":
-        return <RoomsManagement />;
+      case "recursos":
+        return <ManageResources />;
+
       default:
         return <HomePage />;
     }
@@ -42,6 +45,8 @@ function App() {
         else if (path === '/salas') setCurrentPage('salas');
         else if (path === '/reservas') setCurrentPage('reservas');
         else if (path === '/gerenciar-salas') setCurrentPage('gerenciar-salas');
+        else if (path === "/recursos") setCurrentPage("recursos");
+
       }
     };
 
