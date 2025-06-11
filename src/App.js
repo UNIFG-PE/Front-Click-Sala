@@ -5,6 +5,9 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import RoomsPage from './pages/RoomsPage';
 import MyReservationsPage from './pages/MyReservationsPage';
+import CadastroUsuarioPage from './pages/CadastroUsuarioPage';
+
+
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -18,8 +21,14 @@ function App() {
         return <RoomsPage />;
       case 'reservas':
         return <MyReservationsPage />;
+      case 'cadastro':
+        return <SignIn />;
       default:
         return <HomePage />;
+      case 'cadastro-usuario':
+        return <CadastroUsuarioPage />;
+
+
     }
   };
 
@@ -33,8 +42,11 @@ function App() {
 
         // Atualizar a página atual com base no caminho
         if (path === '/') setCurrentPage('home');
+        else if (path === '/cadastro') setCurrentPage('cadastro');
         else if (path === '/salas') setCurrentPage('salas');
         else if (path === '/reservas') setCurrentPage('reservas');
+        else if (path === '/cadastro-usuario') setCurrentPage('cadastro-usuario');
+
       }
     };
 
