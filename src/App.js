@@ -21,6 +21,8 @@ function App() {
         return <RoomsPage />;
       case 'reservas':
         return <MyReservationsPage />;
+      case 'cadastro':
+        return <SignIn />;
       default:
         return <HomePage />;
       case 'cadastro-usuario':
@@ -40,6 +42,7 @@ function App() {
 
         // Atualizar a página atual com base no caminho
         if (path === '/') setCurrentPage('home');
+        else if (path === '/cadastro') setCurrentPage('cadastro');
         else if (path === '/salas') setCurrentPage('salas');
         else if (path === '/reservas') setCurrentPage('reservas');
         else if (path === '/cadastro-usuario') setCurrentPage('cadastro-usuario');

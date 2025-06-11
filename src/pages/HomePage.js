@@ -8,7 +8,7 @@ function HomePage() {
         <div className="hero-content">
           <h1>Bem-vindo ao ODA</h1>
           <p>Sistema de reserva de salas online para sua empresa</p>
-          <a href="/salas" className="cta-button">Reservar uma Sala</a>
+          <a href="/cadastro" className="cta-button">Reservar uma Sala</a>
         </div>
       </section>
       
