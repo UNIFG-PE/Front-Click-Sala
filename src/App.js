@@ -19,6 +19,8 @@ function App() {
         return <RoomsPage />;
       case "reservas":
         return <MyReservationsPage />;
+      case "buscar-salas":
+        return <RequestPages />;
       default:
         return <HomePage />;
     }
@@ -39,6 +41,7 @@ function App() {
         if (path === "/") setCurrentPage("home");
         else if (path === "/salas") setCurrentPage("salas");
         else if (path === "/reservas") setCurrentPage("reservas");
+        else if (path === "/buscar-salas") setCurrentPage("buscar-salas");
       }
     };
 

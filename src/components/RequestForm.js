@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./RequestForm.css";
 
 function RequestForm({ onSubmit, onCancel }) {
+  const [opcaoselecionada, setOpcaoselecionada] = useState("");
   const [date, setDate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
@@ -11,6 +12,7 @@ function RequestForm({ onSubmit, onCancel }) {
     e.preventDefault();
 
     const criteria = {
+      opcaoselecionada,
       date,
       startTime,
       endTime,
@@ -24,8 +26,36 @@ function RequestForm({ onSubmit, onCancel }) {
 
   return (
     <form className="reservation-form" onSubmit={handleSubmit}>
+      <p>
+        <strong>
+          Selecione os Campus de acordo com o local que deseja reservar:
+        </strong>
+      </p>
+      <div className="form-radio-group">
+        <label>
+          <input
+            type="radio"
+            name="opcaoselecionada"
+            value="campus1"
+            checked={opcaoselecionada === "campus1"}
+            onChange={(e) => setOpcaoselecionada(e.target.value)}
+          />
+          Campus Boa Vista
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="opcaoselecionada"
+            value="campus2"
+            checked={opcaoselecionada === "campus2"}
+            onChange={(e) => setOpcaoselecionada(e.target.value)}
+          />
+          Campus Piedade
+        </label>
+      </div>
+
       <div className="form-group">
-        <label htmlFor="date">Data</label>
+        <label htmlFor="date">Data:</label>
         <input
           type="date"
           id="date"
@@ -38,7 +68,7 @@ function RequestForm({ onSubmit, onCancel }) {
 
       <div className="form-row">
         <div className="form-group">
-          <label htmlFor="startTime">Hora de Início</label>
+          <label htmlFor="startTime">Hora de Início:</label>
           <input
             type="time"
             id="startTime"
@@ -49,7 +79,7 @@ function RequestForm({ onSubmit, onCancel }) {
         </div>
 
         <div className="form-group">
-          <label htmlFor="endTime">Hora de Término</label>
+          <label htmlFor="endTime">Hora de Término:</label>
           <input
             type="time"
             id="endTime"
