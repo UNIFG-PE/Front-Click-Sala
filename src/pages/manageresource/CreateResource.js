@@ -6,7 +6,7 @@ function CreateResource({ onSuccess }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Recurso criado:", name); // Você pode substituir por chamada à API
+    console.log("Recurso criado:", name); 
     onSuccess();
   };
 
