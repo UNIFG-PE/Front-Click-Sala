@@ -1,5 +1,5 @@
-import React from 'react';
-import './Header.css';
+import React from "react";
+import "./Header.css";
 
 function Header() {
   return (
@@ -10,9 +10,18 @@ function Header() {
       </div>
       <nav className="nav">
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/reservas">Minhas Reservas</a></li>
-          <li><a href="/salas">Salas</a></li>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/reservas">Minhas Reservas</a>
+          </li>
+          <li>
+            <a href="/salas">Salas</a>
+          </li>
+          <li>
+            <a href="/buscar-salas">Buscar Salas</a>
+          </li>
         </ul>
       </nav>
     </header>
