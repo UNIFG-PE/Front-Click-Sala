@@ -78,8 +78,8 @@ function RoomsPage() {
   // Filtrar salas com base na pesquisa e capacidade
   const filteredRooms = rooms.filter(room => {
     const matchesSearch = room.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                         room.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         room.location.toLowerCase().includes(searchTerm.toLowerCase());
+      room.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      room.location.toLowerCase().includes(searchTerm.toLowerCase());
     
     const matchesCapacity = capacityFilter === '' || room.capacity >= parseInt(capacityFilter);
     

@@ -1,0 +1,109 @@
+.resource-page {
+  font-family: 'Segoe UI', sans-serif;
+  color: #2c3e50;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  background-color: #1f1f50;
+  padding: 1rem 2rem;
+  color: white;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: white;
+  color: #1f1f50;
+  border-radius: 50%;
+  padding: 0.3rem 0.6rem;
+}
+
+.search {
+  flex: 1;
+  margin: 0 2rem;
+  padding: 0.5rem;
+  border-radius: 20px;
+  border: none;
+  max-width: 400px;
+}
+
+.icons {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.resource-content {
+  padding: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.description {
+  color: #7f8c8d;
+  margin-top: 0.3rem;
+}
+
+.create-button {
+  background-color: #1f1f50;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.resource-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.resource-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #ddd;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.icon {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+
+.icon.edit:hover {
+  color: #2980b9;
+}
+
+.icon.delete:hover {
+  color: #e74c3c;
+}
+
+.back-button {
+  background-color: #d35400;
+  color: white;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
