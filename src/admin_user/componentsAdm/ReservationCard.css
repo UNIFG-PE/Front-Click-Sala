@@ -72,7 +72,7 @@
   color: white;
   border: none;
   padding: 1rem;
-  width: 450px;
+  width: 100%;
   margin-right: 700px;
   font-weight: 600;
   cursor: pointer;
@@ -81,9 +81,7 @@
 
 .cancel-reservation-button:hover {
   background-color: #c0392b;
-  width: 100%;
 }
-
 
 @media (max-width: 768px) {
   .detail-item {
