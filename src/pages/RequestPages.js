@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import RequestForm from "../components/RequestForm";
+import RoomCard from "../components/RoomCard";
 
 function RequestPages() {
   const [availableRooms, setAvailableRooms] = useState([]);
@@ -17,19 +18,53 @@ function RequestPages() {
     setFormCriteria(criteria);
 
     try {
-      const queryString = new URLSearchParams(criteria).toString();
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      const response = await fetch(`/api/rooms/available?${queryString}`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
+      const mockRooms = [
+        {
+          id: 1,
+          name: "Sala Executiva",
+          location: "Bloco A, 2º andar",
+          description:
+            "Sala executiva com mesa de reunião para 10 pessoas, projetor e sistema de videoconferência.",
+          capacity: 10,
+          available: true,
+          features: ["Projetor", "Videoconferência", "Ar-condicionado", "Café"],
+          image:
+            "https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80",
+        },
+        {
+          id: 2,
+          name: "Sala Criativa",
+          location: "Bloco B, Térreo",
+          description:
+            "Espaço colaborativo com quadros brancos, puffs e mesas modulares para brainstorming e trabalho em equipe.",
+          capacity: 8,
+          available: true,
+          features: ["Quadro branco", "Mesas modulares", "Puffs", "Wi-Fi"],
+          image:
+            "https://images.unsplash.com/photo-1497215842964-222b430dc094?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80",
+        },
+        {
+          id: 3,
+          name: "Sala de Treinamento",
+          location: "Bloco C, 1º andar",
+          description:
+            "Sala ampla com configuração em formato de auditório, ideal para treinamentos e apresentações.",
+          capacity: 20,
+          available: true,
+          features: [
+            "Projetor",
+            "Sistema de som",
+            "Microfones",
+            "Ar-condicionado",
+          ],
+          image:
+            "https://images.unsplash.com/photo-1517502884422-41eaead166d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80",
+        },
+      ];
 
-      if (!response.ok) {
-        throw new Error("Erro ao buscar salas.");
-      }
-
-      const rooms = await response.json();
-      setAvailableRooms(rooms);
+      setAvailableRooms(mockRooms);
 
       setTimeout(() => {
         resultsRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -47,28 +82,18 @@ function RequestPages() {
     setReservationStatus(null);
 
     try {
-      const query = new URLSearchParams({
-        roomId,
-        ...formCriteria,
-      }).toString();
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      const response = await fetch(`/api/reservations/create?${query}`, {
-        method: "GET",
-      });
-
-      if (!response.ok) throw new Error("Erro ao realizar reserva.");
-
-      const result = await response.json();
       setReservationStatus(`Reserva confirmada para a sala ${roomId}!`);
     } catch (error) {
-      setError(error.message);
+      setError("Erro ao realizar reserva mockada.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div>
+    <div className="Request-page">
       <h2>Buscar Salas Disponíveis</h2>
       <RequestForm onSubmit={handleSearch} />
 
@@ -79,16 +104,13 @@ function RequestPages() {
       )}
 
       {!loading && availableRooms.length > 0 && (
-        <div>
+        <div ref={resultsRef}>
           <h3>Salas Encontradas:</h3>
-          <ul>
+          <div className="room-list">
             {availableRooms.map((room) => (
-              <li key={room.id}>
-                <strong>{room.name}</strong> - Capacidade: {room.capacity}
-                <button onClick={() => handleReserve(room.id)}>Reservar</button>
-              </li>
+              <RoomCard key={room.id} room={room} onReserve={handleReserve} />
             ))}
-          </ul>
+          </div>
         </div>
       )}
 
