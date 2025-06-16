@@ -10,12 +10,12 @@ function CreateTypeRoom({ onClose, onSave, error, setError, initialName = "", is
     // eslint-disable-next-line
   }, [initialName]);
 
-  const handleSave = () => {
+  const handleSave =  async () => {
     if (!name.trim()) {
       setError("O nome do tipo de sala é obrigatório!");
       return;
     }
-    const result = onSave(name.trim());
+    const result =  await onSave(name.trim());
     if (result !== false) {
       setName("");
       setError("");
