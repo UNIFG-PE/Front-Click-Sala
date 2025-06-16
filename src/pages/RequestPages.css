@@ -1,7 +1,7 @@
 .RequestPages {
-  width: 450px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 3em;
+  padding: 3em 1em;
 }
 .RequestPages h1 {
   margin-bottom: 0.5em;
@@ -9,18 +9,21 @@
 .RequestPages p {
   color: #7b7b7b;
 }
-.room-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: center;
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 4em 1em;
 }
 
 .room-card {
-  flex: 0 1 300px;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 16px;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 768px) {
+  .room-card {
+    flex: 0 1 100%;
+  }
 }

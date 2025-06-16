@@ -93,7 +93,7 @@ function RequestPages() {
   };
 
   return (
-    <div className="Request-page">
+    <div className="Requestpage">
       <h2>Buscar Salas Disponíveis</h2>
       <RequestForm onSubmit={handleSearch} />
 
@@ -106,7 +106,7 @@ function RequestPages() {
       {!loading && availableRooms.length > 0 && (
         <div ref={resultsRef}>
           <h3>Salas Encontradas:</h3>
-          <div className="room-list">
+          <div className="rooms-grid">
             {availableRooms.map((room) => (
               <RoomCard key={room.id} room={room} onReserve={handleReserve} />
             ))}
