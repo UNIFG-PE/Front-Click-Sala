@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
-import Footer from './admin_user/footer';
-import HomePage from './home/HomePage'; // user
+import Footer from './admin_user/footerAdm';
+import HomePage from './home/HomePage'; // usuario normal
 import RoomsPage from './pages/RoomsPage';
 import MyReservationsPage from './pages/MyReservationsPage'; 
 import Suporte from './pages/Suporte';
-import Login from './admin_user/pages/login'; 
-import AdminScreen from './admin_user/homepage'; // admin
-import AdminHeader from './admin_user/header';
-import GerenciarSalas from './admin_user/pages/MyReservationsPage';
-import RoomsPag from './admin_user/pages/RoomsPage';
+import Login from './admin_user/pagesAdm/login'; 
+import AdminScreen from './admin_user/homepageAdm'; // usuario adm
+import AdminHeader from './admin_user/headerAdm';
+import GerenciarSalas from './admin_user/pagesAdm/MyReservationsPage';
+import RoomsPag from './admin_user/pagesAdm/RoomsPage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('login');
@@ -60,10 +60,18 @@ function App() {
         event.preventDefault();
         const path = event.target.getAttribute('href');
 
-        if (path === '/') setCurrentPage('home');
+             if (path === '/') {
+        if (userRole === 'ADMIN') {
+          setCurrentPage('admin');
+        } else {
+          setCurrentPage('home');
+        }
+      }
+        
         else if (path === '/admin') setCurrentPage('admin');
         else if (path === '/gerenciarsalas') setCurrentPage('gerenciarsalas');
         else if (path === '/reservas') setCurrentPage('reservas');
+        else if (path === '/salas') setCurrentPage('salas');
         else if (path === '/suporte') setCurrentPage('suporte');
         
       }

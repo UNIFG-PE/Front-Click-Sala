@@ -1,11 +1,11 @@
 import React from 'react';
-import './logout.css'; // Arquivo CSS separado
+import './logoutAdm.css'; // Arquivo CSS separado
 
 function Logout({ onConfirm, onCancel }) {
   return (
     <div className="logout-modal-overlay">
       <div className="logout-modal">
-        <p>quer fazer logout?</p>
+        <p>Deseja sair?</p>
         <div className="logout-buttons">
           <button onClick={onConfirm}>sim</button>
           <button onClick={onCancel}>não</button>

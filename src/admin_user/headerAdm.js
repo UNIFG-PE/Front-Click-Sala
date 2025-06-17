@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './header.css';
+import './headerAdm.css';
 import { FiLogOut } from 'react-icons/fi';
-import Logout from './logout';
+import Logout from './logoutAdm';
 
 function Header() {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
