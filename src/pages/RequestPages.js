@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import RequestForm from "../components/RequestForm";
 import RoomCard from "../components/RoomCard";
+import SuccessMessage from "../components/SuccessMessage";
+import "./RequestPages.css";
 
 function RequestPages() {
   const [availableRooms, setAvailableRooms] = useState([]);
@@ -99,10 +101,10 @@ function RequestPages() {
 
       {loading && <p>Carregando salas...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
-      {reservationStatus && (
-        <p style={{ color: "green" }}>{reservationStatus}</p>
-      )}
-
+      <SuccessMessage
+        message={reservationStatus}
+        onClose={() => setReservationStatus(null)}
+      />
       {!loading && availableRooms.length > 0 && (
         <div ref={resultsRef}>
           <h3>Salas Encontradas:</h3>
