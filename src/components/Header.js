@@ -13,6 +13,7 @@ function Header() {
           <li><a href="/">Home</a></li>
           <li><a href="/reservas">Minhas Reservas</a></li>
           <li><a href="/salas">Salas</a></li>
+          <li><a href="/cadastro-usuario">Cadastrar Usuário</a></li>
         </ul>
       </nav>
     </header>

@@ -5,6 +5,9 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import RoomsPage from './pages/RoomsPage';
 import MyReservationsPage from './pages/MyReservationsPage';
+import CadastroUsuarioPage from './pages/CadastroUsuarioPage';
+import SignIn from './pages/SignIn';
+
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -18,9 +21,13 @@ function App() {
         return <RoomsPage />;
       case 'reservas':
         return <MyReservationsPage />;
+      case 'cadastro-usuario': // <- rota correta para a opção do topo
+        return <SignIn />;
+      case 'cadastro': // se for outra tela (como cadastro de sala, mantenha aqui)
+        return <CadastroUsuarioPage />;
       default:
         return <HomePage />;
-    }
+  }
   };
 
   // Interceptar cliques em links para simular navegação
@@ -35,9 +42,10 @@ function App() {
         if (path === '/') setCurrentPage('home');
         else if (path === '/salas') setCurrentPage('salas');
         else if (path === '/reservas') setCurrentPage('reservas');
+        else if (path === '/cadastro-usuario') setCurrentPage('cadastro-usuario');
+        else if (path === '/cadastro') setCurrentPage('cadastro');
       }
     };
-
     // Adicionar listener para capturar cliques
     document.addEventListener('click', handleNavigation);
 
