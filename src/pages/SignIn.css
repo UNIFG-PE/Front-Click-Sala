@@ -84,15 +84,4 @@ button[type="submit"]:hover {
   .sign-in h2 {
     font-size: 1.75rem;
   }
-
-  .input-error {
-  border-color: red !important;
-}
-
-.error-text {
-  color: red;
-  font-size: 0.9rem;
-  margin-top: 0.3rem;
-}
-
 }

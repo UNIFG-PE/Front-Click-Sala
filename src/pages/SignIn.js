@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './SignIn.css';
+import './SignIn.css'; 
 
 const SignIn = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({ //cria os estados dos imputs
     fullName: '',
     cpf: '',
     phoneNumber: '',
@@ -10,46 +10,16 @@ const SignIn = () => {
     password: ''
   });
 
-  const [errors, setErrors] = useState({});
-
-  const validate = () => {
-    const newErrors = {};
-
-    // CPF: exatamente 11 dígitos numéricos
-    if (!/^\d{11}$/.test(formData.cpf)) {
-      newErrors.cpf = 'CPF deve conter exatamente 11 números.';
-    }
-
-    // Telefone: formato comum brasileiro
-    if (!/^(\+?\d{1,3})?[\s-]?\(?\d{2}\)?[\s-]?\d{4,5}[\s-]?\d{4}$/.test(formData.phoneNumber)) {
-      newErrors.phoneNumber = 'Telefone inválido. Ex: (11) 91234-5678';
-    }
-
-    // E-mail: formato padrão
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Email inválido.';
-    }
-
-    return newErrors;
-  };
-
-  const handleChange = (e) => {
+  const handleChange = (e) => { //atualiza os estados dos imputs
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: '' }); // limpa erro ao digitar
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => {//previne o comportamento padrão do form e pega os dados do form
     e.preventDefault();
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-    console.log('Dados válidos:', formData);
-    // Aqui você pode enviar os dados para o backend
+    console.log(formData);
   };
 
-  return (
+  return ( //html do form de cadastro
     <div className="sign-in">
       <h2>Cadastre-se</h2>
       <form onSubmit={handleSubmit}>
@@ -74,9 +44,7 @@ const SignIn = () => {
             value={formData.cpf}
             onChange={handleChange}
             required
-            className={errors.cpf ? 'input-error' : ''}
           />
-          {errors.cpf && <span className="error-text">{errors.cpf}</span>}
         </div>
 
         <div className="form-group">
@@ -87,10 +55,9 @@ const SignIn = () => {
             name="phoneNumber"
             value={formData.phoneNumber}
             onChange={handleChange}
+            pattern="^(\+?\d{1,3})?[-.\s]?\(?\d{2,3}\)?[-.\s]?\d{4,5}[-.\s]?\d{4}$"
             required
-            className={errors.phoneNumber ? 'input-error' : ''}
           />
-          {errors.phoneNumber && <span className="error-text">{errors.phoneNumber}</span>}
         </div>
 
         <div className="form-group">
@@ -102,9 +69,7 @@ const SignIn = () => {
             value={formData.email}
             onChange={handleChange}
             required
-            className={errors.email ? 'input-error' : ''}
           />
-          {errors.email && <span className="error-text">{errors.email}</span>}
         </div>
 
         <div className="form-group">
