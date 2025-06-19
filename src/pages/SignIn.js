@@ -50,7 +50,8 @@ const SignIn = () => {
   };
 
   return (
-    <div className="sign-in">
+    <div className="sign-in-container">
+       <div className="sign-in">
       <h2>Cadastre-se</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -124,6 +125,7 @@ const SignIn = () => {
 
         <button type="submit">Cadastrar</button>
       </form>
+    </div>
     </div>
   );
 };

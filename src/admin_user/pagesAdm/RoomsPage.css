@@ -37,7 +37,7 @@
 
 .search-bar input {
   width: 100%;
-  padding: 0.9rem 1rem;
+  padding: 0.8rem 1rem;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
@@ -134,3 +134,22 @@
     grid-template-columns: 1fr;
   }
 }
+.floating-button-square {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  background-color: #3498db; /* verde */
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px; /* quadrado com cantos levemente arredondados */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 999;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+
