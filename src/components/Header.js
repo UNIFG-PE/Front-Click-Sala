@@ -29,12 +29,17 @@ function Header() {
           <li><a href="/">Home</a></li>
           <li><a href="/reservas">Minhas Reservas</a></li>
           <li><a href="/salas">Salas</a></li>
+
           <li><a href="/suporte">Suporte</a></li>
+             <li><a href="/cadastro-usuario">Cadastrar Usuário</a></li>
           <li>
             <span className="nav-link" onClick={handleLogoutClick} style={{ cursor: 'pointer' }}>
               <FiLogOut size={23}/>
             </span>
           </li>
+
+         
+
         </ul>
       </nav>
 

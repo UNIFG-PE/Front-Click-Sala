@@ -11,6 +11,8 @@ import AdminScreen from './admin_user/homepageAdm'; // usuario adm
 import AdminHeader from './admin_user/headerAdm';
 import GerenciarSalas from './admin_user/pagesAdm/MyReservationsPage';
 import RoomsPag from './admin_user/pagesAdm/RoomsPage';
+import CadastroUsuarioPage from './pages/CadastroUsuarioPage';
+import SignIn from './pages/SignIn';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('login');
@@ -32,9 +34,9 @@ function App() {
       case 'admin':
         return <AdminScreen />;
       case 'gerenciarsalas':
-        return < GerenciarSalas/>;
-          case 'consultarreser':
-        return < RoomsPag/>;
+        return <GerenciarSalas />;
+      case 'consultarreser':
+        return <RoomsPag />;
       case 'home':
         return <HomePage />;
       case 'salas':
@@ -43,7 +45,10 @@ function App() {
         return <MyReservationsPage />;
       case 'suporte':
         return <Suporte />;
-   
+      case 'cadastro-usuario':
+        return <SignIn />;
+      case 'cadastro':
+        return <CadastroUsuarioPage />;
       default:
         return <HomePage />;
     }
@@ -60,20 +65,19 @@ function App() {
         event.preventDefault();
         const path = event.target.getAttribute('href');
 
-             if (path === '/') {
-        if (userRole === 'ADMIN') {
-          setCurrentPage('admin');
-        } else {
-          setCurrentPage('home');
-        }
-      }
-        
-        else if (path === '/admin') setCurrentPage('admin');
+        if (path === '/') {
+          if (userRole === 'ADMIN') {
+            setCurrentPage('admin');
+          } else {
+            setCurrentPage('home');
+          }
+        } else if (path === '/admin') setCurrentPage('admin');
         else if (path === '/gerenciarsalas') setCurrentPage('gerenciarsalas');
         else if (path === '/reservas') setCurrentPage('reservas');
         else if (path === '/salas') setCurrentPage('salas');
         else if (path === '/suporte') setCurrentPage('suporte');
-        
+        else if (path === '/cadastro-usuario') setCurrentPage('cadastro-usuario');
+        else if (path === '/cadastro') setCurrentPage('cadastro');
       }
     };
 
@@ -82,13 +86,13 @@ function App() {
   }, [userRole]);
 
   return (
-  <div className="App">
-    {userRole === 'USER' && <Header />}
-    {userRole === 'ADMIN' && <AdminHeader/>}
-    <main className="main-content">{renderPage()}</main>
-    {userRole && <Footer />}
-  </div>
-);
+    <div className="App">
+      {userRole === 'USER' && <Header />}
+      {userRole === 'ADMIN' && <AdminHeader />}
+      <main className="main-content">{renderPage()}</main>
+      {userRole && <Footer />}
+    </div>
+  );
 }
 
 export default App;
