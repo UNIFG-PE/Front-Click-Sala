@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -7,12 +7,12 @@ import RoomsPage from './pages/RoomsPage';
 import MyReservationsPage from './pages/MyReservationsPage';
 import CadastroUsuarioPage from './pages/CadastroUsuarioPage';
 import SignIn from './pages/SignIn';
-
+import UserManagementPage from './pages/UserManagementPage'; // ✅ nova página importada
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
 
-  // Simular um sistema de rotas simples
+  // Sistema de rotas simples com base no estado
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
@@ -21,38 +21,34 @@ function App() {
         return <RoomsPage />;
       case 'reservas':
         return <MyReservationsPage />;
-      case 'cadastro-usuario': // <- rota correta para a opção do topo
+      case 'cadastro-usuario':
         return <SignIn />;
-      case 'cadastro': // se for outra tela (como cadastro de sala, mantenha aqui)
+      case 'cadastro':
         return <CadastroUsuarioPage />;
+      case 'usuarios': // ✅ nova rota
+        return <UserManagementPage />;
       default:
         return <HomePage />;
-  }
+    }
   };
 
-  // Interceptar cliques em links para simular navegação
-  React.useEffect(() => {
+  useEffect(() => {
     const handleNavigation = (event) => {
-      // Verificar se o clique foi em um link interno
       if (event.target.tagName === 'A' && !event.target.getAttribute('href').startsWith('http')) {
         event.preventDefault();
         const path = event.target.getAttribute('href');
 
-        // Atualizar a página atual com base no caminho
         if (path === '/') setCurrentPage('home');
         else if (path === '/salas') setCurrentPage('salas');
         else if (path === '/reservas') setCurrentPage('reservas');
         else if (path === '/cadastro-usuario') setCurrentPage('cadastro-usuario');
         else if (path === '/cadastro') setCurrentPage('cadastro');
+        else if (path === '/usuarios') setCurrentPage('usuarios'); // ✅ nova rota interceptada
       }
     };
-    // Adicionar listener para capturar cliques
-    document.addEventListener('click', handleNavigation);
 
-    // Limpar listener quando o componente for desmontado
-    return () => {
-      document.removeEventListener('click', handleNavigation);
-    };
+    document.addEventListener('click', handleNavigation);
+    return () => document.removeEventListener('click', handleNavigation);
   }, []);
 
   return (
