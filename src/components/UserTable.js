@@ -1,5 +1,6 @@
 import React from 'react';
 import './UserTable.css';
+import UserAvatar from './UserAvatar';
 
 // Componente para exibir o status com uma cor indicativa
 const StatusBadge = ({ status }) => {
@@ -28,6 +29,10 @@ const UserTable = ({ users, onEdit, onDelete }) => {
               <td>{user.matricula}</td>
               <td>{user.email}</td>
               <td>{user.role}</td>
+              <td style={{ display: 'flex', alignItems: 'center' }}>
+                <UserAvatar name={user.name} />
+                {user.name}
+              </td>
               <td><StatusBadge status={user.status} /></td>
               <td className="actions-cell">
                 <button className="edit-btn" onClick={() => onEdit(user)}>Editar</button>

@@ -1,17 +1,17 @@
 export const initialUsers = [
   {
     id: 1,
-    name: 'Ana Silva',
+    name: 'João Paulo ',
     matricula: '20230101',
-    email: 'ana.silva@unifac.edu.br',
+    email: 'joaopaulo@unifg.edu.br',
     role: 'Administrador',
     status: 'Ativo'
   },
   {
     id: 2,
-    name: 'Bruno Costa',
+    name: 'Petros Barreto',
     matricula: '20220215',
-    email: 'bruno.costa@unifac.edu.br',
+    email: 'petrosbarreto@ulife.com.br',
     role: 'Professor',
     status: 'Ativo'
   },
@@ -19,7 +19,7 @@ export const initialUsers = [
     id: 3,
     name: 'Carla Dias',
     matricula: '20240330',
-    email: 'carla.dias@unifac.edu.br',
+    email: 'carla.dias@unifg.br',
     role: 'Aluno',
     status: 'Pendente'
   },
@@ -27,7 +27,7 @@ export const initialUsers = [
     id: 4,
     name: 'Daniel Martins',
     matricula: '20210520',
-    email: 'daniel.martins@unifac.edu.br',
+    email: 'daniel.martins@unifg.br',
     role: 'Aluno',
     status: 'Inativo'
   }
