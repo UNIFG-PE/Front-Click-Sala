@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import UserTable from '../components/UserTable';
 import UserModal from '../components/UserModal';
+import { initialUsers } from '../data/initialUsers'; // ✅ Importando dados iniciais
 import '../pages/UserManagement.css';
 
 const UserManagementPage = () => {
-  const [users, setUsers] = useState([]);
+  // ✅ Iniciando o estado com os dados de exemplo
+  const [users, setUsers] = useState(initialUsers);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -19,7 +21,7 @@ const UserManagementPage = () => {
   };
 
   const handleDelete = (id) => {
-    const confirm = window.confirm('Deseja excluir este usuário?');
+    const confirm = window.confirm('Deseja realmente excluir este usuário?');
     if (confirm) {
       setUsers(users.filter((user) => user.id !== id));
     }
@@ -29,7 +31,7 @@ const UserManagementPage = () => {
     if (user.id) {
       setUsers(users.map((u) => (u.id === user.id ? user : u)));
     } else {
-      user.id = Date.now();
+      user.id = Date.now(); // ID simples para novos usuários
       setUsers([...users, user]);
     }
     setIsModalOpen(false);
