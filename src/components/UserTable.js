@@ -8,7 +8,7 @@ const StatusBadge = ({ status }) => {
   return <span className={statusClass}>{status}</span>;
 };
 
-const UserTable = ({ users, onEdit, onDelete }) => {
+const UserTable = ({ users, onEdit, onDelete, onProfile }) => {
   return (
     <div className="table-container">
       <table className="user-table">
@@ -25,18 +25,23 @@ const UserTable = ({ users, onEdit, onDelete }) => {
         <tbody>
           {users.map((user) => (
             <tr key={user.id}>
-              <td>{user.name}</td>
+              {/* Aqui mostramos o Avatar + nome */}
+              <td style={{ display: 'flex', alignItems: 'center' }}>
+                <UserAvatar name={user.name} photo={user.photo} />
+                {user.name}
+              </td>
               <td>{user.matricula}</td>
               <td>{user.email}</td>
               <td>{user.role}</td>
-              <td style={{ display: 'flex', alignItems: 'center' }}>
-                <UserAvatar name={user.name} />
-                {user.name}
+              <td>
+                <StatusBadge status={user.status} />
               </td>
-              <td><StatusBadge status={user.status} /></td>
               <td className="actions-cell">
                 <button className="edit-btn" onClick={() => onEdit(user)}>Editar</button>
                 <button className="delete-btn" onClick={() => onDelete(user.id)}>Excluir</button>
+                {onProfile && (
+                  <button className="profile-btn" onClick={() => onProfile(user)}>Perfil</button>
+                )}
               </td>
             </tr>
           ))}
@@ -45,5 +50,4 @@ const UserTable = ({ users, onEdit, onDelete }) => {
     </div>
   );
 };
-
 export default UserTable;

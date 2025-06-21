@@ -1,35 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import UserTable from '../components/UserTable';
 import UserModal from '../components/UserModal';
-import UserFilters from '../components/UserFilters'; // Novo filtro
-import Pagination from '../components/Pagination'; // Nova paginação
+import UserFilters from '../components/UserFilters';
+import Pagination from '../components/Pagination';
 import { initialUsers } from '../data/initialUsers';
-import { filterAndSortUsers } from '../utils/userFilters'; // Função utilitária nova
+import { filterAndSortUsers } from '../utils/userFilters';
 import '../pages/UserManagement.css';
 
+// FUNÇÕES AUXILIARES PARA SALVAR E LER DO LOCALSTORAGE
+function saveUsersToStorage(users) {
+  localStorage.setItem('USER_LIST', JSON.stringify(users));
+}
+function loadUsersFromStorage() {
+  const saved = localStorage.getItem('USER_LIST');
+  return saved ? JSON.parse(saved) : initialUsers;
+}
+
 const UserManagementPage = () => {
-  // --- seus estados originais ---
-  const [users, setUsers] = useState(initialUsers);
+  // SUBSTITUA o initialUsers pelo carregamento persistente:
+  const [users, setUsers] = useState(loadUsersFromStorage());
   const [selectedUser, setSelectedUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // --- estados novos para busca/filtros/ordenação/paginação ---
   const [search, setSearch] = useState('');
   const [status, setStatus] = useState('');
   const [role, setRole] = useState('');
   const [sort, setSort] = useState('');
   const [page, setPage] = useState(1);
-  const perPage = 6; // ajuste se quiser mais/menos por página
+  const perPage = 6;
 
-  // --- lógica de filtragem, ordenação e paginação ---
+  // SEMPRE QUE USERS MUDA, SALVA NO LOCALSTORAGE:
+  useEffect(() => {
+    saveUsersToStorage(users);
+  }, [users]);
+
   const filteredUsers = filterAndSortUsers(users, { search, status, role, sort });
   const totalPages = Math.ceil(filteredUsers.length / perPage);
   const pagedUsers = filteredUsers.slice((page - 1) * perPage, page * perPage);
 
-  // sempre que filtros mudarem, volta para pág. 1
   useEffect(() => { setPage(1); }, [search, status, role, sort]);
 
-  // --- CRUD original ---
   const handleAdd = () => {
     setSelectedUser(null);
     setIsModalOpen(true);
@@ -58,7 +68,6 @@ const UserManagementPage = () => {
     <div className="user-page">
       <h2 className="user-title">Gestão de Usuários</h2>
       <button className="add-btn" onClick={handleAdd}>+ Novo Usuário</button>
-      {/* Novos filtros */}
       <UserFilters
         search={search}
         setSearch={setSearch}
@@ -69,9 +78,7 @@ const UserManagementPage = () => {
         sort={sort}
         setSort={setSort}
       />
-      {/* Tabela usa os usuários da página atual, já filtrados/ordenados */}
       <UserTable users={pagedUsers} onEdit={handleEdit} onDelete={handleDelete} />
-      {/* Nova paginação */}
       <Pagination currentPage={page} totalPages={totalPages} onChange={setPage} />
       {isModalOpen && (
         <UserModal user={selectedUser} onSave={handleSave} onClose={() => setIsModalOpen(false)} />
@@ -79,5 +86,4 @@ const UserManagementPage = () => {
     </div>
   );
 };
-
 export default UserManagementPage;
