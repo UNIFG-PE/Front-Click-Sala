@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import RoomsPage from "./pages/RoomsPage";
 import MyReservationsPage from "./pages/MyReservationsPage";
-import RoomsManagement from "./pages/roomManagement/RoomsManagement";
-import ManageResources from './pages/resources/ManageResources';
+import ManageResources  from "./pages/manageresource/ManageResources";
 
 
 function App() {
@@ -20,8 +19,8 @@ function App() {
         return <RoomsPage />;
       case "reservas":
         return <MyReservationsPage />;
-      case "gerenciar-salas":
-        return <RoomsManagement />;
+      // case "gerenciar-salas":
+      //   return <RoomsManagement />;
       case "recursos":
         return <ManageResources />;
 
@@ -45,7 +44,7 @@ function App() {
         else if (path === '/salas') setCurrentPage('salas');
         else if (path === '/reservas') setCurrentPage('reservas');
         else if (path === '/gerenciar-salas') setCurrentPage('gerenciar-salas');
-        else if (path === "/recursos") setCurrentPage("recursos");
+        else if (path === '/recursos') setCurrentPage("recursos");
 
       }
     };
