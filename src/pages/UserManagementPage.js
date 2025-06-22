@@ -16,8 +16,8 @@ function loadUsersFromStorage() {
   return saved ? JSON.parse(saved) : initialUsers;
 }
 
-const UserManagementPage = () => {
-  // SUBSTITUA o initialUsers pelo carregamento persistente:
+// ✅ Componente principal
+const UserManagementPage = ({ onLogout }) => {
   const [users, setUsers] = useState(loadUsersFromStorage());
   const [selectedUser, setSelectedUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,16 +29,17 @@ const UserManagementPage = () => {
   const [page, setPage] = useState(1);
   const perPage = 6;
 
-  // SEMPRE QUE USERS MUDA, SALVA NO LOCALSTORAGE:
   useEffect(() => {
     saveUsersToStorage(users);
   }, [users]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [search, status, role, sort]);
+
   const filteredUsers = filterAndSortUsers(users, { search, status, role, sort });
   const totalPages = Math.ceil(filteredUsers.length / perPage);
   const pagedUsers = filteredUsers.slice((page - 1) * perPage, page * perPage);
-
-  useEffect(() => { setPage(1); }, [search, status, role, sort]);
 
   const handleAdd = () => {
     setSelectedUser(null);
@@ -66,7 +67,24 @@ const UserManagementPage = () => {
 
   return (
     <div className="user-page">
-      <h2 className="user-title">Gestão de Usuários</h2>
+      {/* Título + Botão de logout */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h2 className="user-title">Gestão de Usuários</h2>
+        <button
+          onClick={onLogout}
+          style={{
+            background: '#f44336',
+            color: 'white',
+            border: 'none',
+            padding: '10px 15px',
+            borderRadius: '5px',
+            cursor: 'pointer'
+          }}
+        >
+          Sair
+        </button>
+      </div>
+
       <button className="add-btn" onClick={handleAdd}>+ Novo Usuário</button>
       <UserFilters
         search={search}
@@ -86,4 +104,5 @@ const UserManagementPage = () => {
     </div>
   );
 };
+
 export default UserManagementPage;
