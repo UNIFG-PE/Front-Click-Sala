@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
 // Ícone avatar
 const AvatarIcon = () => (
   <svg viewBox="0 0 100 100" width="80" height="80" style={{ marginBottom: '15px' }}>
@@ -12,21 +11,27 @@ const AvatarIcon = () => (
 function MyProfilePage({ user, onLogout, onSave }) {
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
+  const [displayName, setDisplayName] = useState(user.name);
+
+  useEffect(() => {
+    setName(user.name);
+    setEmail(user.email);
+    setDisplayName(user.name);
+  }, [user]);
 
   // Funções padrão para evitar erros (atualização local)
-  const handleLogout = onLogout || (() => {});
+  const handleLogout = onLogout || (() => { });
+
   const handleSave = (e) => {
     e.preventDefault();
     if (typeof onSave === 'function') {
       onSave({ ...user, name, email });
-    } else {
-      // não quebra nada se não enviar!
     }
+    setDisplayName(name); // Atualiza o nome do cabeçalho azul só ao salvar
   };
 
   // ... estilos (como no seu código anterior) ...
-
-  const styles = { /* ... (mantém seus estilos) ... */ 
+  const styles = {
     container: {
       display: 'flex',
       justifyContent: 'center',
@@ -121,7 +126,9 @@ function MyProfilePage({ user, onLogout, onSave }) {
     <div style={styles.container}>
       <div style={styles.profileCard}>
         <div style={styles.cardHeader}>
-          <h2 style={styles.userName}>{user.name}</h2>
+          <h2 style={styles.userName}>
+            {displayName} {user.permissao === 'Professor' ? '(Professor)' : ''}
+          </h2>
           <p style={styles.userRole}>{user.permissao}</p>
         </div>
         <div style={styles.cardBody}>
@@ -129,15 +136,32 @@ function MyProfilePage({ user, onLogout, onSave }) {
           <form onSubmit={handleSave} style={styles.form}>
             <div style={styles.formGroup}>
               <label style={styles.label}>Matrícula</label>
-              <input type="text" value={user.matricula} readOnly style={{ ...styles.input, ...styles.readOnlyInput }} />
+              <input
+                type="text"
+                value={user.matricula}
+                readOnly
+                style={{ ...styles.input, ...styles.readOnlyInput }}
+              />
             </div>
             <div style={styles.formGroup}>
               <label htmlFor="name" style={styles.label}>Nome Completo</label>
-              <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} style={styles.input} />
+              <input
+                id="name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                style={styles.input}
+              />
             </div>
             <div style={styles.formGroup}>
               <label htmlFor="email" style={styles.label}>E-mail</label>
-              <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} style={styles.input} />
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                style={styles.input}
+              />
             </div>
             <div style={styles.buttonContainer}>
               <button type="button" onClick={handleLogout} style={styles.logoutButton}>Sair</button>
@@ -149,5 +173,4 @@ function MyProfilePage({ user, onLogout, onSave }) {
     </div>
   );
 }
-
 export default MyProfilePage;
