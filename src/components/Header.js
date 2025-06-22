@@ -14,6 +14,7 @@ function Header() {
           <li><a href="/reservas">Minhas Reservas</a></li>
           <li><a href="/salas">Salas</a></li>
           <li><a href="/cadastro-usuario">Cadastrar Usuário</a></li>
+          <li><a href="/faq" onClick={e => { if (onNavigate) { e.preventDefault(); onNavigate('faq'); } }}>FAQ</a></li>
         </ul>
       </nav>
     </header>
