@@ -44,21 +44,51 @@ function App() {
       case 'cadastro':
         return <CadastroUsuarioPage />;
       case 'usuarios':
-        // ✅ LÓGICA DE PERMISSÃO INTEGRADA AQUI
-        // 1. Verifica se há um usuário logado
-        if (currentUser) {
-          // 2. Se sim, verifica a permissão dele
-          if (currentUser.permissao === 'Administrador') {
-            // Se for admin, mostra a página de gestão completa
-            return <UserManagementPage onLogout={handleLogout} />;
-          } else {
-            // Para outras permissões, mostra a página de perfil pessoal
-            return <MyProfilePage user={currentUser} onLogout={handleLogout} />;
-          }
-        } else {
-          // 3. Se não houver usuário logado, mostra a página de login
-          return <LoginPage onLoginSuccess={handleLogin} />;
-        }
+  // 1. Verifica se há um usuário logado
+  if (currentUser) {
+    // 2. Redireciona fluxos dependendo do papel do usuário
+    if (currentUser.permissao === 'Administrador') {
+      // Fluxo do Admin: Aprovar usuários, desbloquear, alterar permissões, consultar histórico, etc
+      return (
+        <UserManagementPage
+          onLogout={handleLogout}
+          user={currentUser}
+          // Acrescente mais props conforme seu UserManagementPage for evoluindo
+        />
+      );
+    } else if (currentUser.permissao === 'Professor') {
+      // Fluxo do Professor: Reservar salas, consultar histórico, receber notificações, etc
+      return (
+        <MyProfilePage
+          user={currentUser}
+          tipoPerfil="Professor"
+          onLogout={handleLogout}
+        />
+      );
+    } else if (currentUser.permissao === 'Aluno') {
+      // Fluxo do Aluno: Solicitar reservas, visualizar/cancelar as próprias reservas
+      return (
+        <MyProfilePage
+          user={currentUser}
+          tipoPerfil="Aluno"
+          onLogout={handleLogout}
+        />
+      );
+    } else {
+      // Outros perfis genéricos
+      return (
+        <MyProfilePage
+          user={currentUser}
+          tipoPerfil="Outro"
+          onLogout={handleLogout}
+        />
+      );
+    }
+  } else {
+    // 3. Se não houver usuário logado, mostra a página de login
+    return <LoginPage onLoginSuccess={handleLogin} />;
+  }
+
       default:
         return <HomePage />;
     }

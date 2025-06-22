@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-// Ícone avatar
+import { QRCodeCanvas } from 'qrcode.react';
+
 const AvatarIcon = () => (
   <svg viewBox="0 0 100 100" width="80" height="80" style={{ marginBottom: '15px' }}>
     <circle cx="50" cy="50" r="50" fill="#e9ecef" />
@@ -11,26 +12,25 @@ const AvatarIcon = () => (
 function MyProfilePage({ user, onLogout, onSave }) {
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
+  const [password, setPassword] = useState(user.password ?? '');
   const [displayName, setDisplayName] = useState(user.name);
 
   useEffect(() => {
     setName(user.name);
     setEmail(user.email);
+    setPassword(user.password ?? '');
     setDisplayName(user.name);
   }, [user]);
 
-  // Funções padrão para evitar erros (atualização local)
   const handleLogout = onLogout || (() => { });
-
   const handleSave = (e) => {
     e.preventDefault();
     if (typeof onSave === 'function') {
-      onSave({ ...user, name, email });
+      onSave({ ...user, name, email, password });
     }
-    setDisplayName(name); // Atualiza o nome do cabeçalho azul só ao salvar
+    setDisplayName(name);
   };
 
-  // ... estilos (como no seu código anterior) ...
   const styles = {
     container: {
       display: 'flex',
@@ -120,6 +120,15 @@ function MyProfilePage({ user, onLogout, onSave }) {
       fontWeight: 'bold',
       transition: 'background-color 0.2s',
     },
+    qrcode: {
+      marginTop: '18px',
+      marginBottom: '5px'
+    },
+    qrLabel: {
+      color: '#888',
+      fontSize: '13px',
+      marginTop: '7px'
+    }
   };
 
   return (
@@ -127,13 +136,18 @@ function MyProfilePage({ user, onLogout, onSave }) {
       <div style={styles.profileCard}>
         <div style={styles.cardHeader}>
           <h2 style={styles.userName}>
-            {displayName} {user.permissao === 'Professor' ? '(Professor)' : ''}
+            {displayName}
           </h2>
-          <p style={styles.userRole}>{user.permissao}</p>
+          <p style={styles.userRole}>{user.permissao || user.role}</p>
         </div>
         <div style={styles.cardBody}>
           <AvatarIcon />
-          <form onSubmit={handleSave} style={styles.form}>
+          {/* QR Code do usuário */}
+          <div style={styles.qrcode}>
+            <QRCodeCanvas value={user.matricula || user.email || ''} size={128} />
+            <div style={styles.qrLabel}>Seu QR Code de identificação</div>
+          </div>
+          <form onSubmit={handleSave} style={styles.form} autoComplete="off">
             <div style={styles.formGroup}>
               <label style={styles.label}>Matrícula</label>
               <input
@@ -161,6 +175,25 @@ function MyProfilePage({ user, onLogout, onSave }) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 style={styles.input}
+              />
+            </div>
+            <div style={styles.formGroup}>
+              <label style={styles.label}>Permissão</label>
+              <input
+                type="text"
+                value={user.permissao || user.role}
+                readOnly
+                style={{ ...styles.input, ...styles.readOnlyInput }}
+              />
+            </div>
+            <div style={styles.formGroup}>
+              <label htmlFor="password" style={styles.label}>Senha</label>
+              <input
+                id="password"
+                type="password"
+                value={password}
+                readOnly
+                style={{ ...styles.input, ...styles.readOnlyInput }}
               />
             </div>
             <div style={styles.buttonContainer}>
