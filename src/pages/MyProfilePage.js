@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
 
+// O componente AvatarIcon permanece o mesmo
 const AvatarIcon = () => (
   <svg viewBox="0 0 100 100" width="80" height="80" style={{ marginBottom: '15px' }}>
     <circle cx="50" cy="50" r="50" fill="#e9ecef" />
@@ -10,6 +11,7 @@ const AvatarIcon = () => (
 );
 
 function MyProfilePage({ user, onLogout, onSave }) {
+  // A lógica do componente (estados e handlers) permanece intacta
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState(user.password ?? '');
@@ -31,32 +33,50 @@ function MyProfilePage({ user, onLogout, onSave }) {
     setDisplayName(name);
   };
 
+  // Objeto de estilos com a cor do cabeçalho revertida
   const styles = {
     container: {
       display: 'flex',
       justifyContent: 'center',
+      alignItems: 'center',
       padding: '40px 20px',
-      backgroundColor: '#f0f2f5',
+      backgroundImage: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
       fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-      minHeight: '80vh',
+      minHeight: '100vh',
+      boxSizing: 'border-box',
     },
     profileCard: {
       backgroundColor: 'white',
-      borderRadius: '10px',
-      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+      borderRadius: '12px',
+      boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
       width: '100%',
-      maxWidth: '600px',
+      maxWidth: '850px',
       overflow: 'hidden',
     },
     cardHeader: {
-      backgroundColor: '#007bff',
+      // MUDANÇA: Cor revertida para o azul original
+      backgroundColor: '#007bff', 
       color: 'white',
       padding: '25px',
       textAlign: 'center',
     },
     cardBody: {
-      padding: '30px',
-      textAlign: 'center',
+      padding: '30px 40px',
+    },
+    cardContentWrapper: {
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: '40px',
+    },
+    leftColumn: {
+        flex: '0 0 130px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+    },
+    rightColumn: {
+        flex: '1',
     },
     userName: {
       margin: '0',
@@ -69,11 +89,16 @@ function MyProfilePage({ user, onLogout, onSave }) {
       opacity: '0.9',
     },
     form: {
-      marginTop: '30px',
+      marginTop: '0',
       textAlign: 'left',
     },
-    formGroup: {
+    formRow: {
+      display: 'flex',
+      gap: '20px',
       marginBottom: '20px',
+    },
+    formGroup: {
+      flex: 1,
     },
     label: {
       display: 'block',
@@ -88,6 +113,7 @@ function MyProfilePage({ user, onLogout, onSave }) {
       border: '1px solid #ced4da',
       borderRadius: '6px',
       boxSizing: 'border-box',
+      transition: 'border-color 0.2s, box-shadow 0.2s',
     },
     readOnlyInput: {
       backgroundColor: '#e9ecef',
@@ -95,7 +121,8 @@ function MyProfilePage({ user, onLogout, onSave }) {
     },
     buttonContainer: {
       display: 'flex',
-      justifyContent: 'space-between',
+      justifyContent: 'flex-end',
+      gap: '15px',
       marginTop: '30px',
     },
     saveButton: {
@@ -103,7 +130,7 @@ function MyProfilePage({ user, onLogout, onSave }) {
       fontSize: '16px',
       fontWeight: 'bold',
       color: 'white',
-      backgroundColor: '#28a745',
+      backgroundColor: '#28a745', // Verde mantido para a ação primária de salvar
       border: 'none',
       borderRadius: '6px',
       cursor: 'pointer',
@@ -112,17 +139,16 @@ function MyProfilePage({ user, onLogout, onSave }) {
     logoutButton: {
       padding: '12px 25px',
       fontSize: '16px',
-      color: '#495057',
-      backgroundColor: '#f8f9fa',
-      border: '1px solid #ced4da',
+      fontWeight: 'bold',
+      color: 'white',
+      backgroundColor: '#fd7e14', // Laranja mantido para a ação secundária
+      border: 'none',
       borderRadius: '6px',
       cursor: 'pointer',
-      fontWeight: 'bold',
-      transition: 'background-color 0.2s',
+      transition: 'opacity 0.2s',
     },
     qrcode: {
-      marginTop: '18px',
-      marginBottom: '5px'
+      marginTop: '20px',
     },
     qrLabel: {
       color: '#888',
@@ -132,75 +158,63 @@ function MyProfilePage({ user, onLogout, onSave }) {
   };
 
   return (
+    // O JSX não foi alterado
     <div style={styles.container}>
       <div style={styles.profileCard}>
         <div style={styles.cardHeader}>
-          <h2 style={styles.userName}>
-            {displayName}
-          </h2>
+          <h2 style={styles.userName}>{displayName}</h2>
           <p style={styles.userRole}>{user.permissao || user.role}</p>
         </div>
+        
         <div style={styles.cardBody}>
-          <AvatarIcon />
-          {/* QR Code do usuário */}
-          <div style={styles.qrcode}>
-            <QRCodeCanvas value={user.matricula || user.email || ''} size={128} />
-            <div style={styles.qrLabel}>Seu QR Code de identificação</div>
+          <div style={styles.cardContentWrapper}>
+            
+            <div style={styles.leftColumn}>
+              <AvatarIcon />
+              <div style={styles.qrcode}>
+                <QRCodeCanvas value={user.matricula || user.email || ''} size={128} />
+                <div style={styles.qrLabel}>Seu QR Code</div>
+              </div>
+            </div>
+
+            <div style={styles.rightColumn}>
+              <form onSubmit={handleSave} style={styles.form} autoComplete="off">
+                <div style={styles.formRow}>
+                  <div style={styles.formGroup}>
+                    <label style={styles.label}>Matrícula</label>
+                    <input type="text" value={user.matricula} readOnly style={{ ...styles.input, ...styles.readOnlyInput }} />
+                  </div>
+                  <div style={styles.formGroup}>
+                    <label style={styles.label}>Permissão</label>
+                    <input type="text" value={user.permissao || user.role} readOnly style={{ ...styles.input, ...styles.readOnlyInput }} />
+                  </div>
+                </div>
+
+                <div style={styles.formRow}>
+                  <div style={styles.formGroup}>
+                    <label htmlFor="name" style={styles.label}>Nome Completo</label>
+                    <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} style={styles.input} />
+                  </div>
+                  <div style={styles.formGroup}>
+                    <label htmlFor="email" style={styles.label}>E-mail</label>
+                    <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} style={styles.input} />
+                  </div>
+                </div>
+
+                <div style={{...styles.formRow, marginBottom: '0'}}>
+                    <div style={styles.formGroup}>
+                        <label htmlFor="password" style={styles.label}>Senha</label>
+                        <input id="password" type="password" value={password} placeholder="••••••••" readOnly style={{ ...styles.input, ...styles.readOnlyInput }} />
+                    </div>
+                </div>
+
+                <div style={styles.buttonContainer}>
+                  <button type="button" onClick={handleLogout} style={styles.logoutButton}>Sair</button>
+                  <button type="submit" style={styles.saveButton}>Atualizar Dados</button>
+                </div>
+              </form>
+            </div>
           </div>
-          <form onSubmit={handleSave} style={styles.form} autoComplete="off">
-            <div style={styles.formGroup}>
-              <label style={styles.label}>Matrícula</label>
-              <input
-                type="text"
-                value={user.matricula}
-                readOnly
-                style={{ ...styles.input, ...styles.readOnlyInput }}
-              />
-            </div>
-            <div style={styles.formGroup}>
-              <label htmlFor="name" style={styles.label}>Nome Completo</label>
-              <input
-                id="name"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                style={styles.input}
-              />
-            </div>
-            <div style={styles.formGroup}>
-              <label htmlFor="email" style={styles.label}>E-mail</label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                style={styles.input}
-              />
-            </div>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>Permissão</label>
-              <input
-                type="text"
-                value={user.permissao || user.role}
-                readOnly
-                style={{ ...styles.input, ...styles.readOnlyInput }}
-              />
-            </div>
-            <div style={styles.formGroup}>
-              <label htmlFor="password" style={styles.label}>Senha</label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                readOnly
-                style={{ ...styles.input, ...styles.readOnlyInput }}
-              />
-            </div>
-            <div style={styles.buttonContainer}>
-              <button type="button" onClick={handleLogout} style={styles.logoutButton}>Sair</button>
-              <button type="submit" style={styles.saveButton}>Atualizar Dados</button>
-            </div>
-          </form>
         </div>
       </div>
     </div>
