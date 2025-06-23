@@ -19,9 +19,9 @@ export const initialUsers = [
   },
   {
     id: 3,
-    name: 'Carla Dias',
+    name: 'julio cesar',
     matricula: '20240330',
-    email: 'carla.dias@unifg.br',
+    email: 'julio.cesar@unifg.br',
     role: 'Aluno',
     status: 'Pendente',
     qrcodeValue: '20240330'
