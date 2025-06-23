@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
@@ -6,39 +7,64 @@ import HomePage from './pages/HomePage';
 import RoomsPage from './pages/RoomsPage';
 import MyReservationsPage from './pages/MyReservationsPage';
 import RoomsManagement from './pages/roomManagement/RoomsManagement';
+=======
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import HomePage from "./pages/HomePage";
+import RoomsPage from "./pages/RoomsPage";
+import MyReservationsPage from "./pages/MyReservationsPage";
+import ManageResources  from "./pages/manageresource/ManageResources";
+
+>>>>>>> origin/mariane2
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('home');
+  const [currentPage, setCurrentPage] = useState("home");
 
-  // Simular um sistema de rotas simples
   const renderPage = () => {
     switch (currentPage) {
-      case 'home':
+      case "home":
         return <HomePage />;
-      case 'salas':
+      case "salas":
         return <RoomsPage />;
-      case 'reservas':
+      case "reservas":
         return <MyReservationsPage />;
+<<<<<<< HEAD
         case "gerenciar-salas":
         return <RoomsManagement />;
+=======
+      // case "gerenciar-salas":
+      //   return <RoomsManagement />;
+      case "recursos":
+        return <ManageResources />;
+
+>>>>>>> origin/mariane2
       default:
         return <HomePage />;
     }
   };
 
-  // Interceptar cliques em links para simular navegação
-  React.useEffect(() => {
+  useEffect(() => {
     const handleNavigation = (event) => {
       // Verificar se o clique foi em um link interno
-      if (event.target.tagName === 'A' && !event.target.getAttribute('href').startsWith('http')) {
+      if (
+        event.target.tagName === "A" &&
+        !event.target.getAttribute("href").startsWith("http")
+      ) {
         event.preventDefault();
-        const path = event.target.getAttribute('href');
+        const path = event.target.getAttribute("href");
 
         // Atualizar a página atual com base no caminho
         if (path === '/') setCurrentPage('home');
         else if (path === '/salas') setCurrentPage('salas');
         else if (path === '/reservas') setCurrentPage('reservas');
         else if (path === '/gerenciar-salas') setCurrentPage('gerenciar-salas');
+<<<<<<< HEAD
+=======
+        else if (path === '/recursos') setCurrentPage("recursos");
+
+>>>>>>> origin/mariane2
       }
     };
 
@@ -47,16 +73,14 @@ function App() {
 
     // Limpar listener quando o componente for desmontado
     return () => {
-      document.removeEventListener('click', handleNavigation);
+      document.removeEventListener("click", handleNavigation);
     };
   }, []);
 
   return (
     <div className="App">
       <Header />
-      <main className="main-content">
-        {renderPage()}
-      </main>
+      <main className="main-content">{renderPage()}</main>
       <Footer />
     </div>
   );

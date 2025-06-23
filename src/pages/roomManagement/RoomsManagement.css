@@ -3,6 +3,8 @@
   margin: 0 auto;
   padding: 2rem 1rem;
   position: relative;
+  margin-bottom: 3rem;
+
 }
 
 .heading-bar {
@@ -36,6 +38,21 @@
 .create-room-btn,
 .create-typeroom-btn,
 .create-resource-btn {
+=======
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+ 
+}
+
+
+.heading-bar h1 {
+  font-size: 2rem;
+  color: #222;
+  margin: 0;
+}
+
+.create-room-btn {
   background: #232654;
   color: #fff;
   border: none;
@@ -65,6 +82,14 @@
   margin-left: 1rem;
   text-align: center;
  
+.create-room-btn:hover {
+  filter: brightness(0.93);
+}
+
+.subtitle {
+  color: #777;
+  margin-bottom: 2rem;
+  margin-top: 0.5rem;
 }
 
 .rooms-list {
@@ -185,6 +210,8 @@
   cursor: pointer;
   color: #fff;
   transition: filter 0.15s;
+
+  /* width: 170px; */
   min-width: 120px;
   max-width: 180px;
   word-break: break-word;
@@ -192,7 +219,6 @@
   text-align: center;
   display: inline-block;
 }
-
 .dropdown-wrapper {
   position: relative;
   margin: 0 0 0 1.5 rem;
@@ -258,6 +284,8 @@
   .subtitle {
     margin-top: 1.8rem;
   }
+
+@media (max-width: 800px) {
   .room-admin-card {
     flex-direction: column;
     align-items: flex-start;
@@ -295,6 +323,7 @@
     white-space: normal;
     text-align: center;
   }
+
   .main-actions-row {
     flex-direction: column;
     align-items: stretch;
