@@ -12,8 +12,8 @@
   margin-bottom: 3rem;
   margin-top: 3rem;
   margin-left: 3rem;
-   justify-content: flex-start;
-   position: relative;
+  justify-content: flex-start;
+  position: relative;
 }
 
 .heading-bar h1 {
@@ -22,9 +22,7 @@
   margin: 0;
   flex: 1 1 0;
   text-align: left;
-
 }
-
 
 .create-room-btn,
 .create-typeroom-btn,
@@ -57,7 +55,6 @@
   margin-top: 0.6rem;
   margin-left: 1rem;
   text-align: center;
- 
 }
 
 .rooms-list {
@@ -190,7 +187,6 @@
   position: relative;
   margin: 0 0 0 1.5 rem;
   display: inline-block;
-  
 }
 
 .dropdown-toggle-btn {
