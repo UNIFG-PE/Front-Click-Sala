@@ -10,7 +10,6 @@ function CreateTypeRoom({ onClose, onSave, error, setError, initialName = "", is
     // eslint-disable-next-line
   }, [initialName]);
 
-  const handleSave =  async () => {
   const handleSave = () => {
     if (!name.trim()) {
       setError("O nome do tipo de sala é obrigatório!");
@@ -23,8 +22,8 @@ function CreateTypeRoom({ onClose, onSave, error, setError, initialName = "", is
     }
   };
 
-  const handleChange = (err) => {
-    setName(err.target.value);
+  const handleChange = (e) => {
+    setName(e.target.value);
     if (error) setError("");
   };
 
@@ -32,9 +31,7 @@ function CreateTypeRoom({ onClose, onSave, error, setError, initialName = "", is
     <div className="modal-overlay">
       <div className="modal-content">
         <h2>{isEdit ? "Editar Tipo de Sala" : "Novo Tipo de Sala"}</h2>
-        {error && (
-          <div className="error-message">{error}</div>
-        )}
+        {error && <div className="error-message">{error}</div>}
         <input
           type="text"
           placeholder="Nome do tipo de sala"
@@ -54,4 +51,5 @@ function CreateTypeRoom({ onClose, onSave, error, setError, initialName = "", is
     </div>
   );
 }
+
 export default CreateTypeRoom;

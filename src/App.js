@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
+
+import React, { useState,useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -7,18 +7,6 @@ import HomePage from './pages/HomePage';
 import RoomsPage from './pages/RoomsPage';
 import MyReservationsPage from './pages/MyReservationsPage';
 import RoomsManagement from './pages/roomManagement/RoomsManagement';
-=======
-import React, { useState, useEffect } from "react";
-import "./App.css";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import HomePage from "./pages/HomePage";
-import RoomsPage from "./pages/RoomsPage";
-import MyReservationsPage from "./pages/MyReservationsPage";
-import ManageResources  from "./pages/manageresource/ManageResources";
-
->>>>>>> origin/mariane2
-
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
 
@@ -30,16 +18,12 @@ function App() {
         return <RoomsPage />;
       case "reservas":
         return <MyReservationsPage />;
-<<<<<<< HEAD
         case "gerenciar-salas":
         return <RoomsManagement />;
-=======
       // case "gerenciar-salas":
       //   return <RoomsManagement />;
       case "recursos":
         return <ManageResources />;
-
->>>>>>> origin/mariane2
       default:
         return <HomePage />;
     }
@@ -60,11 +44,7 @@ function App() {
         else if (path === '/salas') setCurrentPage('salas');
         else if (path === '/reservas') setCurrentPage('reservas');
         else if (path === '/gerenciar-salas') setCurrentPage('gerenciar-salas');
-<<<<<<< HEAD
-=======
         else if (path === '/recursos') setCurrentPage("recursos");
-
->>>>>>> origin/mariane2
       }
     };
 

@@ -18,13 +18,6 @@
    position: relative;
 }
 
-.main-actions-row {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
 .heading-bar h1 {
   font-size: 2.9rem;
   color: #222;
@@ -38,7 +31,6 @@
 .create-room-btn,
 .create-typeroom-btn,
 .create-resource-btn {
-=======
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
@@ -84,7 +76,7 @@
  
 .create-room-btn:hover {
   filter: brightness(0.93);
-}
+}}
 
 .subtitle {
   color: #777;
@@ -283,7 +275,7 @@
 @media (max-width: 800px) {
   .subtitle {
     margin-top: 1.8rem;
-  }
+  }}
 
 @media (max-width: 800px) {
   .room-admin-card {

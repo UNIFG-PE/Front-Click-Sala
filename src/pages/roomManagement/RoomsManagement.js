@@ -76,7 +76,10 @@ function RoomsManagement() {
     setRooms(rooms.map(room => room.id === id ? { ...room, available: false } : room));
   };
 
-  const handleCreateResource = () => alert("Criar recurso - teste");
+  const handleCreateResource = () => {
+    alert("Criar recurso - teste");
+  };
+
   const handleCreateRoomType = () => setShowRoomTypes(true);
 
   if (showRoomTypes) {
@@ -155,7 +158,10 @@ function RoomsManagement() {
         <div className="modal-overlay">
           <CreateRoom
             onSubmit={handleEditRoom}
-            onCancel={() => { setShowEditModal(false); setEditRoomData(null); }}
+            onCancel={() => {
+              setShowEditModal(false);
+              setEditRoomData(null);
+            }}
             existingRooms={rooms}
             roomTypes={roomTypes}
             initialData={editRoomData}
@@ -166,7 +172,10 @@ function RoomsManagement() {
 
       {showDeleteModal && deleteRoomData && (
         <ConfirmDeleteRoom
-          onClose={() => { setShowDeleteModal(false); setDeleteRoomData(null); }}
+          onClose={() => {
+            setShowDeleteModal(false);
+            setDeleteRoomData(null);
+          }}
           onConfirm={handleConfirmDeleteRoom}
           roomName={deleteRoomData.name}
         />
