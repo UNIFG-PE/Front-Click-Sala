@@ -16,13 +16,6 @@
    position: relative;
 }
 
-.main-actions-row {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
 .heading-bar h1 {
   font-size: 2.9rem;
   color: #222;
