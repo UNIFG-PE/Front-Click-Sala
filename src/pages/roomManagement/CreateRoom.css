@@ -26,14 +26,15 @@
     max-height: 90vh;
     overflow-y: auto;
   }
-  
+
   .create-room-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   .create-room-form h2 {
+
     margin-bottom: 1rem;
     color: #2c3e50;
     text-align: center;
@@ -44,7 +45,7 @@
     color: #2c3e50;
     margin-bottom: 0.3rem;
   }
-  
+
   .create-room-form input,
   .create-room-form textarea {
     padding: 0.7rem 1rem;
@@ -58,7 +59,7 @@
   .create-room-form textarea {
     resize: vertical;
   }
-  
+
   .create-room-form input[type="checkbox"] {
     width: auto;
     margin-right: 0.5rem;
@@ -70,7 +71,7 @@
     justify-content: flex-end;
     margin-top: 1rem;
   }
-  
+
   .cancel-btn {
     background: #e35523;
     border: none;
@@ -84,7 +85,7 @@
   width: 170px;
   text-align: center;
   }
-  
+
   .submit-btn {
     background: #232654;
     border: none;
@@ -98,6 +99,7 @@
   width: 170px;
   text-align: center;
   }
+
   
   .submit-btn:hover {
     background: #4b4e78;
@@ -108,13 +110,14 @@
   }
   
   .form-error {
-    background: #ffdddd;
-    color: #a94442;
-    border: 1px solid #a94442;
-    border-radius: 4px;
-    padding: 0.7rem 1rem;
-    margin-bottom: 0.8rem;
-    font-size: 1rem;
+    color: #dc3545; 
+    background: #fff0f1;
+    border: 1px ;
+    border-radius: 6px;
+    padding: 0.6em 1em;
+    margin-bottom: 1em;
+    font-size: 1.01em;
+    font-weight: 600;
     text-align: center;
   }
   .room-type-select{
@@ -138,4 +141,6 @@
       width: 100%;
       font-size: 1rem;
     }
+
   }
+

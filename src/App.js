@@ -1,12 +1,15 @@
 
-import React, { useState,useEffect } from 'react';
-import './App.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
-import RoomsPage from './pages/RoomsPage';
-import MyReservationsPage from './pages/MyReservationsPage';
-import RoomsManagement from './pages/roomManagement/RoomsManagement';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import HomePage from "./pages/HomePage";
+import RoomsPage from "./pages/RoomsPage";
+import RoomsManagement from "./pages/roomManagement/RoomsManagement";
+import MyReservationsPage from "./pages/MyReservationsPage";
+import ManageResources  from "./pages/manageresource/ManageResources";
+
+
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
 
@@ -18,10 +21,8 @@ function App() {
         return <RoomsPage />;
       case "reservas":
         return <MyReservationsPage />;
-        case "gerenciar-salas":
-        return <RoomsManagement />;
-      // case "gerenciar-salas":
-      //   return <RoomsManagement />;
+      case "gerenciar-salas":
+         return <RoomsManagement />;
       case "recursos":
         return <ManageResources />;
       default:

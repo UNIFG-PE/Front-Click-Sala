@@ -3,15 +3,13 @@ import ModalFormGeneric from './components/ModalFormGeneric';
 import ModalMensagem from './components/ModalMensagem';
 import './style/ManageResource.css'
 
-// Função que reune todos os recursos do site:
-function ManageResources() {
+function ManageResources({ onBack }) {
   const [resources, setResources] = useState([]);
   const [resourceInput, setResourceInput] = useState('');
   const [editingIndex, setEditingIndex] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [messageModal, setMessageModal] = useState(null);
 
-  // Ambas funções que cuidam de guardar e mostrar os valores guardados localmente:
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem('resources')) || ['Projetor', 'WiFi', 'Computadores', 'Televisão'];
     setResources(saved);
@@ -21,7 +19,6 @@ function ManageResources() {
     localStorage.setItem('resources', JSON.stringify(resources));
   }, [resources]);
 
-  // Função que cuida da criação e armazenagem local, lidando também com possíveis falhas:
   const handleSave = () => {
     const trimmed = resourceInput.trim();
     if (!trimmed) {
@@ -61,11 +58,10 @@ function ManageResources() {
     }
 
     setEditingIndex(null);
-    setResourceInput(''); // Limpa a caixa input
-    setShowModal(false); // Fecha a caixa
+    setResourceInput('');
+    setShowModal(false);
   };
 
-  // Função que edita os recursos disponíveis:
   const handleEdit = (index) => {
     if (!resources[index]) return;
     setEditingIndex(index);
@@ -73,7 +69,6 @@ function ManageResources() {
     setShowModal(true);
   };
 
-  // Função que deleta os recursos disponíveis:
   const handleDelete = (index) => {
     const updated = resources.filter((_, i) => i !== index);
     setResources(updated);
@@ -121,10 +116,8 @@ function ManageResources() {
       </main>
 
       <footer className="resources-footer">
-        <button className="btn-back" onClick={() => window.history.back()}>Voltar</button>
+        <button className="btn-back" onClick={onBack ? onBack : () => window.history.back()}>Voltar</button>
       </footer>
-
-      {/* Seção de Componentes */}
 
       {showModal && (
         <ModalFormGeneric

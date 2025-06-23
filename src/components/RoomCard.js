@@ -2,6 +2,7 @@ import React from 'react';
 import './RoomCard.css';
 
 function RoomCard({ room, onReserve, onEdit, onDelete }) {
+
   const isAdmin = onEdit || onDelete;
 
 
@@ -25,11 +26,6 @@ function RoomCard({ room, onReserve, onEdit, onDelete }) {
             ))}
         </div>
       </div>
-
-
-      < div className="room-card-actions">
-        {onEdit && (
-          <button className="edit-btn" onClick={() => onEdit(room.id)}>
       <div className="room-card-actions">
         {onEdit && (
           <button
@@ -41,14 +37,6 @@ function RoomCard({ room, onReserve, onEdit, onDelete }) {
           </button>
         )}
         {onDelete && (
-
-          <button className="delete-btn" onClick={() => onDelete(room.id)}>
-            Excluir
-          </button>
-        )}
-        {/* Só mostra o botão Reservar se não estiver em modo admin */}
-        {onReserve && !onEdit && !onDelete && (
-
           <button
             className="delete-btn"
             onClick={() => onDelete(room.id)}

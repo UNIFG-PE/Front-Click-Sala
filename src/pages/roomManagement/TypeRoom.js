@@ -12,14 +12,12 @@ function TypeRoom({ roomTypes, setRoomTypes, onBack }) {
   const [typeToDelete, setTypeToDelete] = useState(null);
 
   const handleCreate = () => {
-    setError("");
     setShowCreateModal(true);
   };
 
   const handleEdit = (type) => {
     setEditType(type);
     setShowEditModal(true);
-    setError("");
   };
 
   const handleDeleteClick = (type) => {
@@ -27,8 +25,7 @@ function TypeRoom({ roomTypes, setRoomTypes, onBack }) {
     setShowDeleteModal(true);
   };
 
-  // CRIAR NOVO TIPO DE SALA
-  const handleSaveType = async (name) => {
+  const handleSaveType = (name) => {
     const exists = roomTypes.some(
       (t) => t.name.trim().toLowerCase() === name.trim().toLowerCase()
     );
@@ -39,27 +36,14 @@ function TypeRoom({ roomTypes, setRoomTypes, onBack }) {
     const nextId = roomTypes.length
       ? Math.max(...roomTypes.map((t) => t.id)) + 1
       : 1;
-    /*
-    try {
-      const response = await fetch('/api/roomtypes', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name.trim() }),
-      });
-      const data = await response.json();
-      setRoomTypes([...roomTypes, data]); // Supondo que o backend retorna o tipo já com id
-    } catch (error) {
-      setError("Erro ao salvar no backend!");
-      return false;
-    }
-    */
+
     setRoomTypes([...roomTypes, { id: nextId, name: name.trim() }]);
     setShowCreateModal(false);
     setError("");
     return true;
   };
 
-  const handleUpdateType = async (newName) => {
+  const handleUpdateType = (newName) => {
     const exists = roomTypes.some(
       (t) =>
         t.name.trim().toLowerCase() === newName.trim().toLowerCase() &&
@@ -69,24 +53,6 @@ function TypeRoom({ roomTypes, setRoomTypes, onBack }) {
       setError("Este tipo de sala já existe!");
       return false;
     }
-    /*
-    try {
-      const response = await fetch(`/api/roomtypes/${editType.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: newName.trim() }),
-      });
-      const data = await response.json();
-      setRoomTypes(
-        roomTypes.map((type) =>
-          type.id === data.id ? data : type
-        )
-      );
-    } catch (error) {
-      setError("Erro ao atualizar no backend!");
-      return false;
-    }
-    */
     setRoomTypes(
       roomTypes.map((type) =>
         type.id === editType.id ? { ...type, name: newName.trim() } : type
@@ -98,17 +64,7 @@ function TypeRoom({ roomTypes, setRoomTypes, onBack }) {
     return true;
   };
 
-  const handleDeleteConfirm = async () => {
-    /*
-    try {
-      await fetch(`/api/roomtypes/${typeToDelete.id}`, {
-        method: 'DELETE'
-      });
-      setRoomTypes(roomTypes.filter((type) => type.id !== typeToDelete.id));
-    } catch (error) {
-      alert("Erro ao excluir no backend!");
-    }
-    */
+  const handleDeleteConfirm = () => {
     setRoomTypes(roomTypes.filter((type) => type.id !== typeToDelete.id));
     setShowDeleteModal(false);
     setTypeToDelete(null);

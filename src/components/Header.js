@@ -14,7 +14,7 @@ function Header() {
           <li><a href="/reservas">Minhas Reservas</a></li>
           <li><a href="/salas">Salas</a></li>
           <li><a href="/gerenciar-salas">Gerenciar Salas</a></li>
-          <li><a href="/recursos">Gerenciar Recursos</a></li>
+     
         </ul>
       </nav>
     </header>
@@ -22,3 +22,4 @@ function Header() {
 }
 
 export default Header;
+
