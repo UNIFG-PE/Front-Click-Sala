@@ -8,11 +8,12 @@ function CreateRoom({
   onCancel,
   existingRooms = [],
   roomTypes = [],
+  campuses = [],
   initialData = null,
   isEdit = false,
 }) {
   const [name, setName] = useState('');
-  const [location, setLocation] = useState('');
+  const [campus, setCampus] = useState('');
   const [description, setDescription] = useState('');
   const [capacity, setCapacity] = useState('');
   const [features, setFeatures] = useState('');
@@ -25,7 +26,7 @@ function CreateRoom({
   useEffect(() => {
     if (initialData) {
       setName(initialData.name || '');
-      setLocation(initialData.location || '');
+      setCampus(initialData.campus || '');
       setDescription(initialData.description || '');
       setCapacity(initialData.capacity || '');
       setFeatures(initialData.features?.join(', ') || '');
@@ -60,10 +61,14 @@ function CreateRoom({
     }
 
    
-    if (existingRooms.some(room =>
-      room.name.toLowerCase() === name.trim().toLowerCase() &&
-      (!isEdit || room.id !== initialData?.id)
-    )) {
+    if (
+      existingRooms.some(
+        room =>
+          room.name &&
+          room.name.toLowerCase() === name.trim().toLowerCase() &&
+          (!isEdit || room.id !== initialData?.id)
+      )
+    ) {
       setError('Já existe uma sala com esse nome.');
       return;
     }
@@ -73,8 +78,14 @@ function CreateRoom({
       return;
     }
 
-    if (unavailableLocations.some(loc => loc.toLowerCase() === location.trim().toLowerCase())) {
-      setError('Esta localização está indisponível. Escolha outra.');
+    if (unavailableLocations.some(loc => loc.toLowerCase() === campus.trim().toLowerCase())) {
+      setError('Este campus está indisponível. Escolha outro.');
+      return;
+    }
+
+    const selectedCampus = campuses.find(c => c.name === campus);
+    if (!selectedCampus) {
+      setError('Campus inválido. Por favor, selecione um campus válido.');
       return;
     }
 
@@ -84,16 +95,14 @@ function CreateRoom({
       .filter(f => f);
 
     onSubmit({
-      ...initialData, 
-      name: name.trim(),
-      location: location.trim(),
-      description,
+      identifier: name.trim(),
+      floor: 0,
       capacity: Number(capacity),
-      features: featuresArray,
-      image: image || defaultImage,
-      available,
-      roomTypeId: Number(roomTypeId),
-      typeId: Number(roomTypeId),
+      description,
+      status: available ? "AVAILABLE" : "UNAVAILABLE",
+      campusId: selectedCampus.id,
+      categoryId: Number(roomTypeId),
+      imageUrl: image || defaultImage
     });
   };
 
@@ -123,13 +132,20 @@ function CreateRoom({
           ))}
         </select>
 
-        <label>Localização*</label>
-        <input
-          type="text"
+        <label>Campus*</label>
+        <select
+          className='room-type-select'
           required
-          value={location}
-          onChange={e => setLocation(e.target.value)}
-        />
+          value={campus}
+          onChange={e => setCampus(e.target.value)}
+        >
+          <option value="">Selecione um campus</option>
+          {campuses.map(campus => (
+            <option key={campus.id} value={campus.name}>
+              {campus.name}
+            </option>
+          ))}
+        </select>
 
         <label>Descrição</label>
         <textarea
@@ -182,4 +198,3 @@ function CreateRoom({
 }
 
 export default CreateRoom;
-

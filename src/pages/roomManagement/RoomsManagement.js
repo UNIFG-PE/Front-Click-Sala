@@ -21,6 +21,44 @@ function RoomsManagement() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteRoomData, setDeleteRoomData] = useState(null);
 
+  useEffect(() => {
+    axios.get("http://localhost:8080/api/v1/rooms", {
+      auth: {
+        username: "SDMUnifgOdaback8gs2",
+        password: "SDM7Unifg9DJEwh"
+      }
+    })
+    .then(response => setRooms(response.data))
+    .catch(error => {
+      console.error("Erro ao buscar salas:", error);
+      alert("Erro ao buscar salas");
+    });
+
+    axios.get("http://localhost:8080/api/v1/categories", {
+      auth: {
+        username: "SDMUnifgOdaback8gs2",
+        password: "SDM7Unifg9DJEwh"
+      }
+    })
+    .then(response => setRoomTypes(response.data))
+    .catch(error => {
+      console.error("Erro ao buscar tipos de sala:", error);
+      alert("Erro ao buscar tipos de sala");
+    });
+
+    axios.get("http://localhost:8080/api/v1/campus", {
+      auth: {
+        username: "SDMUnifgOdaback8gs2",
+        password: "SDM7Unifg9DJEwh"
+      }
+    })
+      .then(response => setCampus(response.data))
+      .catch(error => {
+        console.error("Erro ao carregar campus", error)
+        alert("Erro ao buscar campus");
+      });
+  }, []);
+
   const handleEdit = (id) => {
     const roomToEdit = rooms.find((room) => room.id === id);
     setEditRoomData(roomToEdit);
@@ -39,28 +77,96 @@ function RoomsManagement() {
     setShowDeleteModal(true);
   };
 
-  const handleConfirmDeleteRoom = () => {
-    setRooms(rooms.filter(room => room.id !== deleteRoomData.id));
-    setShowDeleteModal(false);
-    setDeleteRoomData(null);
+  const handleConfirmDeleteRoom = async () => {
+    try {
+      await axios.delete(`http://localhost:8080/api/v1/rooms/${deleteRoomData.id}`, {
+        auth: {
+          username: "SDMUnifgOdaback8gs2",
+          password: "SDM7Unifg9DJEwh"
+        }
+      });
+
+      setRooms(rooms.filter(room => room.id !== deleteRoomData.id));
+      setShowDeleteModal(false);
+      setDeleteRoomData(null);
+
+    } catch (error) {
+      console.error("Erro ao excluir sala:", error);
+      alert("Erro ao excluir sala");
+    }
   };
 
   const handleDisponibilizar = (id) => {
-    setRooms(rooms.map((room) =>
-      room.id === id ? { ...room, available: true } : room
-    ));
+    const room = rooms.find(r => r.id === id);
+    if (!room) return;
+
+    const updatedRoomData = {
+      identifier: room.identifier,
+      floor: room.floor,
+      capacity: room.capacity,
+      description: room.description,
+      status: "AVAILABLE",
+      campusId: room.campusId,
+      categoryId: room.categoryId
+    };
+
+    axios.put(`http://localhost:8080/api/v1/rooms/${id}`, updatedRoomData, {
+      auth: {
+        username: "SDMUnifgOdaback8gs2",
+        password: "SDM7Unifg9DJEwh"
+      }
+    })
+    .then(response => {
+      setRooms(rooms.map(r => r.id === id ? response.data : r));
+    })
+    .catch(error => {
+      console.error("Erro ao disponibilizar sala:", error);
+    });
   };
 
   const handleIndisponibilizar = (id) => {
-    setRooms(rooms.map((room) =>
-      room.id === id ? { ...room, available: false } : room
-    ));
+    const room = rooms.find(r => r.id === id);
+    if (!room) return;
+
+    const updatedRoomData = {
+      identifier: room.identifier,
+      floor: room.floor,
+      capacity: room.capacity,
+      description: room.description,
+      status: "UNAVAILABLE",
+      campusId: room.campusId,
+      categoryId: room.categoryId
+    };
+
+    axios.put(`http://localhost:8080/api/v1/rooms/${id}`, updatedRoomData, {
+      auth: {
+        username: "SDMUnifgOdaback8gs2",
+        password: "SDM7Unifg9DJEwh"
+      }
+    })
+    .then(response => {
+      setRooms(rooms.map(r => r.id === id ? response.data : r));
+    })
+    .catch(error => {
+      console.error("Erro ao indisponibilizar sala:", error);
+    });
   };
 
-  const handleCreateRoom = (newRoom) => {
-    const nextId = rooms.length ? Math.max(...rooms.map((r) => r.id)) + 1 : 1;
-    setRooms([...rooms, { ...newRoom, id: nextId }]);
-    setShowCreateModal(false);
+  const handleCreateRoom = async (newRoom) => {
+    try {
+      const response = await axios.post("http://localhost:8080/api/v1/rooms", newRoom, {
+        auth: {
+          username: "SDMUnifgOdaback8gs2",
+          password: "SDM7Unifg9DJEwh"
+        }
+      });
+
+      setRooms([...rooms, response.data]);
+      setShowCreateModal(false);
+    } catch (error) {
+      console.error("Erro ao criar sala:", error);
+      alert("Erro ao criar sala");
+    }
   };
 
   const handleCreateResource = () => setShowResources(true); // ALTERADO
@@ -149,12 +255,12 @@ function RoomsManagement() {
         {rooms.map((room) => (
           <div className="room-admin-card" key={room.id}>
             <div className="room-image-column">
-              <img className="room-image" src={room.image} alt={room.name} />
+              <img className="room-image" src={room.imageUrl} alt={room.identifier} />
               <div className="room-capacity">{room.capacity} pessoas</div>
             </div>
             <div className="room-details">
-              <div className="room-title">{room.name}</div>
-              <div className="room-location">{room.location}</div>
+              <div className="room-title">{room.identifier}</div>
+              <div className="room-location">{room.campusName}</div>
             </div>
             <div className="room-status-actions center-actions">
               <button
@@ -169,7 +275,7 @@ function RoomsManagement() {
               >
                 Editar Sala
               </button>
-              {room.available ? (
+              {room.status === "AVAILABLE" ? (
                 <button
                   className="action-btn red small-btn"
                   onClick={() => handleIndisponibilizar(room.id)}
@@ -196,6 +302,7 @@ function RoomsManagement() {
             onCancel={() => setShowCreateModal(false)}
             existingRooms={rooms}
             roomTypes={roomTypes}
+            campuses={campus}
           />
         </div>
       )}
@@ -207,6 +314,7 @@ function RoomsManagement() {
             onCancel={() => { setShowEditModal(false); setEditRoomData(null); }}
             existingRooms={rooms}
             roomTypes={roomTypes}
+            campuses={campus}
             initialData={editRoomData}
             isEdit={true}
           />
