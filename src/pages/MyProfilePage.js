@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
 
-// O componente AvatarIcon permanece o mesmo
-const AvatarIcon = () => (
-  <svg viewBox="0 0 100 100" width="80" height="80" style={{ marginBottom: '15px' }}>
+// Componente do ícone de avatar padrão (sem alterações)
+const AvatarIcon = ({ size = 90 }) => (
+  <svg viewBox="0 0 100 100" width={size} height={size} style={{ marginBottom: '15px' }}>
     <circle cx="50" cy="50" r="50" fill="#e9ecef" />
     <circle cx="50" cy="40" r="18" fill="#adb5bd" />
     <path d="M 50,65 A 35,35 0 0,0 50,100 A 35,35 0 0,0 50,65" fill="#adb5bd" />
@@ -11,12 +11,17 @@ const AvatarIcon = () => (
 );
 
 function MyProfilePage({ user, onLogout, onSave }) {
-  // A lógica do componente (estados e handlers) permanece intacta
+  // Estados para os campos do formulário (sem alterações)
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState(user.password ?? '');
   const [displayName, setDisplayName] = useState(user.name);
 
+  // ALTERADO: O estado da imagem agora começa como nulo.
+  const [profileImage, setProfileImage] = useState(null);
+  const fileInputRef = useRef(null);
+
+  // Efeito para atualizar os dados se o objeto 'user' mudar
   useEffect(() => {
     setName(user.name);
     setEmail(user.email);
@@ -24,23 +29,63 @@ function MyProfilePage({ user, onLogout, onSave }) {
     setDisplayName(user.name);
   }, [user]);
 
-  const handleLogout = onLogout || (() => { });
+  // NOVO: Efeito para carregar a foto específica do usuário.
+  // Ele roda toda vez que o objeto 'user' muda.
+  useEffect(() => {
+    if (user && user.matricula) {
+      // Cria a chave única para a foto do usuário (ex: 'userProfileImage_12345')
+      const userImageKey = `userProfileImage_${user.matricula}`;
+      const savedImage = localStorage.getItem(userImageKey);
+      setProfileImage(savedImage); // Carrega a foto salva, se existir
+    }
+  }, [user]); // A dependência [user] garante que isso rode ao carregar o perfil de um novo usuário
+
+  // Função de logout (sem alterações)
+  const handleLogout = () => {
+    if (typeof onLogout === 'function') {
+        onLogout();
+    }
+  };
+
+  // Função para salvar as alterações (sem alterações)
   const handleSave = (e) => {
     e.preventDefault();
     if (typeof onSave === 'function') {
-      onSave({ ...user, name, email, password });
+      onSave({ ...user, name, email, password, profileImage });
     }
     setDisplayName(name);
   };
 
-  // Objeto de estilos com a cor do cabeçalho revertida
+  // ALTERADO: A função de mudança de imagem agora salva usando a chave única do usuário.
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file && user && user.matricula) { // Garante que temos um usuário com matrícula
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const imageDataUrl = reader.result;
+        setProfileImage(imageDataUrl);
+
+        // Cria a chave única e salva a foto nela
+        const userImageKey = `userProfileImage_${user.matricula}`;
+        localStorage.setItem(userImageKey, imageDataUrl);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Função para acionar o clique no input de arquivo oculto (sem alterações)
+  const handleAvatarClick = () => {
+    fileInputRef.current.click();
+  };
+
+  // Objeto de estilos para o componente (sem alterações)
   const styles = {
     container: {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       padding: '40px 20px',
-      backgroundImage:  "linear-gradient(120deg, #d7e8fa22 0%, #468ee822 100%), url('') center center/cover no-repeat",
+      backgroundImage: "linear-gradient(120deg, #d7e8fa22 0%, #468ee822 100%), url('') center center/cover no-repeat",
       backgroundAttachment: 'fixed',
       fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
       minHeight: '100vh',
@@ -55,8 +100,7 @@ function MyProfilePage({ user, onLogout, onSave }) {
       overflow: 'hidden',
     },
     cardHeader: {
-      // MUDANÇA: Cor revertida para o azul original
-      backgroundColor: '#007bff', 
+      backgroundColor: '#007bff',
       color: 'white',
       padding: '25px',
       textAlign: 'center',
@@ -65,19 +109,34 @@ function MyProfilePage({ user, onLogout, onSave }) {
       padding: '30px 40px',
     },
     cardContentWrapper: {
-        display: 'flex',
-        alignItems: 'flex-start',
-        gap: '40px',
+      display: 'flex',
+      alignItems: 'flex-start',
+      gap: '40px',
     },
     leftColumn: {
-        flex: '0 0 130px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        textAlign: 'center',
+      flex: '0 0 130px',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      textAlign: 'center',
+    },
+    avatarContainer: {
+        position: 'relative',
+        cursor: 'pointer',
+        marginBottom: '15px',
+    },
+    profileAvatar: {
+        width: '90px',
+        height: '90px',
+        borderRadius: '50%',
+        objectFit: 'cover',
+        border: '3px solid #e9ecef',
+    },
+    hiddenFileInput: {
+        display: 'none',
     },
     rightColumn: {
-        flex: '1',
+      flex: '1',
     },
     userName: {
       margin: '0',
@@ -131,7 +190,7 @@ function MyProfilePage({ user, onLogout, onSave }) {
       fontSize: '16px',
       fontWeight: 'bold',
       color: 'white',
-      backgroundColor: '#28a745', // Verde mantido para a ação primária de salvar
+      backgroundColor: '#28a745',
       border: 'none',
       borderRadius: '6px',
       cursor: 'pointer',
@@ -142,7 +201,7 @@ function MyProfilePage({ user, onLogout, onSave }) {
       fontSize: '16px',
       fontWeight: 'bold',
       color: 'white',
-      backgroundColor: '#fd7e14', // Laranja mantido para a ação secundária
+      backgroundColor: '#fd7e14',
       border: 'none',
       borderRadius: '6px',
       cursor: 'pointer',
@@ -159,19 +218,34 @@ function MyProfilePage({ user, onLogout, onSave }) {
   };
 
   return (
-    // O JSX não foi alterado
     <div style={styles.container}>
       <div style={styles.profileCard}>
         <div style={styles.cardHeader}>
           <h2 style={styles.userName}>{displayName}</h2>
           <p style={styles.userRole}>{user.permissao || user.role}</p>
         </div>
-        
+
         <div style={styles.cardBody}>
           <div style={styles.cardContentWrapper}>
-            
+
             <div style={styles.leftColumn}>
-              <AvatarIcon />
+
+              <input
+                type="file"
+                style={styles.hiddenFileInput}
+                ref={fileInputRef}
+                onChange={handleImageChange}
+                accept="image/png, image/jpeg"
+              />
+
+              <div style={styles.avatarContainer} onClick={handleAvatarClick} title="Clique para alterar a foto">
+                {profileImage ? (
+                  <img src={profileImage} alt="Avatar" style={styles.profileAvatar} />
+                ) : (
+                  <AvatarIcon />
+                )}
+              </div>
+
               <div style={styles.qrcode}>
                 <QRCodeCanvas value={user.matricula || user.email || ''} size={128} />
                 <div style={styles.qrLabel}>Seu QR Code</div>
@@ -221,4 +295,5 @@ function MyProfilePage({ user, onLogout, onSave }) {
     </div>
   );
 }
+
 export default MyProfilePage;
