@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./RoomsManagement.css";
 import CreateRoom from "./CreateRoom";
 import TypeRoom from "./TypeRoom";
-import ConfirmDeleteRoom from "./CorfimDeleteRoom";
+import ConfirmDeleteRoom from "./ConfirmDeleteRoom";
 
 const mockRoomTypes = [
   { id: 1, name: "Executiva" },
