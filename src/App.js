@@ -9,7 +9,6 @@ import Suporte from './pages/Suporte';
 import Login from './admin_user/pages/login'; 
 import AdminScreen from './admin_user/homepage'; // admin
 import AdminHeader from './admin_user/header';
-import GerenciarSalas from './admin_user/pages/MyReservationsPage';
 import RoomsPag from './admin_user/pages/RoomsPage';
 import GerenciarSalas from './admin_user/pages/RoomsManagement';
 
@@ -34,7 +33,7 @@ function App() {
         return <AdminScreen />;
       case 'gerenciarsalas':
         return < GerenciarSalas/>;
-          case 'consultarreser':
+          case 'salas':
         return < RoomsPag/>;
       case 'home':
         return <AdminScreen />;
@@ -79,6 +78,7 @@ function App() {
         else if (path === '/gerenciarsalas') setCurrentPage('gerenciarsalas');
         else if (path === '/reservas') setCurrentPage('reservas');
         else if (path === '/suporte') setCurrentPage('suporte');
+        else if (path === '/salas') setCurrentPage('salas')
         
       }
     };
