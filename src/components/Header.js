@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.css';
 
-function Header() {
+function Header({ onNavigate }) {
   return (
     <header className="header">
       <div className="logo">
@@ -10,10 +10,10 @@ function Header() {
       </div>
       <nav className="nav">
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/reservas">Minhas Reservas</a></li>
-          <li><a href="/salas">Salas</a></li>
-          <li><a href="/cadastro-usuario">Cadastrar Usuário</a></li>
+          <li><a href="/" onClick={e => { if (onNavigate) { e.preventDefault(); onNavigate('home'); } }}>Home</a></li>
+          <li><a href="/reservas" onClick={e => { if (onNavigate) { e.preventDefault(); onNavigate('reservas'); } }}>Minhas Reservas</a></li>
+          <li><a href="/salas" onClick={e => { if (onNavigate) { e.preventDefault(); onNavigate('salas'); } }}>Salas</a></li>
+          <li><a href="/cadastro-usuario" onClick={e => { if (onNavigate) { e.preventDefault(); onNavigate('cadastro-usuario'); } }}>Cadastrar Usuário</a></li>
           <li><a href="/faq" onClick={e => { if (onNavigate) { e.preventDefault(); onNavigate('faq'); } }}>FAQ</a></li>
         </ul>
       </nav>
@@ -21,4 +21,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default Header;  // <- ESSA LINHA É ESSENCIAL!

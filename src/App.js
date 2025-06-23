@@ -1,18 +1,30 @@
 import React, { useState } from 'react';
 import './App.css';
+import './pages/faq'
+
+// Importação dos componentes
 import Header from './components/Header';
 import Footer from './components/Footer';
+
+// Importação das páginas
 import HomePage from './pages/HomePage';
 import RoomsPage from './pages/RoomsPage';
 import MyReservationsPage from './pages/MyReservationsPage';
 import CadastroUsuarioPage from './pages/CadastroUsuarioPage';
 import SignIn from './pages/SignIn';
-
+import FAQ from './pages/faq'; // Importe a página de FAQ
 
 function App() {
+  // O estado continua controlando qual página é exibida
   const [currentPage, setCurrentPage] = useState('home');
 
-  // Simular um sistema de rotas simples
+  // ADICIONADO: Função centralizada para ser chamada pelos componentes filhos
+  // Esta função será passada como uma "prop" para o Header
+  const handleNavigate = (page) => {
+    setCurrentPage(page);
+  };
+
+  // A função que renderiza a página correta com base no estado
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
@@ -21,46 +33,30 @@ function App() {
         return <RoomsPage />;
       case 'reservas':
         return <MyReservationsPage />;
-      case 'cadastro-usuario': // <- rota correta para a opção do topo
+      case 'cadastro-usuario':
         return <SignIn />;
-      case 'cadastro': // se for outra tela (como cadastro de sala, mantenha aqui)
+      case 'cadastro':
         return <CadastroUsuarioPage />;
+      // ADICIONADO: Caso para a página de FAQ, que estava faltando na lógica
+      case 'faq':
+        return <FAQ/>;
       default:
         return <HomePage />;
-  }
+    }
   };
 
-  // Interceptar cliques em links para simular navegação
-  React.useEffect(() => {
-    const handleNavigation = (event) => {
-      // Verificar se o clique foi em um link interno
-      if (event.target.tagName === 'A' && !event.target.getAttribute('href').startsWith('http')) {
-        event.preventDefault();
-        const path = event.target.getAttribute('href');
-
-        // Atualizar a página atual com base no caminho
-        if (path === '/') setCurrentPage('home');
-        else if (path === '/salas') setCurrentPage('salas');
-        else if (path === '/reservas') setCurrentPage('reservas');
-        else if (path === '/cadastro-usuario') setCurrentPage('cadastro-usuario');
-        else if (path === '/cadastro') setCurrentPage('cadastro');
-      }
-    };
-    // Adicionar listener para capturar cliques
-    document.addEventListener('click', handleNavigation);
-
-    // Limpar listener quando o componente for desmontado
-    return () => {
-      document.removeEventListener('click', handleNavigation);
-    };
-  }, []);
+  // REMOVIDO: O React.useEffect com o listener global foi removido.
+  // A navegação agora é controlada de forma explícita através de props.
 
   return (
     <div className="App">
-      <Header />
+      {/* MODIFICADO: Passando a função 'handleNavigate' como uma prop chamada 'onNavigate' para o Header */}
+      <Header onNavigate={handleNavigate} />
+      
       <main className="main-content">
         {renderPage()}
       </main>
+      
       <Footer />
     </div>
   );
