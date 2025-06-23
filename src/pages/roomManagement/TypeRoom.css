@@ -120,6 +120,18 @@
   background: #ffdde0;
 }
 
+.error-message {
+  color: #dc3545; 
+  background: #fff0f1;
+  border: 1px solid ;
+  border-radius: 6px;
+  padding: 0.6em 1em;
+  margin-bottom: 1em;
+  font-size: 1.01em;
+  font-weight: 600;
+  text-align: center;
+}
+
 @media (max-width: 600px) {
   .roomtype-page {
     padding: 1rem 0.2rem;

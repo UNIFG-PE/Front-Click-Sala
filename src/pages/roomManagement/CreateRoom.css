@@ -84,6 +84,7 @@
   width: 170px;
   text-align: center;
   }
+
   
   .submit-btn {
     background: #232654;
@@ -99,6 +100,7 @@
   text-align: center;
   }
   
+
   .submit-btn:hover {
     background: #4b4e78;
   }
@@ -108,13 +110,14 @@
   }
   
   .form-error {
-    background: #ffdddd;
-    color: #a94442;
-    border: 1px solid #a94442;
-    border-radius: 4px;
-    padding: 0.7rem 1rem;
-    margin-bottom: 0.8rem;
-    font-size: 1rem;
+    color: #dc3545; 
+    background: #fff0f1;
+    border: 1px ;
+    border-radius: 6px;
+    padding: 0.6em 1em;
+    margin-bottom: 1em;
+    font-size: 1.01em;
+    font-weight: 600;
     text-align: center;
   }
   .room-type-select{
