@@ -3,6 +3,7 @@ import UserTable from '../components/UserTable';
 import UserModal from '../components/UserModal';
 import UserFilters from '../components/UserFilters';
 import Pagination from '../components/Pagination';
+import StatusPieChart from '../components/StatusPieChart';
 import { initialUsers } from '../data/initialUsers';
 import { filterAndSortUsers } from '../utils/userFilters';
 import '../pages/UserManagement.css';
@@ -16,7 +17,7 @@ function loadUsersFromStorage() {
   return saved ? JSON.parse(saved) : initialUsers;
 }
 
-// ✅ Componente principal
+// Componente principal
 const UserManagementPage = ({ onLogout }) => {
   const [users, setUsers] = useState(loadUsersFromStorage());
   const [selectedUser, setSelectedUser] = useState(null);
@@ -65,27 +66,54 @@ const UserManagementPage = ({ onLogout }) => {
     setIsModalOpen(false);
   };
 
+  const statusCounts = users.reduce((acc, user) => {
+    const statusKey = user.status ? user.status.toLowerCase() : '';
+    if (statusKey in acc) {
+      acc[statusKey]++;
+    }
+    return acc;
+  }, { ativo: 0, inativo: 0, pendente: 0 });
+
   return (
     <div className="user-page">
-      {/* Título + Botão de logout */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      {/* ================================================================== */}
+      {/* ✅ INÍCIO DA ALTERAÇÃO DE LAYOUT */}
+      {/* ================================================================== */}
+      
+      {/* CABEÇALHO: Agora contém apenas o título */}
+      <div style={{ marginBottom: '1rem' }}>
         <h2 className="user-title">Gestão de Usuários</h2>
-        <button
-          onClick={onLogout}
-          style={{
-            background: '#f44336',
-            color: 'white',
-            border: 'none',
-            padding: '10px 15px',
-            borderRadius: '5px',
-            cursor: 'pointer'
-          }}
-        >
-          Sair
-        </button>
       </div>
 
-      <button className="add-btn" onClick={handleAdd}>+ Novo Usuário</button>
+      {/* LINHA DE AÇÕES: Um novo container para alinhar os botões e o gráfico */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+        {/* Lado Esquerdo: Botão de Adicionar */}
+        <button className="add-btn" onClick={handleAdd}>+ Novo Usuário</button>
+        
+        {/* Lado Direito: Grupo do Gráfico e Botão Sair */}
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <StatusPieChart counts={statusCounts} />
+          <button
+            onClick={onLogout}
+            style={{
+              background: '#f44336',
+              color: 'white',
+              border: 'none',
+              padding: '10px 15px',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              height: 'fit-content'
+            }}
+          >
+            Sair
+          </button>
+        </div>
+      </div>
+      
+      {/* ================================================================== */}
+      {/* ✅ FIM DA ALTERAÇÃO DE LAYOUT */}
+      {/* ================================================================== */}
+
       <UserFilters
         search={search}
         setSearch={setSearch}

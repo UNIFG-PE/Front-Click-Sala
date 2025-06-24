@@ -126,8 +126,8 @@ function MyProfilePage({ user, onLogout, onSave }) {
         marginBottom: '15px',
     },
     profileAvatar: {
-        width: '90px',
-        height: '90px',
+        width: '150px',
+        height: '150px',
         borderRadius: '50%',
         objectFit: 'cover',
         border: '3px solid #e9ecef',
