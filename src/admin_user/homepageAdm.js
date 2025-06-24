@@ -1,36 +1,38 @@
 import React from 'react';
-import './HomePage.css';
+import './homepageAdm.css';
 
 function HomePage() {
   return (
+    
     <div className="home-page">
       <section className="hero">
         <div className="hero-content">
           <h1>Bem-vindo ao ODA</h1>
-          <p>Sistema de reserva de salas online para sua empresa</p>
-          <a href="/cadastro" className="cta-button">Reservar uma Sala</a>
+          <p>Sistema de gerenciamento de salas</p>
+          <a href="/admin-reservas" className="cta-button">Consultar reservas</a>
+             <a href="/gerenciarsalas" className="cta-button">Gerenciar salas</a>
         </div>
       </section>
       
       <section className="features">
-        <h2>Como funciona</h2>
+        <h2>Como funciona para o administrador</h2>
         <div className="features-grid">
           <div className="feature-card">
-            <div className="feature-icon">🔍</div>
-            <h3>Encontre</h3>
-            <p>Navegue pelas salas disponíveis e encontre a ideal para sua reunião</p>
+            <div className="feature-icon">📝</div>
+            <h3>Cadastre</h3>
+            <p>Adicione novas salas, defina a capacidade e os recursos disponíveis.</p>
           </div>
           
           <div className="feature-card">
-            <div className="feature-icon">📅</div>
-            <h3>Reserve</h3>
-            <p>Escolha a data, horário e confirme sua reserva em poucos cliques</p>
+            <div className="feature-icon">📋</div>
+            <h3>Gerencie</h3>
+            <p>Acompanhe as reservas realizadas e revise as solicitações pendentes.</p>
           </div>
           
           <div className="feature-card">
             <div className="feature-icon">✅</div>
-            <h3>Utilize</h3>
-            <p>Receba a confirmação e utilize a sala no horário reservado</p>
+            <h3>Aprove</h3>
+            <p>Aprove ou rejeite reservas conforme a disponibilidade e regras da instituição</p>
           </div>
         </div>
       </section>

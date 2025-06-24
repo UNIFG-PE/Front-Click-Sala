@@ -10,12 +10,14 @@ function ReservationCard({ reservation, onCancel }) {
   
   return (
     <div className="reservation-card">
-      <div className="reservation-header">
-        <h3>{reservation.room.name}</h3>
-        <span className={`reservation-status ${reservation.status.toLowerCase()}`}>
-          {reservation.status}
-        </span>
-      </div>
+     <div className="reservation-header">
+  <h3>{reservation.room.name}</h3>
+  {reservation.status !==  'Pendente' && reservation.status !==  'Confirmada' && (
+    <span className={`reservation-status ${reservation.status.toLowerCase()}`}>
+      {reservation.status}
+    </span>
+  )}
+</div>
       
       <div className="reservation-details">
         <div className="detail-item">
@@ -26,6 +28,7 @@ function ReservationCard({ reservation, onCancel }) {
         <div className="detail-item">
           <span className="detail-label">Horário:</span>
           <span className="detail-value">{reservation.startTime} - {reservation.endTime}</span>
+          
         </div>
         
         <div className="detail-item">
@@ -37,15 +40,27 @@ function ReservationCard({ reservation, onCancel }) {
           <span className="detail-label">Finalidade:</span>
           <span className="detail-value purpose">{reservation.purpose}</span>
         </div>
-      </div>
-      
+        
+      </div> 
+      {reservation.status !== 'Cancelada' && reservation.status !== 'Pendente' &&( 
+     
+      <div className="reservation-buttons">
       {reservation.status === 'Confirmada' && (
-        <button className="cancel-reservation-button" onClick={() => onCancel(reservation.id)}>
-          Cancelar 
+        <button className="aprove-reservation-button" onClick={() => onCancel(reservation.id)}>
+          Aprovar reserva ✅
         </button>
+        
       )}
+      <button className="cancel-reservation-buttonn">
+      Negar reserva ❌
+    </button>
+
     </div>
+      )}
+     
+    </div>
+   
   );
 }
-
+  
 export default ReservationCard;
