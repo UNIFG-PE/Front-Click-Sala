@@ -2,26 +2,33 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1rem;
-  margin-bottom: 3rem;
+  position: relative;
 }
 
 .heading-bar {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
- 
+  gap: 1.2rem;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+  margin-left: 3rem;
+   justify-content: flex-start;
+   position: relative;
 }
-
 
 .heading-bar h1 {
-  font-size: 2rem;
+  font-size: 2.9rem;
   color: #222;
   margin: 0;
+  flex: 1 1 0;
+  text-align: left;
+
 }
 
-.create-room-btn {
+
+.create-room-btn,
+.create-typeroom-btn,
+.create-resource-btn {
   background: #232654;
   color: #fff;
   border: none;
@@ -32,14 +39,25 @@
   cursor: pointer;
   transition: filter 0.15s;
 }
-.create-room-btn:hover {
+
+.create-room-btn:hover,
+.create-typeroom-btn:hover,
+.create-resource-btn:hover {
   filter: brightness(0.93);
+}
+
+.create-typeroom-btn,
+.create-resource-btn {
+  padding: 0.85rem 1.5rem;
 }
 
 .subtitle {
   color: #777;
-  margin-bottom: 2rem;
-  margin-top: 0.5rem;
+  margin-bottom: 1.2rem;
+  margin-top: 0.6rem;
+  margin-left: 1rem;
+  text-align: center;
+ 
 }
 
 .rooms-list {
@@ -57,6 +75,7 @@
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
   gap: 1.8rem;
   position: relative;
+  margin-top: 10px;
 }
 
 .room-image-column {
@@ -159,7 +178,6 @@
   cursor: pointer;
   color: #fff;
   transition: filter 0.15s;
-  /* width: 170px; */
   min-width: 120px;
   max-width: 180px;
   word-break: break-word;
@@ -168,7 +186,71 @@
   display: inline-block;
 }
 
+.dropdown-wrapper {
+  position: relative;
+  margin: 0 0 0 1.5 rem;
+  display: inline-block;
+  
+}
+
+.dropdown-toggle-btn {
+  background: #232654;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.85rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+
+.dropdown-toggle-btn:hover {
+  filter: brightness(0.93);
+}
+
+.dropdown-menu {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background: #fff;
+  border: 1px solid #d2d4e2;
+  border-radius: 8px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.13);
+  z-index: 200;
+  padding: 1rem 1.2rem;
+  margin-top: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-width: 210px;
+  align-items: stretch;
+}
+.dropdown-menu.open {
+  position: static;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.13);
+}
+
+.dropdown-action-btn {
+  background: #232654;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.8rem 1.3rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 0.3rem;
+  transition: filter 0.15s;
+  text-align: center;
+  width: 100%;
+}
+
 @media (max-width: 800px) {
+  .subtitle {
+    margin-top: 1.8rem;
+  }
   .room-admin-card {
     flex-direction: column;
     align-items: flex-start;
@@ -206,4 +288,52 @@
     white-space: normal;
     text-align: center;
   }
+  .main-actions-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  .heading-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+  }
+  .heading-bar h1 {
+    text-align: center;
+    margin: 0 0 0.7rem 0;
+  }
+  .dropdown-wrapper {
+    width: auto;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+  }
+  .dropdown-menu {
+    position: absolute;
+    left: 31%;
+    top: 100%;
+    min-width: 210px;
+    max-width: 90vw;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.13);
+    border: 1px solid #d2d4e2;
+    padding: 1rem 1.2rem;
+    margin-top: 0.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: stretch;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .dropdown-menu.open {
+    position: static;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.13);
+  }
 }
+
+

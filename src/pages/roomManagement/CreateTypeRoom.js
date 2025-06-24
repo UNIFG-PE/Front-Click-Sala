@@ -6,8 +6,6 @@ function CreateTypeRoom({ onClose, onSave, error, setError, initialName = "", is
 
   useEffect(() => {
     setName(initialName);
-    setError("");
-    // eslint-disable-next-line
   }, [initialName]);
 
   const handleSave = () => {
@@ -19,11 +17,12 @@ function CreateTypeRoom({ onClose, onSave, error, setError, initialName = "", is
     if (result !== false) {
       setName("");
       setError("");
+      onClose();
     }
   };
 
-  const handleChange = (err) => {
-    setName(err.target.value);
+  const handleChange = (e) => {
+    setName(e.target.value);
     if (error) setError("");
   };
 
