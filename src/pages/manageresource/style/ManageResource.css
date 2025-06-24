@@ -27,12 +27,12 @@
 
 .btn-create {
   align-self: flex-end;
-  padding: 10px 20px;
+  padding: 30px 50px;
   background-color: #1b1f5c;
   color: white;
   border: none;
   border-radius: 6px;
-  font-weight: 500;
+  font-weight: 1000;
   cursor: pointer;
   transition: background 0.3s ease;
 }
@@ -117,7 +117,7 @@
   background-color: #b34429;
 }
 
-/* Responsivo para mobile */
+/* Responsivo */
 @media (max-width: 768px) {
   .resources-main {
     flex-direction: column;
