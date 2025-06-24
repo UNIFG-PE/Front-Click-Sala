@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./TypeRoom.css";
 import CreateTypeRoom from "./CreateTypeRoom";
 import ConfirmDelete from "./ConfirmDelete";
@@ -10,6 +11,21 @@ function TypeRoom({ roomTypes, setRoomTypes, onBack }) {
   const [error, setError] = useState("");
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [typeToDelete, setTypeToDelete] = useState(null);
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/api/v1/categories", {
+      auth: {
+        username: "SDMUnifgOdaback8gs2",
+        password: "SDM7Unifg9DJEwh"
+      }
+    })
+    .then(response => {
+      setRoomTypes(response.data);
+    })
+    .catch(error => {
+      console.error("Erro ao buscar tipos de sala:", error);
+    });
+  }, [setRoomTypes]);
 
   const handleCreate = () => {
     setShowCreateModal(true);
@@ -25,25 +41,42 @@ function TypeRoom({ roomTypes, setRoomTypes, onBack }) {
     setShowDeleteModal(true);
   };
 
-  const handleSaveType = (name) => {
+  const handleSaveType = async (categoryName) => {
     const exists = roomTypes.some(
-      (t) => t.name.trim().toLowerCase() === name.trim().toLowerCase()
+      (t) => t.name.trim().toLowerCase() === categoryName.trim().toLowerCase()
     );
     if (exists) {
       setError("Este tipo de sala já existe!");
       return false;
     }
-    const nextId = roomTypes.length
-      ? Math.max(...roomTypes.map((t) => t.id)) + 1
-      : 1;
 
-    setRoomTypes([...roomTypes, { id: nextId, name: name.trim() }]);
-    setShowCreateModal(false);
-    setError("");
-    return true;
+    try {
+      const response = await axios.post("http://localhost:8080/api/v1/categories", 
+        { 
+          name: categoryName.trim(),
+          description: `Tipo de sala: ${categoryName.trim()}`
+        }, 
+        {
+          auth: {
+            username: "SDMUnifgOdaback8gs2",
+            password: "SDM7Unifg9DJEwh"
+          }
+        }
+      );
+
+      setRoomTypes([...roomTypes, response.data]);
+      setShowCreateModal(false);
+      setError("");
+      return true;
+
+    } catch (error) {
+      console.error("Erro ao salvar tipo de sala:", error);
+      setError("Erro ao salvar tipo de sala!");
+      return false;
+    }
   };
 
-  const handleUpdateType = (newName) => {
+  const handleUpdateType = async (newName) => {
     const exists = roomTypes.some(
       (t) =>
         t.name.trim().toLowerCase() === newName.trim().toLowerCase() &&
@@ -53,22 +86,56 @@ function TypeRoom({ roomTypes, setRoomTypes, onBack }) {
       setError("Este tipo de sala já existe!");
       return false;
     }
-    setRoomTypes(
-      roomTypes.map((type) =>
-        type.id === editType.id ? { ...type, name: newName.trim() } : type
-      )
-    );
-    setShowEditModal(false);
-    setEditType(null);
-    setError("");
-    return true;
+
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/api/v1/categories/${editType.id}`,
+        { 
+          name: newName.trim(),
+          description: `Tipo de sala: ${newName.trim()}`
+        },
+        {
+          auth: {
+            username: "SDMUnifgOdaback8gs2",
+            password: "SDM7Unifg9DJEwh"
+          }
+        }
+      );
+
+      setRoomTypes(
+        roomTypes.map((type) =>
+          type.id === response.data.id ? response.data : type
+        )
+      );
+
+      setShowEditModal(false);
+      setEditType(null);
+      setError("");
+      return true;
+
+    } catch (error) {
+      console.error("Erro ao atualizar tipo de sala:", error);
+      setError("Erro ao atualizar tipo de sala!");
+      return false;
+    }
   };
 
-  const handleDeleteConfirm = () => {
-    setRoomTypes(roomTypes.filter((type) => type.id !== typeToDelete.id));
+  const handleDeleteConfirm = async () => {
+    try {
+    await axios.delete(`http://localhost:8080/api/v1/categories/${typeToDelete.id}`, {
+      auth: {
+        username: "SDMUnifgOdaback8gs2",
+        password: "SDM7Unifg9DJEwh"
+      }
+    });
+    setRoomTypes(roomTypes.filter(type => type.id !== typeToDelete.id));
     setShowDeleteModal(false);
     setTypeToDelete(null);
-  };
+  } catch (error) {
+    console.error("Erro ao excluir tipo de sala:", error);
+    alert("Erro ao excluir tipo de sala!");
+  }
+};
 
   const handleCloseCreate = () => {
     setShowCreateModal(false);
