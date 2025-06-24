@@ -311,7 +311,10 @@ function RoomsManagement() {
         <div className="modal-overlay">
           <CreateRoom
             onSubmit={handleEditRoom}
-            onCancel={() => { setShowEditModal(false); setEditRoomData(null); }}
+            onCancel={() => {
+              setShowEditModal(false);
+              setEditRoomData(null);
+            }}
             existingRooms={rooms}
             roomTypes={roomTypes}
             campuses={campus}
@@ -322,7 +325,10 @@ function RoomsManagement() {
       )}
       {showDeleteModal && deleteRoomData && (
         <ConfirmDeleteRoom
-          onClose={() => { setShowDeleteModal(false); setDeleteRoomData(null); }}
+          onClose={() => {
+            setShowDeleteModal(false);
+            setDeleteRoomData(null);
+          }}
           onConfirm={handleConfirmDeleteRoom}
           roomName={deleteRoomData.name}
         />
