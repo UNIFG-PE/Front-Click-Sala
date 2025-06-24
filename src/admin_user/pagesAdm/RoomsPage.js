@@ -113,7 +113,7 @@ function RoomsPage() {
   return (
     <div className="rooms-page">
       <div className="rooms-header">
-        <h1>Salas Disponíveis</h1>
+        <h1>Salas Disponiveis </h1>
         <p>Encontre e reserve a sala ideal para sua reunião ou evento</p>
       </div>
       

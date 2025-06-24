@@ -11,7 +11,7 @@ function Header() {
   const handleConfirmLogout = () => {
     setShowLogoutModal(false);
     console.log('usuário confirmou o logout');
-    // Aqui você pode limpar localStorage, cookies, redirecionar, etc.
+    window.location.href = '/';
   };
 
   const handleCancelLogout = () => {
@@ -28,8 +28,8 @@ function Header() {
       <nav className="nav">
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="/reservas">Consultar Reservas</a></li>
-          <li><a href="/salas">Gerenciar Salas</a></li>
+          <li><a href="/admin-reservas">Consultar Reservas</a></li>
+          <li><a href="/gerenciarsalas">Gerenciar Salas</a></li>
           <li><a href="/suporte">Suporte</a></li>
           <li>
             <span className="nav-link" onClick={handleLogoutClick} style={{ cursor: 'pointer' }}>

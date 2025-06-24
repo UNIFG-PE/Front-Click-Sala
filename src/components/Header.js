@@ -1,6 +1,6 @@
 import React, { useState } from 'react';  // IMPORTAR useState
 import { FiLogOut } from 'react-icons/fi';
-import Logout from './logout'; // Importa o componente modal Logout (arquivo Logout.js)
+import Logout from './logout';
 import './Header.css';
 
 function Header() {

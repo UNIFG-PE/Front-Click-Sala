@@ -4,13 +4,14 @@ import Header from './components/Header';
 import Footer from './admin_user/footerAdm';
 import HomePage from './home/HomePage'; // usuario normal
 import RoomsPage from './pages/RoomsPage';
-import MyReservationsPage from './pages/MyReservationsPage'; 
+import MyReservationsPage from './pages/MyReservationsPage';
+ 
 import Suporte from './pages/Suporte';
 import Login from './admin_user/pagesAdm/login'; 
 import AdminScreen from './admin_user/homepageAdm'; // usuario adm
 import AdminHeader from './admin_user/headerAdm';
-import GerenciarSalas from './admin_user/pagesAdm/MyReservationsPage';
-import RoomsPag from './admin_user/pagesAdm/RoomsPage';
+import AdminReservas from './admin_user/pagesAdm/MyReservationsPage';
+import GerenciarSalas from './admin_user/pagesAdm/RoomsPage';
 import CadastroUsuarioPage from './pages/CadastroUsuarioPage';
 import SignIn from './pages/SignIn';
 
@@ -33,10 +34,10 @@ function App() {
     switch (currentPage) {
       case 'admin':
         return <AdminScreen />;
-      case 'gerenciarsalas':
+       case 'gerenciarsalas':
         return <GerenciarSalas />;
-      case 'consultarreser':
-        return <RoomsPag />;
+      case 'admin-reservas':
+        return <AdminReservas/>;
       case 'home':
         return <HomePage />;
       case 'salas':
@@ -49,8 +50,11 @@ function App() {
         return <SignIn />;
       case 'cadastro':
         return <CadastroUsuarioPage />;
+      case 'adm-rooms':
+        return <GerenciarSalas />;
       default:
         return <HomePage />;
+        
     }
   };
 
@@ -73,6 +77,8 @@ function App() {
           }
         } else if (path === '/admin') setCurrentPage('admin');
         else if (path === '/gerenciarsalas') setCurrentPage('gerenciarsalas');
+        else if (path === '/admin-reservas') setCurrentPage('admin-reservas');
+        
         else if (path === '/reservas') setCurrentPage('reservas');
         else if (path === '/salas') setCurrentPage('salas');
         else if (path === '/suporte') setCurrentPage('suporte');

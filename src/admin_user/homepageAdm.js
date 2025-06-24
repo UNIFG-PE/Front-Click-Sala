@@ -9,8 +9,8 @@ function HomePage() {
         <div className="hero-content">
           <h1>Bem-vindo ao ODA</h1>
           <p>Sistema de gerenciamento de salas</p>
-          <a href="/salas" className="cta-button">Consultar reservas</a>
-             <a href="/reservas" className="cta-button">Gerencia salas</a>
+          <a href="/admin-reservas" className="cta-button">Consultar reservas</a>
+             <a href="/gerenciarsalas" className="cta-button">Gerenciar salas</a>
         </div>
       </section>
       
