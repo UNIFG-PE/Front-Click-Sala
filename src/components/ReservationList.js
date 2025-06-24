@@ -13,8 +13,8 @@ export default function ReservationList() {
   useEffect(() => {
     async function fetchReservations() {
       try {
-        
-        const response = await fetch('/api/reservas');
+         
+        const response = await fetch('http://localhost:8080/api/v1/roombookings');
         const data = await response.json();
         setReservations(data);
       } catch (error) {
