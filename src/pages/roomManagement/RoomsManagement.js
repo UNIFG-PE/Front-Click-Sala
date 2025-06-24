@@ -11,6 +11,7 @@ function RoomsManagement() {
   const [rooms, setRooms] = useState([]);
   const [roomTypes, setRoomTypes] = useState([]);
   const [campus, setCampus] = useState([]);
+  const [error, setError] = useState("");
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editRoomData, setEditRoomData] = useState(null);
@@ -65,10 +66,40 @@ function RoomsManagement() {
     setShowEditModal(true);
   };
 
-  const handleEditRoom = (updatedRoom) => {
-    setRooms(rooms.map(room => room.id === updatedRoom.id ? updatedRoom : room));
-    setShowEditModal(false);
-    setEditRoomData(null);
+  const handleEditRoom = async (updatedRoom) => {
+    const exists = rooms.some(
+      (room) =>
+        room.identifier.trim().toLowerCase() === updatedRoom.identifier.trim().toLowerCase() &&
+        room.id !== editRoomData.id
+    );
+
+    if (exists) {
+      setError("A room with this name already exists.");
+      return false;
+    }
+
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/api/v1/rooms/${editRoomData.id}`,
+        updatedRoom,
+        {
+          auth: {
+            username: "SDMUnifgOdaback8gs2",
+            password: "SDM7Unifg9DJEwh"
+          }
+        }
+      );
+
+      setRooms(rooms.map(room => room.id === response.data.id ? response.data : room));
+      setShowEditModal(false);
+      setEditRoomData(null);
+      return true;
+
+    } catch (error) {
+      console.error("Erro ao atualizar sala:", error);
+      setError("Failed to update room.");
+      return false;
+    }
   };
 
   const handleDelete = (id) => {
@@ -153,6 +184,14 @@ function RoomsManagement() {
   };
 
   const handleCreateRoom = async (newRoom) => {
+    const exists = rooms.some(
+      (room) => room.identifier.trim().toLowerCase() === newRoom.identifier.trim().toLowerCase()
+    );
+
+    if (exists) {
+      return { success: false, error: "Já existe uma sala com esse nome." };
+    }
+
     try {
       const response = await axios.post("http://localhost:8080/api/v1/rooms", newRoom, {
         auth: {
@@ -163,9 +202,12 @@ function RoomsManagement() {
 
       setRooms([...rooms, response.data]);
       setShowCreateModal(false);
+      return true;
+
     } catch (error) {
       console.error("Erro ao criar sala:", error);
-      alert("Erro ao criar sala");
+      setError("Erro ao criar sala!");
+      return false;
     }
   };
 
@@ -299,10 +341,15 @@ function RoomsManagement() {
         <div className="modal-overlay">
           <CreateRoom
             onSubmit={handleCreateRoom}
-            onCancel={() => setShowCreateModal(false)}
+            onCancel={() => {
+              setShowCreateModal(false);
+              setError("");
+            }}
             existingRooms={rooms}
             roomTypes={roomTypes}
             campuses={campus}
+            error={error}
+            setError={setError}
           />
         </div>
       )}

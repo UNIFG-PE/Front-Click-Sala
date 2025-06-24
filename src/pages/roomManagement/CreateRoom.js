@@ -22,17 +22,16 @@ function CreateRoom({
   const [roomTypeId, setRoomTypeId] = useState('');
   const [error, setError] = useState('');
 
-
   useEffect(() => {
     if (initialData) {
-      setName(initialData.name || '');
-      setCampus(initialData.campus || '');
+      setName(initialData.identifier || '');
+      setCampus(initialData.campusName || '');
       setDescription(initialData.description || '');
       setCapacity(initialData.capacity || '');
       setFeatures(initialData.features?.join(', ') || '');
-      setImage(initialData.image || '');
+      setImage(initialData.imageUrl || '');
       setAvailable(initialData.available ?? true);
-      setRoomTypeId(initialData.typeId || initialData.roomTypeId || '');
+      setRoomTypeId(initialData.categoryId || initialData.roomTypeId || '');
     }
   }, [initialData]);
 
@@ -51,7 +50,7 @@ function CreateRoom({
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
@@ -64,8 +63,8 @@ function CreateRoom({
     if (
       existingRooms.some(
         room =>
-          room.name &&
-          room.name.toLowerCase() === name.trim().toLowerCase() &&
+          room.identifier &&
+          room.identifier.toLowerCase() === name.trim().toLowerCase() &&
           (!isEdit || room.id !== initialData?.id)
       )
     ) {
@@ -94,7 +93,7 @@ function CreateRoom({
       .map(f => f.trim())
       .filter(f => f);
 
-    onSubmit({
+    const result = await onSubmit({
       identifier: name.trim(),
       floor: 0,
       capacity: Number(capacity),
@@ -104,6 +103,21 @@ function CreateRoom({
       categoryId: Number(roomTypeId),
       imageUrl: image || defaultImage
     });
+
+    if (!result) {
+      setError("Erro ao criar sala.");
+      return;
+    }
+
+    setName('');
+    setCampus('');
+    setDescription('');
+    setCapacity('');
+    setFeatures('');
+    setImage('');
+    setAvailable(true);
+    setRoomTypeId('');
+    setError('');
   };
 
   return (
