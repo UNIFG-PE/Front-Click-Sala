@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-const mockReservations = [
-  { id: 1, room: 'Sala 101', status: 'em_andamento' },
-  { id: 2, room: 'Sala 202', status: 'aprovada' },
-  { id: 3, room: 'Sala 303', status: 'negada' },
-];
-
 const statusColors = {
   em_andamento: 'bg-yellow-100 text-yellow-700',
   aprovada: 'bg-green-100 text-green-700',
@@ -14,38 +8,60 @@ const statusColors = {
 
 export default function ReservationList() {
   const [reservations, setReservations] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulando chamada à API
-    setTimeout(() => {
-      setReservations(mockReservations);
-    }, 500);
+    async function fetchReservations() {
+      try {
+        
+        const response = await fetch('/api/reservas');
+        const data = await response.json();
+        setReservations(data);
+      } catch (error) {
+        console.error('Erro ao buscar reservas:', error);
+        
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchReservations();
   }, []);
 
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Reservas de Salas</h1>
-      <div className="space-y-4">
-        {reservations.map((reserva) => (
-          <div
-            key={reserva.id}
-            className="border rounded-lg p-4 flex justify-between items-center shadow-sm"
-          >
-            <div>
-              <h2 className="text-lg font-semibold">{reserva.room}</h2>
-            </div>
+
+      {loading ? (
+        <p className="text-gray-500">Carregando reservas...</p>
+      ) : reservations.length === 0 ? (
+        <p className="text-gray-500">Nenhuma reserva encontrada.</p>
+      ) : (
+        <div className="space-y-4">
+          {reservations.map((reserva) => (
             <div
-              className={`px-3 py-1 rounded-full text-sm font-medium ${
-                statusColors[reserva.status]
-              }`}
+              key={reserva.id}
+              className="border rounded-lg p-4 flex justify-between items-center shadow-sm"
             >
-              {reserva.status === 'em_andamento' && 'Em Andamento'}
-              {reserva.status === 'aprovada' && 'Aprovada'}
-              {reserva.status === 'negada' && 'Negada'}
+              <div>
+                <h2 className="text-lg font-semibold">{reserva.room}</h2>
+                <p className="text-sm text-gray-600">
+                  {reserva.campus} — {reserva.date} às {reserva.time}
+                </p>
+              </div>
+              <div
+                className={`px-3 py-1 rounded-full text-sm font-medium ${
+                  statusColors[reserva.status]
+                }`}
+              >
+                {reserva.status === 'em_andamento' && 'Em Andamento'}
+                {reserva.status === 'aprovada' && 'Aprovada'}
+                {reserva.status === 'negada' && 'Negada'}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
