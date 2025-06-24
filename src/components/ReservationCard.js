@@ -41,7 +41,7 @@ function ReservationCard({ reservation, onCancel }) {
       
       {reservation.status === 'Confirmada' && (
         <button className="cancel-reservation-button" onClick={() => onCancel(reservation.id)}>
-          Cancelar Reserva
+          Cancelar 
         </button>
       )}
     </div>

@@ -51,7 +51,7 @@ function ReservationCard({ reservation, onCancel }) {
         </button>
         
       )}
-      <button className="cancel-reservation-button">
+      <button className="cancel-reservation-buttonn">
       Negar reserva ❌
     </button>
 
