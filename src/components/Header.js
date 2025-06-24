@@ -14,6 +14,7 @@ function Header() {
           <li><a href="/reservas">Minhas Reservas</a></li>
           <li><a href="/salas">Salas</a></li>
           <li><a href="/cadastro-usuario">Cadastrar Usuário</a></li>
+          <li><a href="/usuarios">Gestão de Usuários</a></li> {/* Novo link adicionado */}
         </ul>
       </nav>
     </header>

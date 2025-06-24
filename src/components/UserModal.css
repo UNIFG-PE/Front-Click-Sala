@@ -1,0 +1,133 @@
+/*
+  Guia de Espaçamento usado (Design System simples):
+  - 4px: Mínimo (ex: entre label e input)
+  - 8px: Pequeno (ex: entre botões)
+  - 12px: Médio (ex: entre campos do formulário)
+  - 16px: Normal (ex: padding horizontal, margem acima dos botões)
+  - 20px: Grande (ex: padding vertical do modal)
+*/
+
+.modal-overlay {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.42);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px 16px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  max-width: 420px;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  min-width: 0;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-content h2 {
+  margin: 0 0 16px 0;
+  font-size: 1.1rem;
+  text-align: center;
+  font-weight: 700;
+  color: #35455e;
+  letter-spacing: 0.4px;
+}
+
+.form-group {
+  margin-bottom: 12px; /* Espaçamento padrão entre os campos */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* === NOVA REGRA MÁGICA === */
+/* Remove a margem do último campo para eliminar o espaço extra no final */
+.form-group:last-of-type {
+  margin-bottom: 0;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #52607b;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: 1.1px solid #c5d1eb;
+  background: #f3f7fd;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #3797fd;
+  background: #edf5ff;
+}
+
+.form-group img {
+  margin-top: 8px;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1.5px solid #e5eaf1;
+  align-self: flex-start;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px; /* Espaço final acima dos botões, agora a única folga vertical */
+  flex-wrap: wrap;
+}
+
+.save-btn,
+.cancel-btn {
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+  transition: background 0.15s, filter 0.17s;
+}
+.save-btn {
+  background: linear-gradient(90deg, #2994ed 70%, #59d7ff 100%);
+  color: white;
+}
+.save-btn:hover {
+  filter: brightness(1.08);
+}
+.cancel-btn {
+  background: #b6bec9;
+  color: white;
+}
+.cancel-btn:hover {
+  background: #929aa2;
+}
+
+@media (max-width: 500px) {
+  .modal-content {
+    padding: 16px 12px;
+  }
+}

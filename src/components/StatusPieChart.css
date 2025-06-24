@@ -1,0 +1,76 @@
+/* Container principal - sem alterações, mas mantido para contexto */
+.pie-chart-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 0 15px;
+}
+
+/* O gráfico de pizza principal com todas as melhorias */
+.pie-chart {
+  /* Mantemos o tamanho que você definiu */
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  
+  /* MELHORIA 1: Adiciona uma sombra suave para dar profundidade */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  /* MELHORIA 2: Prepara o elemento para o efeito Donut e animações */
+  position: relative; /* Essencial para posicionar o "buraco" do Donut */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animação suave para o hover */
+  
+  /* Removemos a borda antiga para um visual mais limpo */
+  /* border: 1px solid #ddd; */
+}
+
+/* MELHORIA 3: Efeito de 'elevação' ao passar o mouse */
+.pie-chart:hover {
+  transform: scale(1.07); /* Aumenta levemente o gráfico */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Aumenta a sombra para mais destaque */
+}
+
+/* MELHORIA 4: Criação do "buraco" para o efeito Donut */
+.pie-chart::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centraliza perfeitamente o buraco */
+  
+  width: 55%; /* O tamanho do buraco (percentual do tamanho do gráfico) */
+  height: 55%;
+  
+  background: #fff; /* Cor do "buraco" - geralmente a cor de fundo da página */
+  border-radius: 50%;
+  
+  /* Opcional: uma sombra interna sutil para mais profundidade no buraco */
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+
+/* Legenda - sem alterações na estrutura */
+.pie-chart-legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  color: #555;
+}
+
+.pie-chart-legend li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px; /* Leve aumento no espaçamento */
+}
+
+/* Caixa de cor da legenda com melhorias */
+.legend-color-box {
+  width: 12px;
+  height: 12px;
+  margin-right: 8px; /* Leve aumento no espaçamento */
+  border-radius: 3px; /* Bordas um pouco mais suaves */
+  
+  /* MELHORIA 5: Adiciona uma pequena borda para definir melhor a cor */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
