@@ -23,8 +23,6 @@ function CreateTypeRoom({ onClose, onSave, error, setError, initialName = "", is
 
   const handleChange = (e) => {
     setName(e.target.value);
-  const handleChange = (e) => {
-    setName(e.target.value);
     if (error) setError("");
   };
 
