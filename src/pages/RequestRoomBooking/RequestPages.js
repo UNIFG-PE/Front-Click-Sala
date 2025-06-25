@@ -90,9 +90,9 @@ const handleReservationSubmit = async ({ titulo, motivo }) => {
   setError(null);
 
   try {
-    const username = process.env.API_BASIC_USER_USERNAME;
-    const password = process.env.API_BASIC_USER_PASSWORD;
-    const token = `${username}:${password}`;
+    const username = process.env.REACT_APP_API_BASIC_USER_USERNAME;
+    const password = process.env.REACT_APP_API_BASIC_USER_PASSWORD;
+    const token = btoa(`${username}:${password}`);
 
     const checkIn = `${dataToSearchRoom.date}T${dataToSearchRoom.startTime}:00`;
     const checkOut = `${dataToSearchRoom.date}T${dataToSearchRoom.endTime}:00`;
