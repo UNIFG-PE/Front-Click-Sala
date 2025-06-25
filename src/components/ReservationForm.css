@@ -40,7 +40,6 @@
 
 .form-row {
   display: flex;
-  gap: 1rem;
 }
 
 .form-row .form-group {
@@ -55,7 +54,6 @@ label {
 }
 
 input, textarea {
-  width: 100%;
   padding: 0.8rem;
   border: 1px solid #ddd;
   border-radius: 4px;

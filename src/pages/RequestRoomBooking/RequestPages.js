@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
-import RequestForm from "../components/RequestForm";
-import RoomCard from "../components/RoomCard";
-import SuccessMessage from "../components/SuccessMessage";
+import RequestForm from "../../components/RequestRoomBookingForm/RequestForm";
+import RoomCard from "../../components/RoomCard";
+import SuccessMessage from "../../components/SuccessMessage";
 import "./RequestPages.css";
 
 function RequestPages() {

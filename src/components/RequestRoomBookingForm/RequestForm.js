@@ -31,7 +31,7 @@ function RequestForm({ onSubmit, onCancel }) {
           Selecione os Campus de acordo com o local que deseja reservar:
         </strong>
       </p>
-      <div className="form-radio-group">
+    <div className="form-group">
         <label>
           <input
             type="radio"
@@ -49,6 +49,7 @@ function RequestForm({ onSubmit, onCancel }) {
             value="campus2"
             checked={opcaoselecionada === "campus2"}
             onChange={(e) => setOpcaoselecionada(e.target.value)}
+            required
           />
           Campus Piedade
         </label>
@@ -66,7 +67,7 @@ function RequestForm({ onSubmit, onCancel }) {
         />
       </div>
 
-      <div className="form-row">
+      
         <div className="form-group">
           <label htmlFor="startTime">Hora de Início:</label>
           <input
@@ -88,7 +89,7 @@ function RequestForm({ onSubmit, onCancel }) {
             required
           />
         </div>
-      </div>
+      
 
       <div className="form-group">
         <label htmlFor="participants">Número de Participantes</label>

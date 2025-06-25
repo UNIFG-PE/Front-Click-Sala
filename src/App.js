@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import "./App.css";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import HomePage from "./pages/HomePage";
-import RoomsPage from "./pages/RoomsPage";
+import React, { useState } from 'react';
+import './App.css';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import HomePage from './pages/HomePage';
+import RoomsPage from './pages/RoomsPage';
 import MyReservationsPage from "./pages/MyReservationsPage";
-import RequestPages from "./pages/RequestPages";
+import RequestPages from "./pages/RequestRoomBooking/RequestPages";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("home");
@@ -19,7 +19,7 @@ function App() {
         return <RoomsPage />;
       case "reservas":
         return <MyReservationsPage />;
-      case "buscar-salas":
+      case "solicitar-reserva":
         return <RequestPages />;
       default:
         return <HomePage />;
@@ -41,7 +41,7 @@ function App() {
         if (path === "/") setCurrentPage("home");
         else if (path === "/salas") setCurrentPage("salas");
         else if (path === "/reservas") setCurrentPage("reservas");
-        else if (path === "/buscar-salas") setCurrentPage("buscar-salas");
+        else if (path === "/solicitar-reserva") setCurrentPage("solicitar-reserva");
       }
     };
 

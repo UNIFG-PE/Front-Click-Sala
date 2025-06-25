@@ -20,7 +20,7 @@ function Header() {
             <a href="/salas">Salas</a>
           </li>
           <li>
-            <a href="/buscar-salas">Buscar Salas</a>
+            <a href="/solicitar-reserva">Reservar</a>
           </li>
         </ul>
       </nav>

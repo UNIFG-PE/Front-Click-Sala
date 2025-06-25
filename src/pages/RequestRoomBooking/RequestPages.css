@@ -1,12 +1,10 @@
-.RequestPages {
-  max-width: 1200px;
-  margin: 0 auto;
+.Requestpage {
   padding: 3em 1em;
 }
-.RequestPages h1 {
+.Requestpage h1 {
   margin-bottom: 0.5em;
 }
-.RequestPages p {
+.Requestpage p {
   color: #7b7b7b;
 }
 .rooms-grid {
