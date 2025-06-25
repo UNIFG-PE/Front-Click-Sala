@@ -54,19 +54,27 @@
     flex-direction: column;
     padding: 1rem;
   }
-  
+
   .logo {
     margin-bottom: 1rem;
     align-items: center;
   }
-  
+
   .nav ul {
-    flex-direction: column;
+   
     align-items: center;
   }
-  
+
   .nav li {
+    padding: 10px;
     margin: 0.5rem 0;
     margin-left: 0;
+  }
+}
+@media (max-width: 302px) {
+   .nav ul {
+    flex-direction: column;
+   margin: 0px;
+    align-items: center;
   }
 }

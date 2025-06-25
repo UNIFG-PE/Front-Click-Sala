@@ -1,23 +1,25 @@
 import React, { useState, useRef } from "react";
 import RequestForm from "../../components/RequestRoomBookingForm/RequestForm";
 import RoomCard from "../../components/RoomCard";
+import RoomBookingDetailsForm from "../../components/RequestRoomBookingForm/RoomBookingDetailsForm";
 import SuccessMessage from "../../components/SuccessMessage";
 import "./RequestPages.css";
 
 function RequestPages() {
   const [availableRooms, setAvailableRooms] = useState([]);
-  const [formCriteria, setFormCriteria] = useState(null);
+  const [dataToSearchRoom, setDataToSearchRoom] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [reservationStatus, setReservationStatus] = useState(null);
+  const [chosenRoom, setChosenRoom] = useState(null);
 
   const resultsRef = useRef(null);
 
-  const handleSearch = async (criteria) => {
+  const handleSearch = async (datasBaseRoom) => {
     setLoading(true);
     setError(null);
     setReservationStatus(null);
-    setFormCriteria(criteria);
+    setDataToSearchRoom(datasBaseRoom);
 
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -78,49 +80,95 @@ function RequestPages() {
     }
   };
 
-  const handleReserve = async (roomId) => {
-    setLoading(true);
-    setError(null);
-    setReservationStatus(null);
+  const handleReserve = (roomId) => {
+  const room = availableRooms.find((r) => r.id === roomId);
+  setChosenRoom(room);
+};
 
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+const handleReservationSubmit = async ({ titulo, motivo }) => {
+  setLoading(true);
+  setError(null);
 
-      setReservationStatus(`Reserva confirmada para a sala ${roomId}!`);
-    } catch (error) {
-      setError("Erro ao realizar reserva mockada.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  try {
+    const username = process.env.API_BASIC_USER_USERNAME;
+    const password = process.env.API_BASIC_USER_PASSWORD;
+    const token = `${username}:${password}`;
+
+    const checkIn = `${dataToSearchRoom.date}T${dataToSearchRoom.startTime}:00`;
+    const checkOut = `${dataToSearchRoom.date}T${dataToSearchRoom.endTime}:00`;
+
+    const reservaFinal = {
+      title: titulo,
+      reason: motivo,
+      checkIn,
+      checkOut,
+      roomId: chosenRoom.id
+    };
+
+    const response = await fetch("http://localhost:8080/api/v1/roombookings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Basic ${token}`,
+      },
+      body: JSON.stringify(reservaFinal),
+    });
+
+    if (!response.ok) throw new Error("Erro ao solicitar reserva. Status code: "+ response.status);
+
+    setReservationStatus("Reserva solicitada com sucesso!");
+    setChosenRoom(null);
+  } catch (error) {
+    console.log(error);
+    setError(error.message || "Erro ao solicitar reserva.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
-    <div className="Requestpage">
-      <h2>Buscar Salas Disponíveis</h2>
-      <RequestForm onSubmit={handleSearch} />
+  <div className="Requestpage">
+    <h2>Buscar Salas Disponíveis</h2>
 
-      {loading && <p>Carregando salas...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    {loading && <p>Carregando salas...</p>}
+    {error && <p style={{ color: "red" }}>{error}</p>}
+
+    {reservationStatus && (
       <SuccessMessage
         message={reservationStatus}
         onClose={() => setReservationStatus(null)}
       />
-      {!loading && availableRooms.length > 0 && (
-        <div ref={resultsRef}>
-          <h3>Salas Encontradas:</h3>
-          <div className="rooms-grid">
-            {availableRooms.map((room) => (
-              <RoomCard key={room.id} room={room} onReserve={handleReserve} />
-            ))}
-          </div>
-        </div>
-      )}
+    )}
 
-      {!loading && !error && availableRooms.length === 0 && (
-        <p>Nenhuma sala encontrada.</p>
-      )}
-    </div>
-  );
+    {chosenRoom ? (
+      <RoomBookingDetailsForm
+        chosenRoom={chosenRoom}
+        datasBaseRoomBooking={dataToSearchRoom}
+        onSubmit={handleReservationSubmit}
+        onCancel={() => setChosenRoom(null)}
+      />
+    ) : (
+      <>
+        <RequestForm onSubmit={handleSearch} />
+
+        {!loading && availableRooms.length > 0 && (
+          <div ref={resultsRef}>
+            <h3>Salas Encontradas:</h3>
+            <div className="rooms-grid">
+              {availableRooms.map((room) => (
+                <RoomCard key={room.id} room={room} onReserve={handleReserve} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {!loading && !error && availableRooms.length === 0 && (
+          <p>Nenhuma sala encontrada.</p>
+        )}
+      </>
+    )}
+  </div>
+);
 }
 
 export default RequestPages;

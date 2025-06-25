@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./RequestForm.css";
 
 function RequestForm({ onSubmit, onCancel }) {
-  const [opcaoselecionada, setOpcaoselecionada] = useState("");
+  const [selectedCampus, setSelectedCampus] = useState("");
   const [date, setDate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
@@ -11,15 +11,15 @@ function RequestForm({ onSubmit, onCancel }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const criteria = {
-      opcaoselecionada,
+    const datasBaseRoomBooking = {
+      selectedCampus,
       date,
       startTime,
       endTime,
       participants,
     };
 
-    onSubmit(criteria);
+    onSubmit(datasBaseRoomBooking);
   };
 
   const today = new Date().toISOString().split("T")[0];
@@ -35,20 +35,20 @@ function RequestForm({ onSubmit, onCancel }) {
         <label>
           <input
             type="radio"
-            name="opcaoselecionada"
+            name="selectedcampus"
             value="campus1"
-            checked={opcaoselecionada === "campus1"}
-            onChange={(e) => setOpcaoselecionada(e.target.value)}
+            checked={selectedCampus === "campus1"}
+            onChange={(e) => setSelectedCampus(e.target.value)}
           />
           Campus Boa Vista
         </label>
         <label>
           <input
             type="radio"
-            name="opcaoselecionada"
+            name="selectedcampus"
             value="campus2"
-            checked={opcaoselecionada === "campus2"}
-            onChange={(e) => setOpcaoselecionada(e.target.value)}
+            checked={selectedCampus === "campus2"}
+            onChange={(e) => setSelectedCampus(e.target.value)}
             required
           />
           Campus Piedade
