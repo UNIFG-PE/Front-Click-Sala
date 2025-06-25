@@ -74,7 +74,7 @@ function RoomsManagement() {
     );
 
     if (exists) {
-      setError("A room with this name already exists.");
+      setError("Já existe uma sala com esse nome.");
       return false;
     }
 
@@ -97,7 +97,7 @@ function RoomsManagement() {
 
     } catch (error) {
       console.error("Erro ao atualizar sala:", error);
-      setError("Failed to update room.");
+      setError("Erro ao atualizar sala!");
       return false;
     }
   };
@@ -189,7 +189,8 @@ function RoomsManagement() {
     );
 
     if (exists) {
-      return { success: false, error: "Já existe uma sala com esse nome." };
+      setError("Já existe uma sala com esse nome.");
+      return false;
     }
 
     try {

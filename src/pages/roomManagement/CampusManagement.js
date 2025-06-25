@@ -71,7 +71,7 @@ function CampusManagement({ campus, setCampus, onBack }) {
       return true;
     } catch (error) {
       console.error("Erro ao salvar campus:", error);
-      setError("Erro ao salvar no backend!");
+      setError("Erro ao salvar campus!");
       return false;
     }
   };
@@ -113,7 +113,7 @@ function CampusManagement({ campus, setCampus, onBack }) {
       return true;
     } catch (error) {
       console.error("Erro ao atualizar campus:", error);
-      setError("Erro ao atualizar no backend!");
+      setError("Erro ao atualizar campus!");
       return false;
     }
   };
@@ -132,7 +132,7 @@ function CampusManagement({ campus, setCampus, onBack }) {
       setCampusToDelete(null);
     } catch (error) {
       console.error("Erro ao excluir campus:", error);
-      alert("Erro ao excluir no backend!");
+      alert("Erro ao excluir campus!");
     }
   };
 
