@@ -8,13 +8,14 @@ function CreateTypeRoom({ onClose, onSave, error, setError, initialName = "", is
     setName(initialName);
   }, [initialName]);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!name.trim()) {
       setError("O nome do tipo de sala é obrigatório!");
       return;
     }
-    const result = onSave(name.trim());
-    if (result !== false) {
+
+    const result = await onSave(name.trim());
+    if (result) {
       setName("");
       setError("");
       onClose();
