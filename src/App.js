@@ -34,34 +34,27 @@ function App() {
     switch (currentPage) {
       case 'admin':
         return <AdminScreen />;
-      case 'gerenciarsalas':
-        return < GerenciarSalas/>;
-          case 'salas':
-        return < RoomsPag/>;
+       case 'gerenciarsalas':
+        return <GerenciarSalas />;
+      case 'admin-reservas':
+        return <AdminReservas/>;
       case 'home':
-        return <AdminScreen />;
+        return <HomePage />;
       case 'salas':
         return <RoomsPage />;
       case 'reservas':
         return <MyReservationsPage />;
       case 'suporte':
         return <Suporte />;
-   
+      case 'cadastro-usuario':
+        return <SignIn />;
+      case 'cadastro':
+        return <CadastroUsuarioPage />;
+      case 'adm-rooms':
+        return <GerenciarSalas />;
       default:
         return <HomePage />;
-
-      case 'user':
-        return <HomePage />;
-      case 'home':
-        return <HomePage />;
-      case 'salas':
-        return <RoomsPage />;
-      case 'reservas':
-        return <MyReservationsPage />;
-      case 'suporte':
-        return <Suporte />;
-   
-
+        
     }
   };
 
