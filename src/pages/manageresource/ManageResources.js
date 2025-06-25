@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from "axios";
 import ModalFormGeneric from './components/ModalFormGeneric';
 import ModalMensagem from './components/ModalMensagem';
 import './style/ManageResource.css'
@@ -9,15 +10,24 @@ function ManageResources({ onBack }) {
   const [editingIndex, setEditingIndex] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [messageModal, setMessageModal] = useState(null);
+  const [quantity, setQuantity] = useState('');
+  const [selectedRoomId, setSelectedRoomId] = useState('');
+  const [rooms, setRooms] = useState([]);
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem('resources')) || ['Projetor', 'WiFi', 'Computadores', 'Televisão'];
-    setResources(saved);
+    axios.get('http://localhost:8080/api/v1/rooms')
+      .then(res => setRooms(res.data))
+      .catch(err => console.error(err));
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('resources', JSON.stringify(resources));
-  }, [resources]);
+    axios.get('http://localhost:8080/api/v1/roomfeatures')
+      .then(res => {
+        setResources(res.data);
+      })
+      .catch(err => console.error(err));
+  }, []);
+
 
   const handleSave = () => {
     const trimmed = resourceInput.trim();
@@ -89,6 +99,8 @@ function ManageResources({ onBack }) {
         <button className="btn-create" onClick={() => {
           setEditingIndex(null);
           setResourceInput('');
+          setQuantity('');
+          setSelectedRoomId('');
           setShowModal(true);
         }}>
           ➕ Criar Recurso
@@ -136,6 +148,30 @@ function ManageResources({ onBack }) {
             placeholder="Nome"
             className="input-resource"
           />
+
+          <label htmlFor="quantity-input" className="input-label">Quantidade</label>
+          <input
+            type="number"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+            className="input-resource"
+            min={1}
+          />
+
+          <label htmlFor="room-select" className="input-label">Sala</label>
+          <select
+            id="room-select"
+            value={selectedRoomId}
+            onChange={(e) => setSelectedRoomId(Number(e.target.value))}
+            className="input-resource"
+          >
+            <option value="">Selecione uma sala</option>
+            {rooms.map(room => (
+              <option key={room.id} value={room.id}>
+                {room.identifier}
+              </option>
+            ))}
+          </select>
         </ModalFormGeneric>
       )}
 
