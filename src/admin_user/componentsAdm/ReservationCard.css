@@ -81,6 +81,7 @@
 
 .cancel-reservation-button:hover {
   background-color: #c0392b;
+  width: 100%
 }
 
 @media (max-width: 768px) {
