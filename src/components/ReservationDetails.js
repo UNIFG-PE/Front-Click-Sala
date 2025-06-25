@@ -1,56 +1,53 @@
 import React from "react";
 import "./ReservationDetails.css";
+import { FiArrowLeft } from "react-icons/fi"; 
 
-const getStatusClass = (status) => {
-  switch (status.toLowerCase()) {
-    case "approved":
-      return "status-approved";
-    case "pending":
-      return "status-pending";
-    case "denied":
-      return "status-denied";
-    default:
-      return "status-default";
-  }
-};
-
-const RequestDetails = ({ request, onBack }) => {
-  const currentRequest = request || {
-    campus: "Campus Piedade",
-    room: "Laboratório 7",
-    dateTime: "18/07/2025 - 19:00 às 21:50",
-    block: "Bloco A",
-    floor: "3º Andar",
-    status: "Pendente",
+function ReservationDetails({ reservation, onClose }) {
+  const formatDate = (dateString) => {
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    return new Date(dateString).toLocaleDateString("pt-BR", options);
   };
 
+  if (!reservation) return null;
+
   return (
-    <div className="container">
-      <h2 className="title">Request Details</h2>
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <button className="back-button" onClick={onClose}>
+          <FiArrowLeft size={20} style={{ marginRight: "8px" }} />
+        </button>
 
-      <p className="item">
-        <span className="label">Campus:</span> {currentRequest.campus}
-      </p>
-      <p className="item">
-        <span className="label">Room:</span> {currentRequest.room}
-      </p>
-      <p className="item">
-        <span className="label">Date & Time:</span> {currentRequest.dateTime}
-      </p>
-      <p className="item">
-        <span className="label">Block:</span> {currentRequest.block}
-      </p>
-      <p className="item">
-        <span className="label">Floor:</span> {currentRequest.floor}
-      </p>
-
-      <p className={`item ${getStatusClass(currentRequest.status)}`}>
-        <span className="label">Status:</span> {currentRequest.status}
-      </p>
-
-      <button onClick={onBack}>Back to List</button>
+        <h2>Detalhes da Reserva</h2>
+        <p>
+          <strong>Campus:</strong> {reservation.campus}
+        </p>
+        <p>
+          <strong>Sala:</strong> {reservation.room.name}
+        </p>
+        <p>
+          <strong>Data:</strong> {formatDate(reservation.date)}
+        </p>
+        <p>
+          <strong>Horário:</strong> {reservation.startTime} -{" "}
+          {reservation.endTime}
+        </p>
+        <p>
+          <strong>Finalidade:</strong> {reservation.purpose}
+        </p>
+        <p>
+          <strong>Participantes:</strong> {reservation.participants} pessoas
+        </p>
+        <p>
+          <strong>Status:</strong> {reservation.status}
+        </p>
+      </div>
     </div>
   );
-};
+}
 
-export default RequestDetails;
+export default ReservationDetails;
