@@ -1,6 +1,6 @@
 import React, { useState } from 'react';  // IMPORTAR useState
 import { FiLogOut } from 'react-icons/fi';
-import Logout from './logout'; // Importa o componente modal Logout (arquivo Logout.js)
+import Logout from './logout';
 import './Header.css';
 
 function Header() {
@@ -9,13 +9,13 @@ function Header() {
 
   const handleConfirmLogout = () => {
     setShowLogoutModal(false);
-    console.log('usurio confirmou o logout');
+    console.log('Usuário confirmou o logout');
     window.location.href = '/';
   };
 
   const handleCancelLogout = () => {
     setShowLogoutModal(false);
-    console.log('usuario cancelou o ogout');
+    console.log('Usuário cancelou o logout');
   };
 
   return (
@@ -29,12 +29,17 @@ function Header() {
           <li><a href="/">Home</a></li>
           <li><a href="/reservas">Minhas Reservas</a></li>
           <li><a href="/salas">Salas</a></li>
+
           <li><a href="/suporte">Suporte</a></li>
+             <li><a href="/cadastro-usuario">Cadastrar Usuário</a></li>
           <li>
             <span className="nav-link" onClick={handleLogoutClick} style={{ cursor: 'pointer' }}>
               <FiLogOut size={23}/>
             </span>
           </li>
+
+         
+
         </ul>
       </nav>
 
