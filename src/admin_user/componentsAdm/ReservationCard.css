@@ -66,14 +66,33 @@
 .detail-value.purpose {
   white-space: pre-line;
 }
+.reservation-buttons{
 
-.cancel-reservation-button {
-  background-color: #e74c3c;
+
+  justify-content: space-between;
+  width: 100%;
+}
+.aprove-reservation-button {
+  background-color: #3ce7bc;
   color: white;
   border: none;
   padding: 1rem;
-  width: 100%;
-  margin-right: 700px;
+  width: 50%; 
+  /*margin-right: 700px; */
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.aprove-reservation-button:hover {
+  background-color: #44b89b;
+}
+.cancel-reservation-buttonn {
+   background-color: #e74c3c;
+  color: white;
+  border: none;
+ padding: 1rem;
+  width: 50%;         
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -81,9 +100,7 @@
 
 .cancel-reservation-button:hover {
   background-color: #c0392b;
-  width: 100%
 }
-
 @media (max-width: 768px) {
   .detail-item {
     flex-direction: column;

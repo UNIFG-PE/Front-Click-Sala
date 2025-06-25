@@ -1,5 +1,5 @@
 import React from 'react';
-import './homepage.css';
+import './homepageAdm.css';
 
 function HomePageAdm() {
   return (
@@ -9,9 +9,8 @@ function HomePageAdm() {
         <div className="hero-content">
           <h1>Bem-vindo ao ODA</h1>
           <p>Sistema de gerenciamento de salas</p>
-          <a href="/reservas" className="cta-button">Consultar reservas</a>
-             <a href="/gerenciar" className="cta-button">Gerenciar salas</a>
-             <a href="/salas" className="cta-button">Salas Disponíveis</a>
+          <a href="/admin-reservas" className="cta-button">Consultar reservas</a>
+             <a href="/gerenciarsalas" className="cta-button">Gerenciar salas</a>
         </div>
       </section>
       

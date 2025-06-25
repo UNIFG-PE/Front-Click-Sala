@@ -1,5 +1,9 @@
+
 .home-page {
   min-height: 100vh;
+}
+.home-container {
+  background-color: white;
 }
 
 /* Hero Section */
@@ -33,9 +37,9 @@
   background-color: #3498db;
   color: white;
   padding: 1rem 3rem;
-  border-radius: 30px;
+  border-radius: 0px;
   font-weight: 600;
-  margin-right: 20px;
+ 
   margin-left: 20px;
   text-decoration: none;
   transition: background-color 0.3s, transform 0.3s;

@@ -1,5 +1,5 @@
 import React from 'react';
-import './logout.css'; // Arquivo CSS separado
+import './logoutAdm.css'; 
 
 function Logout({ onConfirm, onCancel }) {
   return (

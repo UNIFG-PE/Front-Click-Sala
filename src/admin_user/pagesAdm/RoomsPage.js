@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import RoomCard from '../components/RoomCard';
-import ReservationForm from '../components/ReservationForm';
+import RoomCard from '../../components/RoomCard';
+import ReservationForm from '../../components/ReservationForm';
 import './RoomsPage.css';
 
 // Dados mockados para as salas
@@ -113,7 +113,7 @@ function RoomsPage() {
   return (
     <div className="rooms-page">
       <div className="rooms-header">
-        <h1>Salas Disponíveis</h1>
+        <h1>Salas Disponiveis </h1>
         <p>Encontre e reserve a sala ideal para sua reunião ou evento</p>
       </div>
       
@@ -164,6 +164,10 @@ function RoomsPage() {
           </div>
         )}
       </div>
+      <button className="floating-button-square" onClick={() => alert('Abrir formulário ou ação desejada')}>
+  +
+</button>
+
       
       {showReservationForm && selectedRoom && (
         <div className="modal-overlay">
@@ -173,8 +177,10 @@ function RoomsPage() {
             onCancel={handleReservationCancel}
           />
         </div>
+        
       )}
     </div>
+    
   );
 }
 

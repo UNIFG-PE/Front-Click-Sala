@@ -107,8 +107,8 @@ function MyReservationsPage() {
   return (
     <div className="my-reservations-page">
       <div className="reservations-header">
-        <h1>Minhas Reservas</h1>
-        <p>Gerencie suas reservas de salas</p>
+        <h1>Solicitações de reservas</h1>
+        <p>Gerencie as solicitações de reservas </p>
       </div>
       
       {showCancelMessage && (
